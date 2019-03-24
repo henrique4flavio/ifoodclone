@@ -22,18 +22,23 @@ public class Pedido {
         this.cliente = cliente;
     }
 
+    public Pedido() {
+    }
+
+    public Pedido(int id) {
+        this.id = id;
+    }
+    
+    
+
+    
+    
     public PedidoEstado getEstado() {
         return estado;
     }
 
     public void setEstado(PedidoEstado estado) {
         this.estado = estado;
-    }
-    
-    
-
-    public Pedido(int id) {
-        this.id = id;
     }
     
    
