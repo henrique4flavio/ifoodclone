@@ -18,23 +18,10 @@ import com.ifood.persistence.PedidoDAO;
  */
 public class ApagarPedidoAction implements Action {
 
-    public ApagarPedidoAction() {
-    }
-
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        int codigo = Integer.parseInt(request.getParameter("codigo"));
-        Pedido pedido = new Pedido(codigo);
-
-        try {
-            PedidoDAO.getInstance().delete(pedido);
-        } catch (SQLException ex) {
-            Logger.getLogger(ApagarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ApagarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        response.sendRedirect("FrontController?action=LerPedido");
-
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+  
 }

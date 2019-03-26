@@ -1,15 +1,26 @@
 package com.ifood.model;
 
-import java.awt.Image;
 import java.util.List;
-
 
 public class Cliente extends Usuario {
 
-
     private String cpf;
-    private String endereco;
-    public Image photo;
+    private String rua;
+    private String numero;
+    private String bairro;
+    private String cep;
+
+ 
+    public Cliente(String cpf, String rua, String numero, String bairro, String cep, String nome, String senha, String email) {
+        super(nome, senha, email);
+        this.cpf = cpf;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cep = cep;
+    }
+    
+    
 
     public String getCpf() {
         return cpf;
@@ -19,15 +30,36 @@ public class Cliente extends Usuario {
         this.cpf = cpf;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getRua() {
+        return rua;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setRua(String rua) {
+        this.rua = rua;
     }
 
-   
+    public String getNumero() {
+        return numero;
+    }
 
-    
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
 }

@@ -1,49 +1,33 @@
 package com.ifood.model;
 
 import com.ifood.state.pedido.PedidoEstado;
+import com.ifood.state.pedido.PedidoEstadoEfetuado;
+import java.sql.Date;
 import java.util.List;
 
 public class Pedido {
 
     private int id;
-
-    private String precoTotal;
-    
-    private List<Comida> comidas;
-    
-    private Restaurante restaurante;
-    
-    private PedidoEstado estado;
-    
+    private Date data;
+    private Comida comida;
+    private Restaurante restaurante;    
     private Cliente cliente;
+    private int qtd;
+    private double precoTotal;
+    private PedidoEstado estado;  
 
-    public Pedido(String precoTotal, List<Comida> comidas, Restaurante restaurante, Cliente cliente) {
-        this.precoTotal = precoTotal;
-        this.comidas = comidas;
+    public Pedido(Date data, Comida comida, Restaurante restaurante, Cliente cliente, int qtd, double precoTotal) {
+        this.data = data;
+        this.comida = comida;
         this.restaurante = restaurante;
         this.cliente = cliente;
-    }
-
-    public Pedido() {
-    }
-
-    public Pedido(int id) {
-        this.id = id;
+        this.qtd = qtd;
+        this.precoTotal = precoTotal;
+        this.estado = new PedidoEstadoEfetuado();
     }
     
     
 
-    
-    
-    public PedidoEstado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(PedidoEstado estado) {
-        this.estado = estado;
-    }
-    
-   
     public int getId() {
         return id;
     }
@@ -52,28 +36,28 @@ public class Pedido {
         this.id = id;
     }
 
-    public String getPrecoTotal() {
-        return precoTotal;
+    public Date getData() {
+        return data;
     }
 
-    public void setPrecoTotal(String precoTotal) {
-        this.precoTotal = precoTotal;
+    public void setData(Date data) {
+        this.data = data;
     }
 
-    public List<Comida> getPratos() {
-        return comidas;
+    public Comida getComida() {
+        return comida;
     }
 
-    public void setPratos(List<Comida> comidas) {
-        this.comidas = comidas;
+    public void setComida(Comida comida) {
+        this.comida = comida;
     }
 
     public Restaurante getRestaurante() {
         return restaurante;
     }
 
-    public void setRestaurante(Restaurante Restaurante) {
-        this.restaurante = Restaurante;
+    public void setRestaurante(Restaurante restaurante) {
+        this.restaurante = restaurante;
     }
 
     public Cliente getCliente() {
@@ -84,5 +68,31 @@ public class Pedido {
         this.cliente = cliente;
     }
 
+    public int getQtd() {
+        return qtd;
+    }
+
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
+    }
+
+    public double getPrecoTotal() {
+        return precoTotal;
+    }
+
+    public void setPrecoTotal(double precoTotal) {
+        this.precoTotal = precoTotal;
+    }
+
+    public PedidoEstado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(PedidoEstado estado) {
+        this.estado = estado;
+    }
+
+
+   
 
 }
