@@ -9,15 +9,17 @@ public class Pedido {
 
     private String precoTotal;
     
-    private List<Prato> pratos;
+    private List<Comida> comidas;
     
     private Restaurante restaurante;
     
     private PedidoEstado estado;
+    
+    private Cliente cliente;
 
-    public Pedido(String precoTotal, List<Prato> pratos, Restaurante restaurante, Cliente cliente) {
+    public Pedido(String precoTotal, List<Comida> comidas, Restaurante restaurante, Cliente cliente) {
         this.precoTotal = precoTotal;
-        this.pratos = pratos;
+        this.comidas = comidas;
         this.restaurante = restaurante;
         this.cliente = cliente;
     }
@@ -58,12 +60,12 @@ public class Pedido {
         this.precoTotal = precoTotal;
     }
 
-    public List<Prato> getPratos() {
-        return pratos;
+    public List<Comida> getPratos() {
+        return comidas;
     }
 
-    public void setPratos(List<Prato> pratos) {
-        this.pratos = pratos;
+    public void setPratos(List<Comida> comidas) {
+        this.comidas = comidas;
     }
 
     public Restaurante getRestaurante() {
@@ -82,6 +84,5 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    private Cliente cliente;
 
 }

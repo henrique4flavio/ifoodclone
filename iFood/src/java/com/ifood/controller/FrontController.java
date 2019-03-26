@@ -1,62 +1,52 @@
+
 package com.ifood.controller;
 
-import com.ifood.action.pedido.ApagarPedidoAction;
-import com.ifood.action.pedido.ConfirmarPedidoAction;
-import com.ifood.action.pedido.EntregarPedidoAction;
-import com.ifood.action.pedido.EnviarPedidoAction;
-import com.ifood.action.pedido.EfetuarPedidoAction;
-import com.ifood.action.pedido.ListarPedidosAction;
+
+import com.ifood.controller.Action;
+import com.ifood.controller.ActionFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author jonat
- */
+
 public class FrontController extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
+        response.setContentType("text/html;charset=ISO-8859-1");
+        response.setCharacterEncoding("ISO-8859-1");
+        
         String action = request.getParameter("action");
         Action actionObject = null;
+
         if (action == null || action.equals("")) {
             response.sendRedirect("index.jsp");
         }
-        if (action.equals("PostarPedido")) {
-            actionObject = new EfetuarPedidoAction();
 
-        } else if (action.equals("EncaminharPedido")) {
-            //acao ler contato
-            actionObject = new ConfirmarPedidoAction();
-
-        } else if (action.equals("ExtraviarPedido")) {
-            //acao ler contato
-            actionObject = new EnviarPedidoAction();
-
-        } else if (action.equals("EntregarPedido")) {
-            //acao ler contato
-            actionObject = new EntregarPedidoAction();
-
-        } else if (action.equals("ApagarPedido")) {
-            //acao de apagar contato
-            actionObject = new ApagarPedidoAction();
-
-        } else if (action.equals("ListarPedidos")) {
-            //acao de apagar contato
-            actionObject = new ListarPedidosAction();
-        }
+        actionObject = ActionFactory.create(action);
 
         if (actionObject != null) {
             actionObject.execute(request, response);
         }
-
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -68,7 +58,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -82,7 +76,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

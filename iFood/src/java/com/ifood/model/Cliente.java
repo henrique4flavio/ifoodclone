@@ -1,14 +1,33 @@
 package com.ifood.model;
 
+import java.awt.Image;
 import java.util.List;
+
 
 public class Cliente extends Usuario {
 
-    private int id;
 
-    private String apelido;
-    private String sexo;
+    private String cpf;
+    private String endereco;
+    public Image photo;
 
-    private List<Pedido> listaPedidos;
+    public String getCpf() {
+        return cpf;
+    }
 
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+   
+
+    
 }
