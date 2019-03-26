@@ -7,7 +7,6 @@ public class Restaurante extends Usuario {
     
     private String descricao;
     private Image foto;
-    private String endereco;
     private Date horaDeAbrir;
     private Date horaDeFechar;
     private String categoria;
