@@ -16,17 +16,15 @@ public class Restaurante extends Usuario {
         super(nome, senha, email);
         this.descricao = descricao;
         this.foto = foto;
-        this.endereco = endereco;
         this.horaDeAbrir = horaDeAbrir;
         this.horaDeFechar = horaDeFechar;
         this.categoria = categoria;
         this.valorDoFrete = valorDoFrete;
     }
 
-    public Restaurante(String descricao, String endereco, Date horaDeAbrir, Date horaDeFechar, String categoria, double valorDoFrete, String nome, String senha, String email) {
+    public Restaurante(String descricao, Date horaDeAbrir, Date horaDeFechar, String categoria, double valorDoFrete, String nome, String senha, String email) {
         super(nome, senha, email);
         this.descricao = descricao;
-        this.endereco = endereco;
         this.horaDeAbrir = horaDeAbrir;
         this.horaDeFechar = horaDeFechar;
         this.categoria = categoria;
@@ -51,14 +49,7 @@ public class Restaurante extends Usuario {
         this.foto = foto;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
+  
     public Date getHoraDeAbrir() {
         return horaDeAbrir;
     }
