@@ -12,7 +12,7 @@
     </head>
     <body>
 
-        <h1>Cadastro de Restaurantes</h1>
+        <h1>Cadastro de Cliente</h1>
         
         
         

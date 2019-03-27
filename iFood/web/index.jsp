@@ -7,6 +7,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Ifood clone</h1>
+        
+        <a href="cadastrarCliente.jsp"> Cadastrar Clientes </a><br>
+        <a href="cadastrarAdministrador.jsp"> Cadastrar Adminstradores </a><br>
+        <a href="cadastrarRestaurante.jsp"> Cadastrar Restaurantes </a>
+
+
     </body>
 </html>
