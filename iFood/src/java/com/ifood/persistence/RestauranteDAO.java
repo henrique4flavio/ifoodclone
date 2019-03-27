@@ -32,9 +32,9 @@ public class RestauranteDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
 
-            st.execute("insert into restaurante (nome, email, senha, descricao, foto, horaDeAbrir, horaDeFechar, categoria)" + "values('"
+            st.execute("insert into restaurante (nome, email, senha, descricao, foto, horaDeAbrir, horaDeFechar, categoria, valorDoFrete)" + "values('"
                     + restaurante.getNome() + "', '" + restaurante.getEmail() + "', '" + restaurante.getSenha() + "','" + restaurante.getDescricao() + "', '" + restaurante.getFoto()
-                    + "', '" + restaurante.getHoraDeAbrir() + "', '" + restaurante.getHoraDeFechar() + "', '" + restaurante.getCategoria() + "')");
+                    + "', '" + restaurante.getHoraDeAbrir() + "', '" + restaurante.getHoraDeFechar() + "', '" + restaurante.getCategoria()+"', '" + restaurante.getValorDoFrete() + "')");
 
         } catch (SQLException e) {
 
