@@ -1,18 +1,31 @@
 package com.ifood.model;
 
-import java.awt.Image;
+import java.sql.Blob;
 import java.sql.Date;
 
 public class Restaurante extends Usuario {
-    
+
     private String descricao;
-    private Image foto;
+    private Blob foto;
     private Date horaDeAbrir;
     private Date horaDeFechar;
     private String categoria;
     private double valorDoFrete;
 
-    public Restaurante(String descricao, Image foto, String endereco, Date horaDeAbrir, Date horaDeFechar, String categoria, double valorDoFrete, String nome, String senha, String email) {
+    public Restaurante() {
+    }
+
+    public Restaurante(String descricao, Blob foto, Date horaDeAbrir, Date horaDeFechar, String categoria, double valorDoFrete, int id, String nome, String senha, String email) {
+        super(id, nome, senha, email);
+        this.descricao = descricao;
+        this.foto = foto;
+        this.horaDeAbrir = horaDeAbrir;
+        this.horaDeAbrir = horaDeFechar;
+        this.categoria = categoria;
+        this.valorDoFrete = valorDoFrete;
+    }
+
+    public Restaurante(String descricao, Blob foto, String endereco, Date horaDeAbrir, Date horaDeFechar, String categoria, double valorDoFrete, String nome, String senha, String email) {
         super(nome, senha, email);
         this.descricao = descricao;
         this.foto = foto;
@@ -21,17 +34,6 @@ public class Restaurante extends Usuario {
         this.categoria = categoria;
         this.valorDoFrete = valorDoFrete;
     }
-
-    public Restaurante(String descricao, Date horaDeAbrir, Date horaDeFechar, String categoria, double valorDoFrete, String nome, String senha, String email) {
-        super(nome, senha, email);
-        this.descricao = descricao;
-        this.horaDeAbrir = horaDeAbrir;
-        this.horaDeFechar = horaDeFechar;
-        this.categoria = categoria;
-        this.valorDoFrete = valorDoFrete;
-    }
-    
-    
 
     public String getDescricao() {
         return descricao;
@@ -41,15 +43,14 @@ public class Restaurante extends Usuario {
         this.descricao = descricao;
     }
 
-    public Image getFoto() {
+    public Blob getFoto() {
         return foto;
     }
 
-    public void setFoto(Image foto) {
+    public void setFoto(Blob foto) {
         this.foto = foto;
     }
 
-  
     public Date getHoraDeAbrir() {
         return horaDeAbrir;
     }
@@ -81,14 +82,5 @@ public class Restaurante extends Usuario {
     public void setValorDoFrete(double valorDoFrete) {
         this.valorDoFrete = valorDoFrete;
     }
-    
-    
-    
-    
-    
-    
-
-   
-
 
 }

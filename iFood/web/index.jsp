@@ -1,8 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 26/03/2019, 15:35:53
-    Author     : jonat
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

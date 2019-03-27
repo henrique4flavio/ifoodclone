@@ -1,4 +1,3 @@
-
 package com.ifood.controller;
 
 
@@ -13,7 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ *
+ * @author daniela.costa
+ */
 public class FrontController extends HttpServlet {
 
     /**
@@ -33,13 +35,15 @@ public class FrontController extends HttpServlet {
         response.setCharacterEncoding("ISO-8859-1");
         
         String action = request.getParameter("action");
+        String pacote = request.getParameter("pacote");
+
         Action actionObject = null;
 
         if (action == null || action.equals("")) {
             response.sendRedirect("index.jsp");
         }
 
-        actionObject = ActionFactory.create(action);
+        actionObject = ActionFactory.create(pacote, action);
 
         if (actionObject != null) {
             actionObject.execute(request, response);
