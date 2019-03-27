@@ -12,6 +12,12 @@ public class Restaurante extends Usuario {
     private String categoria;
     private double valorDoFrete;
 
+    public Restaurante(int id, String nome, String senha, String email) {
+        super(id, nome, senha, email);
+    }
+    
+    
+
     public Restaurante() {
     }
 

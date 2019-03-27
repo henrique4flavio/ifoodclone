@@ -1,7 +1,9 @@
 package com.ifood.persistence;
 
 import com.ifood.model.Restaurante;
+import com.ifood.model.Restaurante;
 import com.mysql.jdbc.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -93,6 +95,38 @@ public class RestauranteDAO {
             closeResources(conn, st);
         }
     }
+    
+    public Restaurante logar(String email, String senha) throws ClassNotFoundException {
+
+        Connection conn = null;
+        PreparedStatement comando = null;
+
+        Restaurante restaurante = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            String sql = "select * from restaurante WHERE email = ? and senha = ?";
+            comando = conn.prepareStatement(sql);
+            comando.setString(1, email);
+            comando.setString(2, senha);
+            ResultSet rs = comando.executeQuery();
+            if (rs.first()) {
+                restaurante = new Restaurante(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getString("email"));
+            }
+
+            comando.close();
+            conn.close();
+        } catch (SQLException e) {
+        } finally {
+            closeResources(conn, comando);
+        }
+    
+        return restaurante;
+    }
+    
 
     public void closeResources(com.mysql.jdbc.Connection conn, Statement st) {
         try {

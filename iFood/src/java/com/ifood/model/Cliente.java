@@ -19,6 +19,12 @@ public class Cliente extends Usuario {
         this.bairro = bairro;
         this.cep = cep;
     }
+
+    public Cliente(int id, String nome, String senha, String email) {
+        super(id, nome, senha, email);
+    }
+    
+    
     
     
 

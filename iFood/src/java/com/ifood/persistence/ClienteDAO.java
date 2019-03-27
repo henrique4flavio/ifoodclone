@@ -7,6 +7,7 @@ package com.ifood.persistence;
 
 import com.ifood.model.Cliente;
 import com.mysql.jdbc.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -94,6 +95,38 @@ public class ClienteDAO {
             closeResources(conn, st);
         }
     }
+
+    public Cliente logar(String email, String senha) throws ClassNotFoundException {
+
+        Connection conn = null;
+        PreparedStatement comando = null;
+
+        Cliente cliente = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            String sql = "select * from cliente WHERE email = ? and senha = ?";
+            comando = conn.prepareStatement(sql);
+            comando.setString(1, email);
+            comando.setString(2, senha);
+            ResultSet rs = comando.executeQuery();
+            if (rs.first()) {
+                cliente = new Cliente(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getString("email"));
+            }
+
+            comando.close();
+            conn.close();
+        } catch (SQLException e) {
+        } finally {
+            closeResources(conn, comando);
+        }
+    
+        return cliente;
+    }
+    
 
     public void closeResources(Connection conn, Statement st) {
         try {

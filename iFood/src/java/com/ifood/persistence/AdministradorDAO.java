@@ -7,7 +7,9 @@ package com.ifood.persistence;
 
 
 import com.ifood.model.Administrador;
+import com.ifood.model.Administrador;
 import com.mysql.jdbc.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -90,6 +92,38 @@ public class AdministradorDAO {
             closeResources(conn, st);
         }
     }
+    
+    public Administrador logar(String email, String senha) throws ClassNotFoundException {
+
+        Connection conn = null;
+        PreparedStatement comando = null;
+
+        Administrador administrador = null;
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            String sql = "select * from administrador WHERE email = ? and senha = ?";
+            comando = conn.prepareStatement(sql);
+            comando.setString(1, email);
+            comando.setString(2, senha);
+            ResultSet rs = comando.executeQuery();
+            if (rs.first()) {
+                administrador = new Administrador(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getString("email"));
+            }
+
+            comando.close();
+            conn.close();
+        } catch (SQLException e) {
+        } finally {
+            closeResources(conn, comando);
+        }
+    
+        return administrador;
+    }
+    
 
     public void closeResources(Connection conn, Statement st) {
         try {
