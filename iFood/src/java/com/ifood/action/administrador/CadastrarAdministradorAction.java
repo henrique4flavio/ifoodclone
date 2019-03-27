@@ -27,7 +27,7 @@ public class CadastrarAdministradorAction implements Action {
         String email = request.getParameter("textEmail");
         String senha = request.getParameter("textSenha");
 
-        Administrador administrador = new Administrador(email, nome, senha);
+        Administrador administrador = new Administrador(nome, senha, email);
 
         try {
             AdministradorDAO.getInstance().save(administrador);

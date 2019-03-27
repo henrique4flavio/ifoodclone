@@ -5,7 +5,6 @@
  */
 package com.ifood.controller;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -23,7 +22,6 @@ import com.ifood.model.Cliente;
 import com.ifood.persistence.AdministradorDAO;
 import com.ifood.persistence.ClienteDAO;
 import com.ifood.persistence.RestauranteDAO;
-
 
 public class LoginController extends HttpServlet {
 
@@ -65,8 +63,11 @@ public class LoginController extends HttpServlet {
             session.setAttribute("cliente", cliente);
             session.setAttribute("usuario", cliente);
             session.setAttribute("tipo", "cliente");
+
             RequestDispatcher view = request.getRequestDispatcher("/clienteHome.jsp");
             view.forward(request, response);
+
+            return;
 
         }
 
@@ -78,6 +79,9 @@ public class LoginController extends HttpServlet {
             session.setAttribute("tipo", "administrador");
             RequestDispatcher view = request.getRequestDispatcher("/administradorHome.jsp");
             view.forward(request, response);
+
+            return;
+
         }
 
         Restaurante restaurante = RestauranteDAO.getInstance().logar(email, senha);
@@ -88,6 +92,9 @@ public class LoginController extends HttpServlet {
             session.setAttribute("tipo", "restaurante");
             RequestDispatcher view = request.getRequestDispatcher("/restauranteHome.jsp");
             view.forward(request, response);
+
+            return;
+
         } else {
             request.setAttribute("msgErro", "Usuário/Senha inválidos!");
             RequestDispatcher view = request.getRequestDispatcher("/login.jsp");

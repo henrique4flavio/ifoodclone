@@ -111,10 +111,15 @@ public class ClienteDAO {
             ResultSet rs = comando.executeQuery();
             if (rs.first()) {
                 cliente = new Cliente(
-                        rs.getInt("id"),
+                        rs.getString("cpf"),
+                        rs.getString("rua"),
+                        rs.getString("numero"),
+                        rs.getString("bairro"),
+                        rs.getString("cep"),
                         rs.getString("nome"),
                         rs.getString("senha"),
                         rs.getString("email"));
+
             }
 
             comando.close();
