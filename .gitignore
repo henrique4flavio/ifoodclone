@@ -1,3 +1,10 @@
 /iFood/nbproject/private/
 /iFood/build/
 /iFood/dist/
+
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+dist/
+nbdist/
+.nb-gradle/
