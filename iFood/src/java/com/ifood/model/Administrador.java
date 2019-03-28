@@ -10,6 +10,7 @@ public class Administrador extends Usuario {
         super(id, nome, senha, email);
     }
 
-    
-
+   public Administrador(int id){
+       this.id=id;
+   }
 }
