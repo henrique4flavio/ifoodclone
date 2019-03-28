@@ -4,8 +4,9 @@ import com.ifood.state.pedido.PedidoEstado;
 import com.ifood.state.pedido.PedidoEstadoEfetuado;
 import java.sql.Date;
 import java.util.List;
+import java.util.Observable;
 
-public class Pedido {
+public class Pedido extends Observable {
 
     private int id;
     private Date data;
