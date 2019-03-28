@@ -12,18 +12,33 @@
         <title>JSP Page</title>
     </head>
     <body>
+         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item" href="/iFood"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+          </ul>
+        </li>
         <h1>Bem Vindo ${restaurante.nome}</h1>
         
+    <form action="FrontController?pacote=comida&action=CadastrarComida&id=${usuario.id}" method="post">
+            Nome:
+            <input type="text" name="textNome"/><br/>          
+            Descrição
+            <input type="text" name="textDescricao"/><br/>
+            Preço do prato:
+            <input type="text" name="textPreco"/><br/>
         
-        <form action="ImagemUpController?acao=uploadImagem&id=${restaurante.id}" method="post" enctype="multipart/form-data">
             
-            <input type="file" name="foto"/><br/>
-        
             
+                       
             <input type="submit" value="Cadastrar"/>
 
             
         </form>
+        
+        
+          
+
+            
         
     </body>
 </html>

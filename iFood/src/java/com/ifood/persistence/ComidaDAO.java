@@ -39,8 +39,8 @@ public class ComidaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into comida (nome, descricao, preco, restaurante)" + "values('"
-                    + comida.getNome() + "', '" + comida.getDescricao() + "', '" + comida.getPreco() + "', '" + comida.getRestaurante()
+            st.execute("insert into comida (nome, descricao, preco, REST_ID)" + "values('"
+                    + comida.getNome() + "', '" + comida.getDescricao() + "', '" + comida.getPreco() + "', '" + comida.getRestaurante().getId()
                     + "')");
 
         } catch (SQLException e) {
@@ -66,7 +66,7 @@ public class ComidaDAO {
                         rs.getString("nome"),
                         rs.getString("descricao"),
                         rs.getDouble("preco"), 
-                        (Restaurante) rs.getObject("restaurante"));
+                        (Restaurante) rs.getObject("REST_ID"));
                        
 
                 comidaes.add(comida);
@@ -97,37 +97,6 @@ public class ComidaDAO {
         }
     }
 
-    public Comida logar(String email, String senha) throws ClassNotFoundException {
-
-        Connection conn = null;
-        PreparedStatement comando = null;
-
-        Comida comida = null;
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            String sql = "select * from comida WHERE email = ? and senha = ?";
-            comando = conn.prepareStatement(sql);
-            comando.setString(1, email);
-            comando.setString(2, senha);
-            ResultSet rs = comando.executeQuery();
-            if (rs.first()) {
-                comida = new Comida(
-                        rs.getString("nome"),
-                        rs.getString("descricao"),
-                        rs.getDouble("preco"), 
-                        (Restaurante) rs.getObject("restaurante"));
-
-            }
-
-            comando.close();
-            conn.close();
-        } catch (SQLException e) {
-        } finally {
-            closeResources(conn, comando);
-        }
-    
-        return comida;
-    }
     
 
     public void closeResources(Connection conn, Statement st) {
