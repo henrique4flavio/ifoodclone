@@ -12,6 +12,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Bem Vindo ${Restaurante.nome}</h1>
+        <h1>Bem Vindo ${restaurante.nome}</h1>
+        
+        
+        <form action="ImagemUpController?acao=uploadImagem&id=${restaurante.id}" method="post" enctype="multipart/form-data">
+            
+            <input type="file" name="foto"/><br/>
+        
+            
+            <input type="submit" value="Cadastrar"/>
+
+            
+        </form>
+        
     </body>
 </html>

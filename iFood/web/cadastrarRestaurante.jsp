@@ -13,13 +13,13 @@
     <body>
 
         <h1>Cadastro de Restaurantes</h1>
-        
-        
-        
+
+
+
         <form action="FrontController?pacote=restaurante&action=CadastrarRestaurante" method="post">
             Nome:
             <input type="text" name="textNome"/><br/>
-           
+
             Email:
             <input type="text" name="textEmail"/><br/>
             Senha:
@@ -35,12 +35,11 @@
             Descricao:
             <input type="text" name="textDescricao"/><br/>
             Foto:
-            <input type="file" accept="image/png,image/jpeg,image/gif" name="foto"/><br/>
+            <input type="file" name="foto" size="50"/> 
 
-            
             <input type="submit" value="Cadastrar"/>
 
-            
+
         </form>
 
     </body>

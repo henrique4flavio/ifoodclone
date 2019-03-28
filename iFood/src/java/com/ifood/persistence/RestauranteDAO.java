@@ -32,9 +32,9 @@ public class RestauranteDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
 
-            st.execute("insert into restaurante (nome, email, senha, descricao, foto, horaDeAbrir, horaDeFechar, categoria, valorDoFrete)" + "values('"
-                    + restaurante.getNome() + "', '" + restaurante.getEmail() + "', '" + restaurante.getSenha() + "','" + restaurante.getDescricao() + "', '" + restaurante.getFoto()
-                    + "', '" + restaurante.getHoraDeAbrir() + "', '" + restaurante.getHoraDeFechar() + "', '" + restaurante.getCategoria()+"', '" + restaurante.getValorDoFrete() + "')");
+            st.execute("insert into restaurante (nome, email, senha, descricao, horaDeAbrir, horaDeFechar, categoria, valorDoFrete)" + "values('"
+                    + restaurante.getNome() + "', '" + restaurante.getEmail() + "', '" + restaurante.getSenha() + "','" + restaurante.getDescricao() + "', '"
+                    + restaurante.getHoraDeAbrir() + "', '" + restaurante.getHoraDeFechar() + "', '" + restaurante.getCategoria() + "', '" + restaurante.getValorDoFrete() + "')");
 
         } catch (SQLException e) {
 
@@ -59,8 +59,8 @@ public class RestauranteDAO {
                 Restaurante restaurante = new Restaurante(
                         rs.getString("descricao"),
                         rs.getBlob("foto"),
-                        rs.getDate("horaDeAbrir"),
-                        rs.getDate("horaDeFechar"),
+                        rs.getString("horaDeAbrir"),
+                        rs.getString("horaDeFechar"),
                         rs.getString("categoria"),
                         rs.getDouble("valorDoFrete"),
                         rs.getInt("id"),
@@ -79,6 +79,38 @@ public class RestauranteDAO {
 
     }
 
+    public Restaurante get(int id) throws ClassNotFoundException {
+
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        List<Restaurante> restaurantes = new ArrayList<Restaurante>();
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from restaurante WHERE id=?" + id);
+            while (rs.next()) {
+
+                Restaurante restaurante = new Restaurante(
+                        rs.getString("descricao"),
+                        rs.getBlob("foto"),
+                        rs.getString("horaDeAbrir"),
+                        rs.getString("horaDeFechar"),
+                        rs.getString("categoria"),
+                        rs.getDouble("valorDoFrete"),
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getString("email"));
+
+                return restaurante;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void delete(Restaurante restaurante) throws
             SQLException, ClassNotFoundException {
         com.mysql.jdbc.Connection conn = null;
@@ -95,7 +127,7 @@ public class RestauranteDAO {
             closeResources(conn, st);
         }
     }
-    
+
     public Restaurante logar(String email, String senha) throws ClassNotFoundException {
 
         Connection conn = null;
@@ -111,10 +143,17 @@ public class RestauranteDAO {
             ResultSet rs = comando.executeQuery();
             if (rs.first()) {
                 restaurante = new Restaurante(
+                        rs.getString("descricao"),
+                        rs.getBlob("foto"),
+                        rs.getString("horaDeAbrir"),
+                        rs.getString("horaDeFechar"),
+                        rs.getString("categoria"),
+                        rs.getDouble("valorDoFrete"),
                         rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("senha"),
                         rs.getString("email"));
+
             }
 
             comando.close();
@@ -123,10 +162,9 @@ public class RestauranteDAO {
         } finally {
             closeResources(conn, comando);
         }
-    
+
         return restaurante;
     }
-    
 
     public void closeResources(com.mysql.jdbc.Connection conn, Statement st) {
         try {
@@ -140,4 +178,5 @@ public class RestauranteDAO {
 
         }
     }
+
 }

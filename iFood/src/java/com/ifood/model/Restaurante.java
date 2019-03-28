@@ -1,16 +1,21 @@
 package com.ifood.model;
 
 import java.sql.Blob;
-import java.sql.Date;
+
 
 public class Restaurante extends Usuario {
 
     private String descricao;
     private Blob foto;
-    private Date horaDeAbrir;
-    private Date horaDeFechar;
+    private String horaDeAbrir;
+    private String horaDeFechar;
     private String categoria;
     private double valorDoFrete;
+    
+    
+    
+    
+    
 
     public Restaurante(int id, String nome, String senha, String email) {
         super(id, nome, senha, email);
@@ -21,7 +26,7 @@ public class Restaurante extends Usuario {
     public Restaurante() {
     }
 
-    public Restaurante(String descricao, Blob foto, Date horaDeAbrir, Date horaDeFechar, String categoria, double valorDoFrete, int id, String nome, String senha, String email) {
+    public Restaurante(String descricao, Blob foto, String horaDeAbrir, String horaDeFechar, String categoria, double valorDoFrete, int id, String nome, String senha, String email) {
         super(id, nome, senha, email);
         this.descricao = descricao;
         this.foto = foto;
@@ -31,7 +36,7 @@ public class Restaurante extends Usuario {
         this.valorDoFrete = valorDoFrete;
     }
 
-    public Restaurante(String descricao, Blob foto, String endereco, Date horaDeAbrir, Date horaDeFechar, String categoria, double valorDoFrete, String nome, String senha, String email) {
+    public Restaurante(String descricao, Blob foto, String horaDeAbrir, String horaDeFechar, String categoria, double valorDoFrete, String nome, String senha, String email) {
         super(nome, senha, email);
         this.descricao = descricao;
         this.foto = foto;
@@ -40,6 +45,11 @@ public class Restaurante extends Usuario {
         this.categoria = categoria;
         this.valorDoFrete = valorDoFrete;
     }
+
+
+    
+
+   
 
     public String getDescricao() {
         return descricao;
@@ -57,19 +67,19 @@ public class Restaurante extends Usuario {
         this.foto = foto;
     }
 
-    public Date getHoraDeAbrir() {
+    public String getHoraDeAbrir() {
         return horaDeAbrir;
     }
 
-    public void setHoraDeAbrir(Date horaDeAbrir) {
+    public void setHoraDeAbrir(String horaDeAbrir) {
         this.horaDeAbrir = horaDeAbrir;
     }
 
-    public Date getHoraDeFechar() {
+    public String getHoraDeFechar() {
         return horaDeFechar;
     }
 
-    public void setHoraDeFechar(Date horaDeFechar) {
+    public void setHoraDeFechar(String horaDeFechar) {
         this.horaDeFechar = horaDeFechar;
     }
 

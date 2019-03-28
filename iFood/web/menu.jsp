@@ -12,6 +12,8 @@
         <a href="cadastrarCliente.jsp"> Cadastrar Clientes </a><br>
         <a href="cadastrarAdministrador.jsp"> Cadastrar Adminstradores </a><br>
         <a href="cadastrarRestaurante.jsp"> Cadastrar Restaurantes </a>
+        
+        
 
 
     </body>
