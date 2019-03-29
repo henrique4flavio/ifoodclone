@@ -25,8 +25,27 @@ public class ConfirmarPedidoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   int id = Integer.parseInt(request.getParameter("id"));
+       // produto.getEstado().encaminhar(produto);
+                
+        Pedido pedido = new Pedido(id);
+        PedidoEstado estado = new PedidoEstadoConfirmado();
+        pedido.setEstado(estado);
+       
+        //pedido.setSituacao(pedido.getEstado().confirmar(pedido));
+       
+        try {
+            PedidoDAO.getInstance().edit(pedido);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConfirmarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConfirmarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.sendRedirect("FrontController?action=ListarPedidos");
+        
+         }
+    
     }
    
  
-}
+

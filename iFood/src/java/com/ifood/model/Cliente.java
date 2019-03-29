@@ -9,6 +9,7 @@ public class Cliente extends Usuario {
     private String numero;
     private String bairro;
     private String cep;
+    private int id;
 
  
     public Cliente(String cpf, String rua, String numero, String bairro, String cep, String nome, String senha, String email) {
@@ -25,7 +26,9 @@ public class Cliente extends Usuario {
     }
     
     
-    
+    public Cliente(int id){
+        this.id= id;
+    }
     
 
     public String getCpf() {
@@ -66,6 +69,14 @@ public class Cliente extends Usuario {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

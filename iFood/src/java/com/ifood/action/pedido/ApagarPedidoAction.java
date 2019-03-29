@@ -20,7 +20,17 @@ public class ApagarPedidoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+int id = Integer.parseInt(request.getParameter("id"));
+        Pedido pedido = new Pedido(id);
+
+        try {
+            PedidoDAO.getInstance().delete(pedido);
+        } catch (SQLException ex) {
+            Logger.getLogger(ApagarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ApagarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.sendRedirect("FrontController?action=ApagarPedido");
     }
 
   

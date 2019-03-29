@@ -128,10 +128,9 @@ public class ClienteDAO {
         } finally {
             closeResources(conn, comando);
         }
-    
+
         return cliente;
     }
-    
 
     public void closeResources(Connection conn, Statement st) {
         try {
@@ -145,4 +144,34 @@ public class ClienteDAO {
 
         }
     }
+
+    public static void edit(Cliente cliente) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement comando = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            String sql = "update cliente set nome=?,email=?,senha=?,cpf=?,rua=?,numero=?,bairro=?,cep=? where id =?";
+
+            comando = conn.prepareStatement(sql);
+            comando.setString(1, cliente.getNome());
+            comando.setString(2, cliente.getEmail());
+            comando.setString(3, cliente.getSenha());
+            comando.setString(4, cliente.getCpf());
+
+            comando.setString(5, cliente.getCpf());
+            comando.setString(6, cliente.getRua());
+            comando.setString(7, cliente.getNumero());
+            comando.setString(8, cliente.getBairro());
+            comando.setString(9, cliente.getCep());
+            comando.setInt(10, cliente.getId());
+
+            comando.execute();
+            comando.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
 }

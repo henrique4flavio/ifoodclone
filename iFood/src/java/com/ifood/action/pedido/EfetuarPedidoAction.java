@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ifood.model.Pedido;
 import com.ifood.persistence.PedidoDAO;
+import com.ifood.state.pedido.PedidoEstado;
+import com.ifood.state.pedido.PedidoEstadoEfetuado;
 /**
  *
  * @author jonat
@@ -22,9 +24,27 @@ public class EfetuarPedidoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = Integer.parseInt(request.getParameter("id"));
+        // produto.getEstado().encaminhar(produto);
+
+        Pedido pedido = new Pedido(id);
+        PedidoEstado estado = new PedidoEstadoEfetuado();
+        pedido.setEstado(estado);
+
+        //pedido.setSituacao(pedido.getEstado().confirmar(pedido));
+        try {
+            PedidoDAO.getInstance().edit(pedido);
+        } catch (SQLException ex) {
+            Logger.getLogger(EfetuarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EfetuarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.sendRedirect("FrontController?action=ListarProdutos");
+
+    }
+
     }
 
   
 
-}
+

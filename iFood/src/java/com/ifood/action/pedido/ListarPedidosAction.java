@@ -21,8 +21,19 @@ public class ListarPedidosAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+try {
+            request.setAttribute("Pedido", PedidoDAO.getInstance().list());
+            RequestDispatcher view
+                    = request.getRequestDispatcher("/pedidos.jsp");
+            try {
+                view.forward(request, response);
+            } catch (ServletException ex) {
+                Logger.getLogger(ListarPedidosAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex) {
+        }
+    }
+
     }
     
    
-}
