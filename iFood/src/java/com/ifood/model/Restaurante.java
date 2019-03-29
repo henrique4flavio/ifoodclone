@@ -1,9 +1,10 @@
 package com.ifood.model;
 
 import java.sql.Blob;
+import java.util.Observable;
+import java.util.Observer;
 
-
-public class Restaurante extends Usuario {
+public class Restaurante extends Usuario implements Observer {
 
     private String descricao;
     private Blob foto;
@@ -11,17 +12,10 @@ public class Restaurante extends Usuario {
     private String horaDeFechar;
     private String categoria;
     private double valorDoFrete;
-    
-    
-    
-    
-    
 
     public Restaurante(int id, String nome, String senha, String email) {
         super(id, nome, senha, email);
     }
-    
-    
 
     public Restaurante() {
     }
@@ -45,11 +39,6 @@ public class Restaurante extends Usuario {
         this.categoria = categoria;
         this.valorDoFrete = valorDoFrete;
     }
-
-
-    
-
-   
 
     public String getDescricao() {
         return descricao;
@@ -97,6 +86,11 @@ public class Restaurante extends Usuario {
 
     public void setValorDoFrete(double valorDoFrete) {
         this.valorDoFrete = valorDoFrete;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

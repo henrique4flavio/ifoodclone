@@ -14,10 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ifood.persistence.RestauranteDAO;
 
-/**
- *
- * @author daniela.costa
- */
+
 public class CadastrarAdministradorAction implements Action {
 
     @Override

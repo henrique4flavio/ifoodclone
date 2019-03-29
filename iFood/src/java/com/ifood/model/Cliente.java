@@ -1,8 +1,10 @@
 package com.ifood.model;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Cliente extends Usuario {
+public class Cliente extends Usuario implements Observer {
 
     private String cpf;
     private String rua;
@@ -71,12 +73,18 @@ public class Cliente extends Usuario {
         this.cep = cep;
     }
 
+<<<<<<< HEAD
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+=======
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> 5af77f359f6421c18ab1318fa9eba893bae43dad
     }
 
 }

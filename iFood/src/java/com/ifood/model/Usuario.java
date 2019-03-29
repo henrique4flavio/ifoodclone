@@ -2,7 +2,7 @@ package com.ifood.model;
 
 public abstract class Usuario {
 
-    private int id;
+    int id;
     private String nome;
     private String senha;
     private String email;
