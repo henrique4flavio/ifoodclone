@@ -73,18 +73,18 @@ public class Cliente extends Usuario implements Observer {
         this.cep = cep;
     }
 
-<<<<<<< HEAD
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-=======
+
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
->>>>>>> 5af77f359f6421c18ab1318fa9eba893bae43dad
     }
 
 }

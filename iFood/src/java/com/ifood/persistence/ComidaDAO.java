@@ -111,4 +111,28 @@ public class ComidaDAO {
 
         }
     }
+    
+    
+     public static void edit(Comida comida) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement comando = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            String sql = "update comida set nome=?,=?,descricao=?,preco=?,REST_ID=? where id =?";
+
+            comando = conn.prepareStatement(sql);
+            comando.setString(1, comida.getNome());
+            comando.setString(2, comida.getDescricao());
+            comando.setDouble(3, comida.getPreco());
+            comando.setInt(4, comida.getRestaurante().getId());
+            comando.setInt(5, comida.getId());
+
+            comando.execute();
+            comando.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 }

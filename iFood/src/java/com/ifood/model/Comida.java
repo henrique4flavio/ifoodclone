@@ -27,6 +27,12 @@ public class Comida {
         this.restaurante = restaurante;
     }
     
+    public Comida(int id){
+        this.id= id;
+    }
+
+   
+    
    
     public int getId() {
         return id;
