@@ -137,4 +137,29 @@ public class AdministradorDAO {
 
         }
     }
+    
+    
+
+     public static void edit(Administrador administrador) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement comando = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            String sql = "update administrador set nome=?,senha=?,email=?  where id =?";
+
+            comando = conn.prepareStatement(sql);
+            comando.setString(1, administrador.getNome());
+            comando.setString(2, administrador.getSenha());
+            comando.setString(3, administrador.getEmail());
+
+            comando.setInt(10, administrador.getId());
+
+            comando.execute();
+            comando.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 }
