@@ -39,6 +39,10 @@ public class Restaurante extends Usuario implements Observer {
         this.categoria = categoria;
         this.valorDoFrete = valorDoFrete;
     }
+    
+    public Restaurante(int id){
+        this.id= id;
+    }
 
     public String getDescricao() {
         return descricao;

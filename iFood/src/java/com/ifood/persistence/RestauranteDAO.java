@@ -178,5 +178,33 @@ public class RestauranteDAO {
 
         }
     }
+    
+    public static void edit(Restaurante restaurante) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement comando = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            String sql = "update restaurante set nome=?,email=?,senha=?,descricao=?,horaDeAbrir=?,horaDeFechar=?,categoria=?,valorDoFrete=? where id =?";
+
+            comando = conn.prepareStatement(sql);
+            comando.setString(1, restaurante.getNome());
+            comando.setString(2, restaurante.getEmail());
+            comando.setString(3, restaurante.getSenha());
+            comando.setString(4, restaurante.getDescricao());
+
+            comando.setString(5, restaurante.getHoraDeAbrir());
+            comando.setString(6, restaurante.getHoraDeFechar());
+            comando.setString(7, restaurante.getCategoria());
+            comando.setDouble(8, restaurante.getValorDoFrete());
+            comando.setInt(9, restaurante.getId());
+
+            comando.execute();
+            comando.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
 }
