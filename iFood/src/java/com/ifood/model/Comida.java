@@ -11,8 +11,11 @@ public class Comida {
     private double preco;
     private Image foto;
     private Restaurante restaurante;
+    
+    private int restauranteId;
 
-    public Comida(String nome, String descricao, double preco, Image foto, Restaurante restaurante) {
+    public Comida(int id, String nome, String descricao, double preco, Image foto, Restaurante restaurante) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -20,23 +23,23 @@ public class Comida {
         this.restaurante = restaurante;
     }
 
-    public Comida(String nome, String descricao, double preco, Restaurante restaurante) {
+    public Comida(int id, String nome, String descricao, double preco, Restaurante restaurante) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.restaurante = restaurante;
     }
     
-    public Comida(int id){
-        this.id= id;
+    public Comida(int restauranteId){
+        this.restauranteId = restauranteId;
     }
-
-   
     
-   
+    
     public int getId() {
         return id;
     }
+
 
     public void setId(int id) {
         this.id = id;
