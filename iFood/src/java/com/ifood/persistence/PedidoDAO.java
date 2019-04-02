@@ -38,9 +38,9 @@ public class PedidoDAO {
             
             comando.setInt(1, pedido.getId());
             comando.setDate(2, pedido.getData());
-            comando.setInt(3, pedido.getComida().getId());
-            comando.setInt(4, pedido.getRestaurante().getId());
-            comando.setInt(5, pedido.getCliente().getId());
+            comando.setInt(3, pedido.getComida_id());
+            comando.setInt(4, pedido.getRestaurante_id());
+            comando.setInt(5, pedido.getCliente_id());
             comando.setInt(6, pedido.getQtd());
             comando.setDouble(7, pedido.getPrecoTotal());
             
@@ -103,42 +103,6 @@ com.mysql.jdbc.Connection conn = null;
         }
     }
 
-    public Pedido logar(String email, String senha) throws ClassNotFoundException {
-
-        Connection conn = null;
-        PreparedStatement comando = null;
-
-        Pedido pedido = null;
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            String sql = "select * from pedido WHERE email = ? and senha = ?";
-            comando = conn.prepareStatement(sql);
-            comando.setString(1, email);
-            comando.setString(2, senha);
-            ResultSet rs = comando.executeQuery();
-            if (rs.first()) {
-                pedido = new Pedido(
-                        rs.getString("cpf"),
-                        rs.getString("rua"),
-                        rs.getString("numero"),
-                        rs.getString("bairro"),
-                        rs.getString("cep"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getString("email"));
-
-            }
-
-            comando.close();
-            conn.close();
-        } catch (SQLException e) {
-        } finally {
-            closeResources(conn, comando);
-        }
-    
-        return pedido;
-    }
-    
 
     public void closeResources(Connection conn, Statement st) {
         try {

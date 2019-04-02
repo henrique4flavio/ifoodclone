@@ -1,18 +1,16 @@
-
 package com.ifood.state.pedido;
 
 import com.ifood.model.Pedido;
-
 
 /**
  *
  * @author jonat
  */
 public class PedidoEstadoSaiuParaEntrega implements PedidoEstado {
-    
+
     private String estado = "Saiu Para Entrega";
-    
-     public String getEstado() {
+
+    public String getEstado() {
         return estado;
     }
 
@@ -21,24 +19,22 @@ public class PedidoEstadoSaiuParaEntrega implements PedidoEstado {
 
     @Override
     public String efetuar(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Pedido ja foi efetuado";
     }
 
     @Override
     public String confirmar(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Pedido já foi confirmado";
     }
 
     @Override
     public String sairParaEntrega(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Pedido já saiu para entrega";
     }
 
     @Override
     public String entregar(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Pedido Entregue";
     }
-
-   
 
 }

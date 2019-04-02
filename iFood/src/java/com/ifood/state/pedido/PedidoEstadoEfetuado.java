@@ -19,22 +19,22 @@ public class PedidoEstadoEfetuado implements PedidoEstado {
 
     @Override
     public String efetuar(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Pedido já foi efetuado";
     }
 
     @Override
     public String confirmar(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Pedido confirmado";
     }
 
     @Override
     public String sairParaEntrega(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Pedido saiu para entrega";
     }
 
     @Override
     public String entregar(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Pedido entregue";
     }
 
 }

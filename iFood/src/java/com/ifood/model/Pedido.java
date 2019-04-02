@@ -10,18 +10,18 @@ public class Pedido extends Observable {
 
     private int id;
     private Date data;
-    private Comida comida;
-    private Restaurante restaurante;    
-    private Cliente cliente;
+    private int comida_id;
+    private int restaurante_id;    
+    private int cliente_id;
     private int qtd;
     private double precoTotal;
     private PedidoEstado estado;  
 
-    public Pedido(Date data, Comida comida, Restaurante restaurante, Cliente cliente, int qtd, double precoTotal) {
+    public Pedido(Date data, int comida_id, int restaurante_id, int cliente_id, int qtd, double precoTotal) {
         this.data = data;
-        this.comida = comida;
-        this.restaurante = restaurante;
-        this.cliente = cliente;
+        this.comida_id = comida_id;
+        this.restaurante_id = restaurante_id;
+        this.cliente_id = cliente_id;
         this.qtd = qtd;
         this.precoTotal = precoTotal;
         this.estado = new PedidoEstadoEfetuado();
@@ -47,30 +47,31 @@ public Pedido(int id){
         this.data = data;
     }
 
-    public Comida getComida() {
-        return comida;
+    public int getComida_id() {
+        return comida_id;
     }
 
-    public void setComida(Comida comida) {
-        this.comida = comida;
+    public void setComida_id(int comida_id) {
+        this.comida_id = comida_id;
     }
 
-    public Restaurante getRestaurante() {
-        return restaurante;
+    public int getRestaurante_id() {
+        return restaurante_id;
     }
 
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
+    public void setRestaurante_id(int restaurante_id) {
+        this.restaurante_id = restaurante_id;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public int getCliente_id() {
+        return cliente_id;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente_id(int cliente_id) {
+        this.cliente_id = cliente_id;
     }
 
+    
     public int getQtd() {
         return qtd;
     }
