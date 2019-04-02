@@ -9,28 +9,22 @@ import java.util.Observable;
 public class Pedido extends Observable {
 
     private int id;
-    private Date data;
-    private int comida_id;
-    private int restaurante_id;    
-    private int cliente_id;
-    private int qtd;
+    private String data;
+    private List<Comida> comidas;
+    private Restaurante restaurante;    
+    private Cliente cliente;
     private double precoTotal;
     private PedidoEstado estado;  
 
-    public Pedido(Date data, int comida_id, int restaurante_id, int cliente_id, int qtd, double precoTotal) {
+    public Pedido(String data, List<Comida> comidas, Restaurante restaurante, Cliente cliente, double precoTotal) {
         this.data = data;
-        this.comida_id = comida_id;
-        this.restaurante_id = restaurante_id;
-        this.cliente_id = cliente_id;
-        this.qtd = qtd;
+        this.comidas = comidas;
+        this.restaurante = restaurante;
+        this.cliente = cliente;
         this.precoTotal = precoTotal;
         this.estado = new PedidoEstadoEfetuado();
     }
-    
-    
-public Pedido(int id){
-    this.id= id;
-}
+
     public int getId() {
         return id;
     }
@@ -39,45 +33,36 @@ public Pedido(int id){
         this.id = id;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
-    public int getComida_id() {
-        return comida_id;
+    public List<Comida> getComidas() {
+        return comidas;
     }
 
-    public void setComida_id(int comida_id) {
-        this.comida_id = comida_id;
+    public void setComidas(List<Comida> comidas) {
+        this.comidas = comidas;
     }
 
-    public int getRestaurante_id() {
-        return restaurante_id;
+    public Restaurante getRestaurante() {
+        return restaurante;
     }
 
-    public void setRestaurante_id(int restaurante_id) {
-        this.restaurante_id = restaurante_id;
+    public void setRestaurante(Restaurante restaurante) {
+        this.restaurante = restaurante;
     }
 
-    public int getCliente_id() {
-        return cliente_id;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setCliente_id(int cliente_id) {
-        this.cliente_id = cliente_id;
-    }
-
-    
-    public int getQtd() {
-        return qtd;
-    }
-
-    public void setQtd(int qtd) {
-        this.qtd = qtd;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public double getPrecoTotal() {
@@ -95,8 +80,7 @@ public Pedido(int id){
     public void setEstado(PedidoEstado estado) {
         this.estado = estado;
     }
-
-
-   
+    
+    
 
 }
