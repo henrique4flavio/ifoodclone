@@ -1,5 +1,7 @@
 package com.ifood.persistence;
 
+import com.ifood.model.Cliente;
+import com.ifood.model.Comida;
 import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,9 +10,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.ifood.model.Pedido;
+import com.ifood.model.Restaurante;
 
 public class PedidoDAO {
- private static PedidoDAO instance = new PedidoDAO();
+
+    private static PedidoDAO instance = new PedidoDAO();
 
     private PedidoDAO() {
     }
@@ -22,7 +26,6 @@ public class PedidoDAO {
 
     public void save(Pedido pedido) throws
             SQLException, ClassNotFoundException {
-        
 
         Connection conn = null;
         Statement st = null;
@@ -30,20 +33,16 @@ public class PedidoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
- String sql = "insert into pedido (id,data,COMIDA_ID,REST_ID,CLIENTE_ID,qta,precoTotal) values(?,?,?,?,?,?,?)";
-            
-           PreparedStatement comando = conn.prepareStatement(sql);
+            String sql = "insert into pedido (data,REST_ID,CLIENTE_ID,precoTotal, estado) values(?,?,?,?,?)";
 
-            
-            
-            comando.setInt(1, pedido.getId());
-            comando.setDate(2, pedido.getData());
-            comando.setInt(3, pedido.getComida_id());
-            comando.setInt(4, pedido.getRestaurante_id());
-            comando.setInt(5, pedido.getCliente_id());
-            comando.setInt(6, pedido.getQtd());
-            comando.setDouble(7, pedido.getPrecoTotal());
-            
+            PreparedStatement comando = conn.prepareStatement(sql);
+
+            comando.setString(1, pedido.getData());
+            comando.setInt(2, pedido.getRestaurante().getId());
+            comando.setInt(3, pedido.getCliente().getId());
+            comando.setDouble(4, pedido.getPrecoTotal());
+            comando.setString(5, pedido.getEstado().getEstado());
+
             comando.execute();
             comando.close();
             conn.close();
@@ -53,11 +52,11 @@ public class PedidoDAO {
         } finally {
             closeResources(conn, st);
         }
-        
+
     }
 
     public List<Pedido> list() throws ClassNotFoundException {
-com.mysql.jdbc.Connection conn = null;
+        com.mysql.jdbc.Connection conn = null;
         Statement st = null;
 
         List<Pedido> pedidos = new ArrayList<Pedido>();
@@ -67,15 +66,15 @@ com.mysql.jdbc.Connection conn = null;
             ResultSet rs = st.executeQuery("select * from pedido");
             while (rs.next()) {
 
-                Pedido pedido = new Pedido(
-                        rs.getDate("data"),
-                        rs.getInt("COMIDA_ID"),
-                        rs.getInt("REST_ID"),
-                        rs.getInt("CLIENTE_ID"),
-                        rs.getInt("qtd"),
-                        rs.getDouble("precoTotal"));
-                        
+                String data = rs.getString("data");
+                int restauranteId = rs.getInt("REST_ID");
+                int clienteId = rs.getInt("CLIENTE_ID");
+                double precoTotal = rs.getDouble("precoTotal");
 
+                Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
+                Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
+
+                Pedido pedido = new Pedido(data, restaurante, cliente, precoTotal);
                 pedidos.add(pedido);
 
             }
@@ -84,6 +83,35 @@ com.mysql.jdbc.Connection conn = null;
         }
 
         return pedidos;
+    }
+
+    public Pedido getPedidoById(int id) throws ClassNotFoundException {
+
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from pedido WHERE id=?" + id);
+            while (rs.next()) {
+
+                String data = rs.getString("data");
+                int restauranteId = rs.getInt("REST_ID");
+                int clienteId = rs.getInt("CLIENTE_ID");
+                double precoTotal = rs.getDouble("precoTotal");
+
+                Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
+                Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
+
+                Pedido pedido = new Pedido(data, restaurante, cliente, precoTotal);
+                
+                return pedido;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void delete(Pedido pedido) throws
@@ -103,7 +131,6 @@ com.mysql.jdbc.Connection conn = null;
         }
     }
 
-
     public void closeResources(Connection conn, Statement st) {
         try {
             if (st != null) {
@@ -116,10 +143,9 @@ com.mysql.jdbc.Connection conn = null;
 
         }
     }
-    
-    public static void edit(Pedido pedido) throws SQLException, ClassNotFoundException {
-  
-    }
 
+    public void edit(Pedido pedido) throws SQLException, ClassNotFoundException {
+
+    }
 
 }

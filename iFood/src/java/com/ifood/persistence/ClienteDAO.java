@@ -78,6 +78,37 @@ public class ClienteDAO {
         return clientees;
 
     }
+    
+    public Cliente getClienteById(int id) throws ClassNotFoundException {
+
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from cliente WHERE id=?" + id);
+            while (rs.next()) {
+
+                Cliente cliente = new Cliente(
+                        rs.getString("cpf"),
+                        rs.getString("rua"),
+                        rs.getString("numero"),
+                        rs.getString("bairro"),
+                        rs.getString("cep"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getString("email"));
+
+                       
+                return cliente;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public void delete(Cliente cliente) throws
             SQLException, ClassNotFoundException {

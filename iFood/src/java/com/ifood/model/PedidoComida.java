@@ -9,8 +9,7 @@ public class PedidoComida {
         private Comida comida;
         private int quantidade;
         
-        private int pedidoId;
-        private int comidaId;
+
 
     public PedidoComida(int id, Pedido pedido, Comida comida, int quantidade) {
         this.id = id;
@@ -24,11 +23,6 @@ public class PedidoComida {
         this.pedido = pedido;
         this.comida = comida;
     }
-    
-        
-    public PedidoComida(int id){
-    
-    }
 
     public int getId() {
         return id;
@@ -36,22 +30,6 @@ public class PedidoComida {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getPedidoId() {
-        return pedidoId;
-    }
-
-    public void setPedidoId(int pedidoId) {
-        this.pedidoId = pedidoId;
-    }
-
-    public int getComidaId() {
-        return comidaId;
-    }
-
-    public void setComidaId(int comidaId) {
-        this.comidaId = comidaId;
     }
 
     public Pedido getPedido() {
@@ -78,6 +56,10 @@ public class PedidoComida {
         this.quantidade = quantidade;
     }
     
+        
+    public PedidoComida(int id){
     
-    
+    }
+
 }
+ 

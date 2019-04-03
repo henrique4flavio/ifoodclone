@@ -79,12 +79,11 @@ public class RestauranteDAO {
 
     }
 
-    public Restaurante get(int id) throws ClassNotFoundException {
+    public Restaurante getRestauranteById(int id) throws ClassNotFoundException {
 
         com.mysql.jdbc.Connection conn = null;
         Statement st = null;
 
-        List<Restaurante> restaurantes = new ArrayList<Restaurante>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();

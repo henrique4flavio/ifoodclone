@@ -80,6 +80,32 @@ public class ComidaDAO {
         return comidaes;
 
     }
+    
+    public Comida getComidaById(int id) throws ClassNotFoundException {
+
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from comida WHERE id=?" + id);
+            while (rs.next()) {
+
+                Comida comida = new Comida(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("descricao"),
+                        rs.getDouble("preco"), 
+                        (Restaurante) rs.getObject("REST_ID"));
+                       
+                return comida;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public void delete(Comida comida) throws
             SQLException, ClassNotFoundException {

@@ -33,7 +33,7 @@ public class CadastrarComidaAction implements Action{
         int id = Integer.parseInt(request.getParameter("id"));
         Restaurante restaurante;
         try {
-            restaurante = RestauranteDAO.getInstance().get(id);
+            restaurante = RestauranteDAO.getInstance().getRestauranteById(id);
             Comida comida = new Comida(id, nome, descricao, precoComida, restaurante);                
             ComidaDAO.getInstance().save(comida);
         
