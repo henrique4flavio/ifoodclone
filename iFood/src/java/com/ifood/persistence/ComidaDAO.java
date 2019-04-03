@@ -34,7 +34,6 @@ public class ComidaDAO {
 
         Connection conn = null;
         Statement st = null;
-  
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();

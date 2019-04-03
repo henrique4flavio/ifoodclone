@@ -11,7 +11,9 @@
         
         <a href="cadastrarCliente.jsp"> Cadastrar Clientes </a><br>
         <a href="cadastrarAdministrador.jsp"> Cadastrar Adminstradores </a><br>
-        <a href="cadastrarRestaurante.jsp"> Cadastrar Restaurantes </a>
+        <a href="cadastrarRestaurante.jsp"> Cadastrar Restaurantes </a> <br>
+        <a href="FrontController?pacote=restaurante&action=ListarRestaurantes">Listar Restaurantes </a>
+
         
         
 

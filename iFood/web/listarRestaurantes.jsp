@@ -24,9 +24,15 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
         <table border='1'>    
             <tr>       
                 <th>Restaurante</th>
-                <th>Remetente</th>
-                <th>Destinatario</th>
-                <th>Situação</th>
+                <th>Email</th>
+                <th>Descrição</th>
+                <th>Hora de Abrir</th>
+                <th>Hora de Fechar</th>
+                <th>Categoria</th>
+                <th>Valor do Frete</th>
+                <th>Menu</th>
+
+
 
 
             </tr>    
@@ -41,7 +47,9 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
                     <td><c:out value = "${Restaurante.horaDeFechar}" /></td>
                     <td><c:out value = "${Restaurante.categoria}" /></td>
                     <td><c:out value = "${Restaurante.valorDoFrete}" /></td>
-                    <td><img src="ImagemUpController?acao=displayImagem&id=${Restaurante.id}" /></td>
+                    <td><form action ="FrontController?pacote=comida&action=ListarComidas&id=${Restaurante.id}" method="post">
+                            <input type="submit" value="Comidas"/>
+                        </form>  </td>
 
                 </tr>
             </c:forEach>

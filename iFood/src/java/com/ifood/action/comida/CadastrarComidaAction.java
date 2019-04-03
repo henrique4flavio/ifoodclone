@@ -18,10 +18,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+public class CadastrarComidaAction implements Action {
 
-
-public class CadastrarComidaAction implements Action{
-    
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -34,27 +32,13 @@ public class CadastrarComidaAction implements Action{
         Restaurante restaurante;
         try {
             restaurante = RestauranteDAO.getInstance().getRestauranteById(id);
-            Comida comida = new Comida(nome, descricao, precoComida, restaurante);                
+            Comida comida = new Comida(nome, descricao, precoComida, restaurante);
             ComidaDAO.getInstance().save(comida);
-        
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CadastrarComidaAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-         catch (SQLException ex) {
-            Logger.getLogger(CadastrarComidaAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            request.getRequestDispatcher("index.jsp").include(request, response);
-        } catch (ServletException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(CadastrarComidaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 }
-
-
-
-
-
-    
