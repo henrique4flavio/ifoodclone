@@ -56,28 +56,31 @@ public class ComidaDAO {
         Connection conn = null;
         Statement st = null;
 
-        List<Comida> comidaes = new ArrayList<Comida>();
+        List<Comida> comidas = new ArrayList<Comida>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from comida");
             while (rs.next()) {
+                
+                int restauranteId = rs.getInt("REST_ID");
+                Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
                 Comida comida = new Comida(
                         rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("descricao"),
                         rs.getDouble("preco"), 
-                        (Restaurante) rs.getObject("REST_ID"));
+                        restaurante);
                        
 
-                comidaes.add(comida);
+                comidas.add(comida);
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return comidaes;
+        return comidas;
 
     }
     
