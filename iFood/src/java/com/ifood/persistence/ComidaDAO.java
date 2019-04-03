@@ -39,8 +39,8 @@ public class ComidaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into comida (id, nome, descricao, preco, REST_ID)" + "values('"
-                   + comida.getId() + "', '" + comida.getNome() + "', '" + comida.getDescricao() + "', '" + comida.getPreco() + "', '" + comida.getRestaurante().getId()
+            st.execute("insert into comida (nome, descricao, preco, REST_ID)" + "values('"
+                   + comida.getNome() + "', '" + comida.getDescricao() + "', '" + comida.getPreco() + "', '" + comida.getRestaurante().getId()
                     + "')");
 
         } catch (SQLException e) {

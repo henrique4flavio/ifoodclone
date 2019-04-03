@@ -34,7 +34,7 @@ public class CadastrarComidaAction implements Action{
         Restaurante restaurante;
         try {
             restaurante = RestauranteDAO.getInstance().getRestauranteById(id);
-            Comida comida = new Comida(id, nome, descricao, precoComida, restaurante);                
+            Comida comida = new Comida(nome, descricao, precoComida, restaurante);                
             ComidaDAO.getInstance().save(comida);
         
         } catch (ClassNotFoundException ex) {

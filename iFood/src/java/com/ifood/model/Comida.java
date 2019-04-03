@@ -14,12 +14,10 @@ public class Comida {
     
     private int restauranteId;
 
-    public Comida(int id, String nome, String descricao, double preco, Image foto, Restaurante restaurante) {
-        this.id = id;
+    public Comida(String nome, String descricao, double preco, Restaurante restaurante) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
-        this.foto = foto;
         this.restaurante = restaurante;
     }
 
