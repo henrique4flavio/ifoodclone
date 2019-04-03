@@ -15,18 +15,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 public class ListarComidasAction implements Action {
-    
-private Object view;
+
+    private Object view;
 
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         try {
 
-            request.setAttribute("Comida", ComidaDAO.getInstance().list());
+            int restauranteId = Integer.parseInt(request.getParameter("id"));
+
+            request.setAttribute("Comida", ComidaDAO.getInstance().list(restauranteId));
             RequestDispatcher view
-                    = request.getRequestDispatcher("/comidas.jsp");
+                    = request.getRequestDispatcher("/listarComidas.jsp");
             try {
                 view.forward(request, response);
             } catch (ServletException ex) {
@@ -37,4 +38,3 @@ private Object view;
     }
 
 }
-
