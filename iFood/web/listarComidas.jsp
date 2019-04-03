@@ -76,7 +76,7 @@
         <!-- Include jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript" ></script>
         <!-- Include SmartCart -->
-        <script src="vendor/js/jquery.smartCart.min.js" type="text/javascript"></script>
+        <script src="vendor/js/jquery.smartCart.js" type="text/javascript"></script>
         <!-- Initialize -->
         <script type="text/javascript">
             $(document).ready(function () {

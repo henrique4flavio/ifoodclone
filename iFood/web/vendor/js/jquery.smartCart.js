@@ -1,6 +1,6 @@
 /*!
  * jQuery Smart Cart v3.0.1
- * The smart interactive jQuery Shopping Cart plugin with PayPal payment support
+ * The smart interactive jQuery Carrinho plugin with PayPal payment support
  * http://www.techlaboratory.net/smartcart
  *
  * Created by Dipu Raj
@@ -32,12 +32,12 @@
             productId: 'product_id'
         },
         lang: { // Language variables
-            cartTitle: "Shopping Cart",
-            checkout: 'Checkout',
-            clear: 'Clear',
+            cartTitle: "Carrinho",
+            checkout: 'Finalizar Pedido',
+            clear: 'Limpar',
             subtotal: 'Subtotal:',
             cartRemove: '×',
-            cartEmpty: 'Cart is Empty!<br />Choose your products'
+            cartEmpty: 'O carrinho está vazio!<br /> Selecione sua comida'
         },
         submitSettings: {
             submitType: 'form', // form, paypal, ajax
@@ -45,10 +45,10 @@
             ajaxSettings: {} // Ajax extra settings for submit call
         },
         currencySettings: {
-            locales: 'en-US', // A string with a BCP 47 language tag, or an array of such strings
+            locales: 'pt-BR', // A string with a BCP 47 language tag, or an array of such strings
             currencyOptions: {
                 style: 'currency',
-                currency: 'USD',
+                currency: 'BRL',
                 currencyDisplay: 'symbol'
             } // extra settings for the currency formatter. Refer: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
         },
