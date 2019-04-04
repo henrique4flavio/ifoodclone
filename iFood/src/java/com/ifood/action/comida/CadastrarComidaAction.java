@@ -14,31 +14,37 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CadastrarComidaAction implements Action {
+public class CadastrarComidaAction implements Action{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+                
+        try {
         String nome = request.getParameter("textNome");
         String descricao = request.getParameter("textDescricao");
         String preco = request.getParameter("textPreco");
         double precoComida = Double.parseDouble(preco);
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        Restaurante restaurante;
-        try {
-            restaurante = RestauranteDAO.getInstance().getRestauranteById(id);
+       Restaurante restaurante = new Restaurante();
+                    restaurante.setId(1);
+                    
             Comida comida = new Comida(nome, descricao, precoComida, restaurante);
             ComidaDAO.getInstance().save(comida);
+             request.setAttribute("mensagemSucesso", "Comida criado com sucesso!");
+             
+
+
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CadastrarComidaAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarComidaAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
 
     }
 }

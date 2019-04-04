@@ -17,17 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ListarComidasAction implements Action {
 
-    private Object view;
-
-    public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        try {
-
-            int restauranteId = Integer.parseInt(request.getParameter("id"));
-
-            request.setAttribute("Comida", ComidaDAO.getInstance().list(restauranteId));
+    @Override
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+try {
+            request.setAttribute("Comida", ComidaDAO.getInstance().list());
             RequestDispatcher view
-                    = request.getRequestDispatcher("/listarComidas.jsp");
+                    = request.getRequestDispatcher("/comidas.jsp");
             try {
                 view.forward(request, response);
             } catch (ServletException ex) {
@@ -37,4 +32,4 @@ public class ListarComidasAction implements Action {
         }
     }
 
-}
+    }
