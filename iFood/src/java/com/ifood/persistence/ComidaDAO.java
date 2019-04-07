@@ -60,7 +60,7 @@ public class ComidaDAO {
     }
 
 
-    public List<Comida> list() throws ClassNotFoundException {
+    public List<Comida> list(int restauranteId) throws ClassNotFoundException {
 
         com.mysql.jdbc.Connection conn = null;
         Statement st = null;
@@ -69,7 +69,7 @@ public class ComidaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from comida");
+            ResultSet rs = st.executeQuery("select * from comida WHERE REST_ID = "+restauranteId);
             
             while (rs.next()) {
                 
@@ -77,7 +77,6 @@ public class ComidaDAO {
                 String nome = rs.getString("nome");
                 String descricao = rs.getString("descricao");
                 Double preco = rs.getDouble("preco");
-                int restauranteId = rs.getInt("REST_ID");
 
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
 

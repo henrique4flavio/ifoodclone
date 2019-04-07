@@ -19,10 +19,12 @@ public class ListarComidasAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-try {
-            request.setAttribute("Comida", ComidaDAO.getInstance().list());
+        try {
+            int restauranteId = Integer.parseInt(request.getParameter("id"));
+
+            request.setAttribute("Comida", ComidaDAO.getInstance().list(restauranteId));
             RequestDispatcher view
-                    = request.getRequestDispatcher("/comidas.jsp");
+                    = request.getRequestDispatcher("/listarComidas.jsp");
             try {
                 view.forward(request, response);
             } catch (ServletException ex) {
@@ -32,4 +34,4 @@ try {
         }
     }
 
-    }
+}
