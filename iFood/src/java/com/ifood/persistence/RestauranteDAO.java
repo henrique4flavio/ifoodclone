@@ -58,7 +58,7 @@ public class RestauranteDAO {
 
                 Restaurante restaurante = new Restaurante(
                         rs.getString("descricao"),
-                        rs.getBlob("foto"),
+                        rs.getString("foto"),
                         rs.getString("horaDeAbrir"),
                         rs.getString("horaDeFechar"),
                         rs.getString("categoria"),
@@ -79,33 +79,31 @@ public class RestauranteDAO {
 
     }
 
-    public Restaurante getRestauranteById(int id) throws ClassNotFoundException {
+    public Restaurante getRestauranteById(int id) throws ClassNotFoundException, SQLException {
 
         com.mysql.jdbc.Connection conn = null;
         Statement st = null;
 
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from restaurante WHERE id=?" + id);
-            while (rs.next()) {
+        conn = DatabaseLocator.getInstance().getConnection();
+        st = conn.createStatement();
+        ResultSet rs = st.executeQuery("select * from restaurante WHERE id=" + id);
+        
+        while (rs.next()) {
+        
 
-                Restaurante restaurante = new Restaurante(
-                        rs.getString("descricao"),
-                        rs.getBlob("foto"),
-                        rs.getString("horaDeAbrir"),
-                        rs.getString("horaDeFechar"),
-                        rs.getString("categoria"),
-                        rs.getDouble("valorDoFrete"),
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getString("email"));
-
-                return restaurante;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String descricao = rs.getString("descricao");
+        String foto = rs.getString("foto");
+        String horaDeAbrir = rs.getString("horaDeAbrir");
+        String horaDeFechar = rs.getString("horaDeFechar");
+        String categoria = rs.getString("categoria");
+        double valorDoFrete = rs.getDouble("valorDoFrete");
+        String nome = rs.getString("nome");
+        String senha = rs.getString("senha");
+        String email = rs.getString("email");
+        
+        Restaurante restaurante = new Restaurante(descricao, foto, horaDeAbrir, horaDeFechar, categoria, valorDoFrete, id, nome, senha, email);
+        
+        return restaurante;
         }
         return null;
     }
@@ -143,7 +141,7 @@ public class RestauranteDAO {
             if (rs.first()) {
                 restaurante = new Restaurante(
                         rs.getString("descricao"),
-                        rs.getBlob("foto"),
+                        rs.getString("foto"),
                         rs.getString("horaDeAbrir"),
                         rs.getString("horaDeFechar"),
                         rs.getString("categoria"),
@@ -177,8 +175,8 @@ public class RestauranteDAO {
 
         }
     }
-    
-    public static void edit(Restaurante restaurante) throws SQLException, ClassNotFoundException {
+
+    public void edit(Restaurante restaurante) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement comando = null;
 

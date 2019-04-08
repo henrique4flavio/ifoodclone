@@ -1,13 +1,12 @@
 package com.ifood.model;
 
-import java.sql.Blob;
 import java.util.Observable;
 import java.util.Observer;
 
 public class Restaurante extends Usuario implements Observer {
 
     private String descricao;
-    private Blob foto;
+    private String foto;
     private String horaDeAbrir;
     private String horaDeFechar;
     private String categoria;
@@ -20,7 +19,7 @@ public class Restaurante extends Usuario implements Observer {
     public Restaurante() {
     }
 
-    public Restaurante(String descricao, Blob foto, String horaDeAbrir, String horaDeFechar, String categoria, double valorDoFrete, int id, String nome, String senha, String email) {
+    public Restaurante(String descricao, String foto, String horaDeAbrir, String horaDeFechar, String categoria, double valorDoFrete, int id, String nome, String senha, String email) {
         super(id, nome, senha, email);
         this.descricao = descricao;
         this.foto = foto;
@@ -30,7 +29,7 @@ public class Restaurante extends Usuario implements Observer {
         this.valorDoFrete = valorDoFrete;
     }
 
-    public Restaurante(String descricao, Blob foto, String horaDeAbrir, String horaDeFechar, String categoria, double valorDoFrete, String nome, String senha, String email) {
+    public Restaurante(String descricao, String foto, String horaDeAbrir, String horaDeFechar, String categoria, double valorDoFrete, String nome, String senha, String email) {
         super(nome, senha, email);
         this.descricao = descricao;
         this.foto = foto;
@@ -52,11 +51,11 @@ public class Restaurante extends Usuario implements Observer {
         this.descricao = descricao;
     }
 
-    public Blob getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(Blob foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 

@@ -35,7 +35,10 @@
             Descricao:
             <input type="text" name="textDescricao"/><br/>
             Foto:
-            <input type="file" name="foto" size="50"/> 
+
+                <input type="file" name="arquivo">
+                <br>
+                
 
             <input type="submit" value="Cadastrar"/>
 

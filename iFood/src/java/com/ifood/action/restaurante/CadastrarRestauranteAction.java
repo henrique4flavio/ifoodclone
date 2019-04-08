@@ -30,9 +30,9 @@ public class CadastrarRestauranteAction implements Action {
         String horaDeAbrir = request.getParameter("textHoraDeAbrir");
         String horaDeFechar = request.getParameter("textHoraDeFechar");
         String descricao = request.getParameter("textDescricao");
-        Blob foto = null;
+        String foto ="";
 
-        Restaurante restaurante = new Restaurante(descricao, foto, horaDeAbrir, horaDeFechar, categoria, frete, nome, senha, email);
+        Restaurante restaurante = new Restaurante(descricao,foto, horaDeAbrir, horaDeFechar, categoria, frete, nome, senha, email);
         try {
             RestauranteDAO.getInstance().save(restaurante);
         } catch (SQLException ex) {
