@@ -73,10 +73,12 @@ public class ComidaDAO {
                 String nome = rs.getString("nome");
                 String descricao = rs.getString("descricao");
                 Double preco = rs.getDouble("preco");
+                String foto = rs.getString("foto");
+                int id = rs.getInt("id");
 
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
 
-                Comida comida = new Comida(nome, descricao, preco, restaurante);
+                Comida comida = new Comida(id, nome, foto, descricao, preco, restaurante);
                 comidas.add(comida);
 
             }

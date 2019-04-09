@@ -143,9 +143,7 @@
                                                                 <td><c:out value = "${Comida.nome}" /></td>
                                                                 <td><c:out value = "${Comida.descricao}" /></td>
                                                                 <td><c:out value = "${Comida.preco}" /></td>
-                                                                <td><c:out value = "${Comida.foto}" /></td>
-                                                                
-          
+                                                                <td><img src="<c:out value = "${Comida.foto}"/>" alt="imagem" width=50 height=40></td>
                                                             </tr>
                                                         </c:forEach>
 
