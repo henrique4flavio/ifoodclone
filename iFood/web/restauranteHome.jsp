@@ -122,7 +122,7 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <a href="#" class="h5 mb-0 font-weight-bold text-gray-800">Cadastrar Comidas</a>
+                                                <a href="cadastrarComida.jsp" class="h5 mb-0 font-weight-bold text-gray-800">Cadastrar Comidas</a>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -138,7 +138,7 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <a href="#" class="h5 mb-0 font-weight-bold text-gray-800">Listar Comidas</a>
+                                                <a href="listarComidas.jsp" class="h5 mb-0 font-weight-bold text-gray-800">Listar Comidas</a>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
