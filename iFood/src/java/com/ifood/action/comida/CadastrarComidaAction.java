@@ -35,7 +35,20 @@ public class CadastrarComidaAction implements Action {
 
             Comida comida = new Comida(nome, descricao, precoComida, restaurante);
             ComidaDAO.getInstance().save(comida);
+            
+            
+            request.setAttribute("comida", ComidaDAO.getInstance().getComida(nome, precoComida, restauranteId));
+            
+            try {
+                request.getRequestDispatcher("inserirImagemComida.jsp").include(request, response);
+            } catch (ServletException ex) {
+                Logger.getLogger(CadastrarComidaAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            
             request.setAttribute("mensagemSucesso", "Comida criado com sucesso!");
+            
+
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CadastrarComidaAction.class.getName()).log(Level.SEVERE, null, ex);

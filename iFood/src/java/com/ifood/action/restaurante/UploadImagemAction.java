@@ -45,7 +45,6 @@ public class UploadImagemAction implements Action {
 
             Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(id);
 
-            System.out.println(restaurante.getNome());
 
             DiskFileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);

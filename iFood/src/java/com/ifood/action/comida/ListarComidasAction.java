@@ -14,6 +14,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class ListarComidasAction implements Action {
 
@@ -22,15 +23,28 @@ public class ListarComidasAction implements Action {
         try {
             int restauranteId = Integer.parseInt(request.getParameter("id"));
 
-            request.setAttribute("Comida", ComidaDAO.getInstance().list(restauranteId));
-            RequestDispatcher view
-                    = request.getRequestDispatcher("/listarComidas.jsp");
-            try {
+
+            boolean create = true;
+            HttpSession session = request.getSession(create);
+            String usuario = (String) session.getAttribute("tipo");
+            if (usuario.equals("restaurante")) {
+                request.setAttribute("Comida", ComidaDAO.getInstance().list(restauranteId));
+
+                RequestDispatcher view = request.getRequestDispatcher("/listarComidasRestaurante.jsp");
                 view.forward(request, response);
-            } catch (ServletException ex) {
-                Logger.getLogger(ListarComidasAction.class.getName()).log(Level.SEVERE, null, ex);
+
             }
+            if (usuario.equals("cliente")) {
+              request.setAttribute("Comida", ComidaDAO.getInstance().list(restauranteId));
+
+                RequestDispatcher view = request.getRequestDispatcher("/listarComidas.jsp");
+                view.forward(request, response);
+
+            }
+        } catch (ServletException ex) {
+            Logger.getLogger(ListarComidasAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ListarComidasAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

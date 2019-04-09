@@ -1,7 +1,6 @@
 
 package com.ifood.model;
 
-import java.awt.Image;
 
 public class Comida {
 
@@ -9,7 +8,7 @@ public class Comida {
     private String nome;
     private String descricao;
     private double preco;
-    private Image foto;
+    private String foto;
     private Restaurante restaurante;
     
     private int restauranteId;
@@ -21,10 +20,11 @@ public class Comida {
         this.restaurante = restaurante;
     }
 
-    public Comida(int id, String nome, String descricao, double preco, Restaurante restaurante) {
+    public Comida(int id, String nome,String foto, String descricao, double preco, Restaurante restaurante) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
+        this.foto = foto;
         this.preco = preco;
         this.restaurante = restaurante;
     }
@@ -67,11 +67,11 @@ public class Comida {
         this.preco = preco;
     }
 
-    public Image getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(Image foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
