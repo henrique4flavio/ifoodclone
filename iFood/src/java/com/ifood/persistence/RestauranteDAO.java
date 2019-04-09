@@ -87,23 +87,50 @@ public class RestauranteDAO {
         conn = DatabaseLocator.getInstance().getConnection();
         st = conn.createStatement();
         ResultSet rs = st.executeQuery("select * from restaurante WHERE id=" + id);
-        
-        while (rs.next()) {
-        
 
-        String descricao = rs.getString("descricao");
-        String foto = rs.getString("foto");
-        String horaDeAbrir = rs.getString("horaDeAbrir");
-        String horaDeFechar = rs.getString("horaDeFechar");
-        String categoria = rs.getString("categoria");
-        double valorDoFrete = rs.getDouble("valorDoFrete");
-        String nome = rs.getString("nome");
-        String senha = rs.getString("senha");
-        String email = rs.getString("email");
-        
-        Restaurante restaurante = new Restaurante(descricao, foto, horaDeAbrir, horaDeFechar, categoria, valorDoFrete, id, nome, senha, email);
-        
-        return restaurante;
+        while (rs.next()) {
+
+            String descricao = rs.getString("descricao");
+            String foto = rs.getString("foto");
+            String horaDeAbrir = rs.getString("horaDeAbrir");
+            String horaDeFechar = rs.getString("horaDeFechar");
+            String categoria = rs.getString("categoria");
+            double valorDoFrete = rs.getDouble("valorDoFrete");
+            String nome = rs.getString("nome");
+            String senha = rs.getString("senha");
+            String email = rs.getString("email");
+
+            Restaurante restaurante = new Restaurante(descricao, foto, horaDeAbrir, horaDeFechar, categoria, valorDoFrete, id, nome, senha, email);
+
+            return restaurante;
+        }
+        return null;
+    }
+
+    public Restaurante getRestauranteByEmail(String email) throws ClassNotFoundException, SQLException {
+
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        conn = DatabaseLocator.getInstance().getConnection();
+        st = conn.createStatement();
+        ResultSet rs = st.executeQuery("select * from restaurante WHERE email="+ "'" + email + "'");
+
+        while (rs.next()) {
+
+            String descricao = rs.getString("descricao");
+            String foto = rs.getString("foto");
+            String horaDeAbrir = rs.getString("horaDeAbrir");
+            String horaDeFechar = rs.getString("horaDeFechar");
+            String categoria = rs.getString("categoria");
+            double valorDoFrete = rs.getDouble("valorDoFrete");
+            String nome = rs.getString("nome");
+            String senha = rs.getString("senha");
+            int id = rs.getInt("id");
+
+            Restaurante restaurante = new Restaurante(descricao, foto, horaDeAbrir, horaDeFechar, categoria, valorDoFrete, id, nome, senha, email);
+
+            return restaurante;
         }
         return null;
     }
@@ -182,19 +209,19 @@ public class RestauranteDAO {
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
-            String sql = "update restaurante set nome=?,email=?,senha=?,descricao=?,horaDeAbrir=?,horaDeFechar=?,categoria=?,valorDoFrete=? where id =?";
+            String sql = "update restaurante set nome=?,email=?,senha=?,descricao=?,foto=?,horaDeAbrir=?,horaDeFechar=?,categoria=?,valorDoFrete=? where id =?";
 
             comando = conn.prepareStatement(sql);
             comando.setString(1, restaurante.getNome());
             comando.setString(2, restaurante.getEmail());
             comando.setString(3, restaurante.getSenha());
             comando.setString(4, restaurante.getDescricao());
-
-            comando.setString(5, restaurante.getHoraDeAbrir());
-            comando.setString(6, restaurante.getHoraDeFechar());
-            comando.setString(7, restaurante.getCategoria());
-            comando.setDouble(8, restaurante.getValorDoFrete());
-            comando.setInt(9, restaurante.getId());
+            comando.setString(5, restaurante.getFoto());
+            comando.setString(6, restaurante.getHoraDeAbrir());
+            comando.setString(7, restaurante.getHoraDeFechar());
+            comando.setString(8, restaurante.getCategoria());
+            comando.setDouble(9, restaurante.getValorDoFrete());
+            comando.setInt(10, restaurante.getId());
 
             comando.execute();
             comando.close();

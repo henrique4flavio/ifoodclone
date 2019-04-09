@@ -29,17 +29,16 @@
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-               
-                
+
+
                 <li class="nav-item active">
                     <a class="nav-link" href="index.html">
-                    <img src="${restaurante.foto}" alt="logo" width=190 height=160>
                 </li>
 
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-text mx-3">Bem Vindo ${restaurante.nome} <sup>;)</sup></div>
+                    <div class="sidebar-brand-text mx-3">Bem Vindo ${administrador.nome} <sup>;)</sup></div>
                 </a>
 
                 <hr class="sidebar-divider my-0">
@@ -55,11 +54,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="charts.html">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Alterar dados do Restaurante</span></a>
+                        <span>Alterar dados do Administrador</span></a>
                 </li>
-                
 
-                
+
+
 
                 <hr class="sidebar-divider d-none d-md-block">
             </ul>
@@ -102,73 +101,51 @@
                         </ul>
 
                     </nav>
-                    <!-- End of Topbar -->
 
-                    <!-- Begin Page Content -->
                     <div class="container-fluid">
 
-                        <!-- Page Heading -->
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
 
+                        <div class="container">
+                            <div class="mt-5 mb-5 text-center">
+                                <h2>Cadastro de Restaurantes</h2>
+                            </div>
+                            <ul class="step d-flex flex-nowrap">
+                                <li class="step-item">
+                                    <a href="#!" class="">Informações do Restaurante</a>
+                                </li>
+                                <li class="step-item active">
+                                    <a href="#!" class="">Logo do Restaurante</a>
+                                </li>
+
+                            </ul> 
+
+                            <form  class="form-horizontal" action="FrontController?pacote=restaurante&action=UploadImagem&id=${restaurante.id}" method="post" enctype="multipart/form-data" name="formulario" id="formulario"
+
+                                  <!-- Text input-->
+
+                                  <div class="form-group">
+                                    <label class="col-md-4 control-label" >Importar Imagem : </label>  
+                                    <div class="col-md-6">
+                                        <input id="txtproduto" name="arquivo" type="file"  class="form-control input-md" required="">
+
+                                    </div>
+                                </div>
+
+
+                                <!-- Button (Double) -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="btnsalvar"></label>
+                                    <div class="col-md-8">
+                                        <input type="submit" value="Salvar"  class="btn btn-primary">
+                                    </div>
+                                </div>
+
+                            </form>
                         </div>
 
-                        <!-- Content Row -->
-                        <div class="row">
 
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <a href="#" class="h5 mb-0 font-weight-bold text-gray-800">Cadastrar Comidas</a>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <a href="#" class="h5 mb-0 font-weight-bold text-gray-800">Listar Comidas</a>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <!-- Pending Requests Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-warning shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <a href="#" class="h5 mb-0 font-weight-bold text-gray-800">Listar Pedidos</a>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-
 
                 <!-- Footer -->
                 <footer class="sticky-footer bg-white">

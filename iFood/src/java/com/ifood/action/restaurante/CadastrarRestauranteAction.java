@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ifood.persistence.RestauranteDAO;
 import java.sql.Blob;
+import javax.servlet.ServletException;
 
 import javax.servlet.annotation.MultipartConfig;
-
 
 public class CadastrarRestauranteAction implements Action {
 
@@ -30,14 +30,26 @@ public class CadastrarRestauranteAction implements Action {
         String horaDeAbrir = request.getParameter("textHoraDeAbrir");
         String horaDeFechar = request.getParameter("textHoraDeFechar");
         String descricao = request.getParameter("textDescricao");
-        String foto ="";
+        String foto = "";
 
-        Restaurante restaurante = new Restaurante(descricao,foto, horaDeAbrir, horaDeFechar, categoria, frete, nome, senha, email);
+        Restaurante restaurante = new Restaurante(descricao, foto, horaDeAbrir, horaDeFechar, categoria, frete, nome, senha, email);
         try {
             RestauranteDAO.getInstance().save(restaurante);
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CadastrarRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+        try {
+            request.setAttribute("restaurante", RestauranteDAO.getInstance().getRestauranteByEmail(email));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CadastrarRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            request.getRequestDispatcher("inserirLogoRestaurante.jsp").include(request, response);
+        } catch (ServletException ex) {
             Logger.getLogger(CadastrarRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 
