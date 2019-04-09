@@ -42,7 +42,6 @@ public class UploadImagemAction implements Action {
         try {
 
             int id = Integer.parseInt(request.getParameter("id"));
-
             Comida comida = ComidaDAO.getInstance().getComidaById(id);
 
 

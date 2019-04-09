@@ -35,7 +35,7 @@
 
                                     <div class="col-md-4 col-sm-6">
                                         <div class="sc-product-item thumbnail">
-                                            <img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+1" alt="...">
+                                            <img src="<c:out value = "${Comida.foto}"/>" alt="imagem" width=200 height=200>
                                             <div class="caption">
                                                 <h4 data-name="product_name"><c:out value = "${Comida.nome}" /></h4>
                                                 <p data-name="product_desc"><c:out value = "${Comida.descricao}" /><p>
