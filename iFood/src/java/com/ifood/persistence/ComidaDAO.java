@@ -15,8 +15,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class ComidaDAO {
 
     private static ComidaDAO instance = new ComidaDAO();
@@ -28,7 +26,7 @@ public class ComidaDAO {
 
         return instance;
     }
-    
+
     public void save(Comida comida) throws
             SQLException, ClassNotFoundException {
 
@@ -59,32 +57,30 @@ public class ComidaDAO {
 
     }
 
-
     public List<Comida> list(int restauranteId) throws ClassNotFoundException {
 
         com.mysql.jdbc.Connection conn = null;
         Statement st = null;
-        
+
         List<Comida> comidas = new ArrayList<Comida>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from comida WHERE REST_ID = "+restauranteId);
-            
+            ResultSet rs = st.executeQuery("select * from comida WHERE REST_ID = " + restauranteId);
+
             while (rs.next()) {
-                
-                
+
                 String nome = rs.getString("nome");
                 String descricao = rs.getString("descricao");
                 Double preco = rs.getDouble("preco");
+                String foto = rs.getString("foto");
+                int id = rs.getInt("id");
 
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
 
-                Comida comida = new Comida(nome, descricao, preco, restaurante);
+                Comida comida = new Comida(id, nome, foto, descricao, preco, restaurante);
                 comidas.add(comida);
-                
-                
-             
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,33 +89,64 @@ public class ComidaDAO {
         return comidas;
 
     }
-    
-    public Comida getComidaById(int id) throws ClassNotFoundException {
 
-         com.mysql.jdbc.Connection conn = null;
+    public Comida getComida(String nomeComida, double precoComida, int restauranteComida) throws ClassNotFoundException {
+
+        com.mysql.jdbc.Connection conn = null;
         Statement st = null;
-        
+
         List<Comida> comidas = new ArrayList<Comida>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from comida");
-            
+            ResultSet rs = st.executeQuery("select * from comida WHERE nome="+ "'" + nomeComida + "'" + " AND preco ="+ precoComida+"");
+
             while (rs.next()) {
-                
-                
+
                 String nome = rs.getString("nome");
                 String descricao = rs.getString("descricao");
                 Double preco = rs.getDouble("preco");
+                String foto = rs.getString("foto");
+                int restauranteId = rs.getInt("REST_ID");
+                int id = rs.getInt("id");
+
+                Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
+
+                Comida comida = new Comida(id, nome, foto, descricao, preco, restaurante);
+                return comida;
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+    public Comida getComidaById(int id) throws ClassNotFoundException {
+
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from comida WHERE id=" +id);
+
+            while (rs.next()) {
+
+                String nome = rs.getString("nome");
+                String descricao = rs.getString("descricao");
+                Double preco = rs.getDouble("preco");
+                String foto = rs.getString("foto");
                 int restauranteId = rs.getInt("REST_ID");
 
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
 
-                Comida comida = new Comida(nome, descricao, preco, restaurante);
-                comidas.add(comida);
+                Comida comida = new Comida(id, nome, foto, descricao, preco, restaurante);
                 
-                
-             
+                return comida;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -146,8 +173,6 @@ public class ComidaDAO {
         }
     }
 
-    
-
     public void closeResources(Connection conn, Statement st) {
         try {
             if (st != null) {
@@ -160,22 +185,22 @@ public class ComidaDAO {
 
         }
     }
-    
-    
-     public static void edit(Comida comida) throws SQLException, ClassNotFoundException {
+
+    public static void edit(Comida comida) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement comando = null;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
-            String sql = "update comida set nome=?,=?,descricao=?,preco=?,REST_ID=? where id =?";
+            String sql = "update comida set nome=?,descricao=?,preco=?,foto=?,REST_ID=? where id =?";
 
             comando = conn.prepareStatement(sql);
             comando.setString(1, comida.getNome());
             comando.setString(2, comida.getDescricao());
             comando.setDouble(3, comida.getPreco());
-            comando.setInt(4, comida.getRestaurante().getId());
-            comando.setInt(5, comida.getId());
+            comando.setString(4, comida.getFoto());
+            comando.setInt(5, comida.getRestaurante().getId());
+            comando.setInt(6, comida.getId());
 
             comando.execute();
             comando.close();

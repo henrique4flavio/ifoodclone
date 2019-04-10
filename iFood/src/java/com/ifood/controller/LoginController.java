@@ -63,6 +63,8 @@ public class LoginController extends HttpServlet {
             session.setAttribute("cliente", cliente);
             session.setAttribute("usuario", cliente);
             session.setAttribute("tipo", "cliente");
+            request.setAttribute("Restaurante", RestauranteDAO.getInstance().list());
+
 
             RequestDispatcher view = request.getRequestDispatcher("/clienteHome.jsp");
             view.forward(request, response);
@@ -107,7 +109,7 @@ public class LoginController extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         if (session != null) {
-              session.invalidate();
+            session.invalidate();
 
         }
         try {
