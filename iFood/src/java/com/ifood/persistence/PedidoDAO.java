@@ -104,7 +104,38 @@ public class PedidoDAO {
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
                 Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
 
-                Pedido pedido = new Pedido(data, restaurante, cliente, precoTotal);
+                Pedido pedido = new Pedido(id, data, restaurante, cliente, precoTotal);
+                
+                return pedido;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public Pedido getUltimoPedido() throws ClassNotFoundException {
+
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT MAX(ID), data, REST_ID, CLIENTE_ID, precoTotal, estado FROM pedido");
+            while (rs.next()) {
+
+                String data = rs.getString("data");
+                int restauranteId = rs.getInt("REST_ID");
+                int clienteId = rs.getInt("CLIENTE_ID");
+                double precoTotal = rs.getDouble("precoTotal");
+                int id = rs.getInt("MAX(ID)");
+
+
+                Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
+                Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
+
+                Pedido pedido = new Pedido(id, data, restaurante, cliente, precoTotal);
                 
                 return pedido;
             }

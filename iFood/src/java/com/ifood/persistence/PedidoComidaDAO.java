@@ -32,22 +32,31 @@ public class PedidoComidaDAO {
     public void save(PedidoComida pedidoComida) throws
             SQLException, ClassNotFoundException {
 
+       
         Connection conn = null;
         Statement st = null;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into pedido_pedidoComida (PEDIDO_ID, COMIDA_ID, quantidade, )" + "values('"
-                    + pedidoComida.getPedido().getId() + "', '" + pedidoComida.getComida().getId() + "', '" + pedidoComida.getQuantidade()
-                    + "')");
+            String sql = "insert into pedido_pedidocomida (PEDIDO_ID,COMIDA_ID,quantidade) values(?,?,?)";
 
+            PreparedStatement comando = conn.prepareStatement(sql);
+
+            comando.setInt(1, pedidoComida.getPedido().getId());
+            comando.setInt(2, pedidoComida.getComida().getId());
+            comando.setDouble(3, pedidoComida.getQuantidade());
+
+            comando.execute();
+            comando.close();
+            conn.close();
         } catch (SQLException e) {
 
             throw e;
         } finally {
             closeResources(conn, st);
         }
+
     }
 
     public List<PedidoComida> list() throws ClassNotFoundException {

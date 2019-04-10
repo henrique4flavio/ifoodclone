@@ -22,6 +22,16 @@ public class Cliente extends Usuario implements Observer {
         this.bairro = bairro;
         this.cep = cep;
     }
+    public Cliente(int id, String cpf, String rua, String numero, String bairro, String cep, String nome, String senha, String email) {
+        super(nome, senha, email);
+        this.cpf = cpf;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.id = id;
+    }
+
 
     public Cliente(int id, String nome, String senha, String email) {
         super(id, nome, senha, email);
