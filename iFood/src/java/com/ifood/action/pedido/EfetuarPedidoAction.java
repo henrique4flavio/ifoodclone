@@ -71,13 +71,14 @@ public class EfetuarPedidoAction implements Action {
                 double preco = Double.parseDouble(comidasJSON.getJSONObject(i).getString("product_price"));
                 
                 precoTotal = precoTotal + preco;
-                pedido.setPrecoTotal(precoTotal);
                 
                 
                 try {
                     Comida comida = ComidaDAO.getInstance().getComidaById(comidaId);
                     pedido = PedidoDAO.getInstance().getUltimoPedido();
-                    System.out.println(pedido.getId()); System.out.println(pedido.getEstado().getEstado());
+                    pedido.setPrecoTotal(precoTotal);
+                    
+                    PedidoDAO.getInstance().edit(pedido);
                     PedidoComida pedidoComida = new PedidoComida(pedido, comida, quantidade);
                     PedidoComidaDAO.getInstance().save(pedidoComida);
                     
@@ -88,7 +89,6 @@ public class EfetuarPedidoAction implements Action {
                 
                 
             } 
-            PedidoDAO.getInstance().edit(pedido);
            
 
 //        response.sendRedirect("FrontController?action=ListarProdutos");

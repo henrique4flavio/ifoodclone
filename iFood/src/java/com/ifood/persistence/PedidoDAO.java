@@ -84,6 +84,36 @@ public class PedidoDAO {
 
         return pedidos;
     }
+    
+     public List<Pedido> getPedidos(int id) throws ClassNotFoundException {
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        List<Pedido> pedidos = new ArrayList<Pedido>();
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from pedido");
+            while (rs.next()) {
+
+                String data = rs.getString("data");
+                int restauranteId = rs.getInt("REST_ID");
+                int clienteId = rs.getInt("CLIENTE_ID");
+                double precoTotal = rs.getDouble("precoTotal");
+
+                Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
+                Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
+
+                Pedido pedido = new Pedido(data, restaurante, cliente, precoTotal);
+                pedidos.add(pedido);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pedidos;
+    }
 
     public Pedido getPedidoById(int id) throws ClassNotFoundException {
 
@@ -177,6 +207,24 @@ public class PedidoDAO {
 
     public void edit(Pedido pedido) throws SQLException, ClassNotFoundException {
 
+   Connection conn = null;
+        PreparedStatement comando = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            String sql = "update pedido set precoTotal=? where id =?";
+
+            comando = conn.prepareStatement(sql);
+            comando.setDouble(1, pedido.getPrecoTotal());
+            comando.setInt(2, pedido.getId());
+            
+
+            comando.execute();
+            comando.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
 }
