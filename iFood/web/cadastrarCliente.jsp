@@ -1,11 +1,19 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
 
 <html>
     <head>
+        
+        <meta charset="utf-8">
+        <title>Cadastro de cliente</title>
+        <link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css' />
+        
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -133,7 +141,9 @@
                     <label class="col-md-2 control-label" for="Cadastrar"></label>
                     <div class="col-md-8">
                         <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Cadastrar</button>
-                        <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
+                        <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset" onclick="window.location.href=''">Cancelar</button>
+                                                            
+
                     </div>
                 </div>
 
