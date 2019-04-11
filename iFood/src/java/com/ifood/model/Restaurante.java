@@ -1,9 +1,10 @@
 package com.ifood.model;
 
+import com.ifood.email.EnviarEmailRestaurante;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Restaurante extends Usuario implements Observer {
+public class Restaurante extends Usuario{
 
     private String descricao;
     private String foto;
@@ -90,10 +91,7 @@ public class Restaurante extends Usuario implements Observer {
     public void setValorDoFrete(double valorDoFrete) {
         this.valorDoFrete = valorDoFrete;
     }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
+     
+    
 }

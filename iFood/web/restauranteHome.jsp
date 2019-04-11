@@ -156,7 +156,7 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <a href="#" class="h5 mb-0 font-weight-bold text-gray-800">Listar Pedidos</a>
+                                                <a href="FrontController?pacote=pedido&action=ListarPedidos&id=${restaurante.id}" class="h5 mb-0 font-weight-bold text-gray-800">Listar Pedidos</a>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-comments fa-2x text-gray-300"></i>

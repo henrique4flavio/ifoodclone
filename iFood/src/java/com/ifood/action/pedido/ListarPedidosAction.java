@@ -10,6 +10,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ifood.model.Pedido;
+import com.ifood.persistence.PedidoComidaDAO;
 import com.ifood.persistence.PedidoDAO;
 import javax.servlet.ServletException;
 
@@ -21,10 +22,16 @@ public class ListarPedidosAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-try {
-            request.setAttribute("Pedido", PedidoDAO.getInstance().list());
+        
+try {       
+            int id = Integer.parseInt(request.getParameter("id"));
+            
+
+            request.setAttribute("Pedido", PedidoDAO.getInstance().listPedidosByRestauranteId(id));
+            request.setAttribute("PedidoComida", PedidoComidaDAO.getInstance().list());
+
             RequestDispatcher view
-                    = request.getRequestDispatcher("/listarPedidosRestauante.jsp");
+                    = request.getRequestDispatcher("/listarPedidosRestaurante.jsp");
             try {
                 view.forward(request, response);
             } catch (ServletException ex) {

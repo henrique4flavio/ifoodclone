@@ -52,7 +52,7 @@ public class ClienteDAO {
         Connection conn = null;
         Statement st = null;
 
-        List<Cliente> clientees = new ArrayList<Cliente>();
+        List<Cliente> clientes = new ArrayList<Cliente>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
@@ -68,14 +68,14 @@ public class ClienteDAO {
                         rs.getString("senha"),
                         rs.getString("email"));
 
-                clientees.add(cliente);
+                clientes.add(cliente);
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return clientees;
+        return clientes;
 
     }
     
@@ -87,7 +87,7 @@ public class ClienteDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from cliente WHERE id=?" + id);
+            ResultSet rs = st.executeQuery("select * from cliente WHERE id=" + id);
             while (rs.next()) {
 
                 Cliente cliente = new Cliente(

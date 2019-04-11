@@ -26,6 +26,8 @@ public class ConfirmarPedidoAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
    int id = Integer.parseInt(request.getParameter("id"));
+      int restauranteId = Integer.parseInt(request.getParameter("restauranteId"));
+
        // produto.getEstado().encaminhar(produto);
                 
         Pedido pedido = new Pedido(id);
@@ -41,8 +43,7 @@ public class ConfirmarPedidoAction implements Action {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConfirmarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("FrontController?action=ListarPedidos");
-        
+        response.sendRedirect("FrontController?pacote=pedido&action=ListarPedidos&id="+restauranteId);
          }
     
     }

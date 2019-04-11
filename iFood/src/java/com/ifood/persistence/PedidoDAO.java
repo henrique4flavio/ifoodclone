@@ -85,6 +85,37 @@ public class PedidoDAO {
         return pedidos;
     }
     
+    public List<Pedido> listPedidosByRestauranteId(int id) throws ClassNotFoundException {
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        List<Pedido> pedidos = new ArrayList<Pedido>();
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from pedido where REST_ID=" +id);
+            while (rs.next()) {
+
+                String data = rs.getString("data");
+                int restauranteId = rs.getInt("REST_ID");
+                int clienteId = rs.getInt("CLIENTE_ID");
+                double precoTotal = rs.getDouble("precoTotal");
+                int pedidoId = rs.getInt("id");
+
+                Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
+                Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
+
+                Pedido pedido = new Pedido(pedidoId, data, restaurante, cliente, precoTotal);
+                pedidos.add(pedido);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pedidos;
+    }
+    
      public List<Pedido> getPedidos(int id) throws ClassNotFoundException {
         com.mysql.jdbc.Connection conn = null;
         Statement st = null;
@@ -123,7 +154,7 @@ public class PedidoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from pedido WHERE id=?" + id);
+            ResultSet rs = st.executeQuery("select * from pedido WHERE id=" + id);
             while (rs.next()) {
 
                 String data = rs.getString("data");

@@ -154,7 +154,11 @@
                                             <option value="Hamburgeria">Hamburgeria</option>
                                             <option value="Pizzaria">Pizzaria</option>
                                             <option value="Comida Japonesa">Comida Japonesa</option>
-                                            <option value="Comida Mineira">Comida Mineira</option>
+                                            <option value="Churrascaria">Churrascaria</option>
+                                            <option value="Pastelaria">Pastelaria</option>
+                                            <option value="Lanchonete">Lanchonete</option>
+                                            <option value="Restaurante de fast food">Restaurante de fast food</option>
+                                            <option value="Bar">Bar</option>
                                         </select>
                                     </div>
                                 </div>

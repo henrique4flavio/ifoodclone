@@ -64,7 +64,7 @@ public class PedidoComidaDAO {
         Connection conn = null;
         Statement st = null;
 
-        List<PedidoComida> pedidoComidaes = new ArrayList<PedidoComida>();
+        List<PedidoComida> pedidoComidas = new ArrayList<PedidoComida>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
@@ -80,6 +80,37 @@ public class PedidoComidaDAO {
 
                 PedidoComida pedidoComida = new PedidoComida(id, pedido, comida);
 
+                pedidoComidas.add(pedidoComida);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pedidoComidas;
+
+    }
+    
+     public List<PedidoComida> listPedidosComida(int pedidoid) throws ClassNotFoundException {
+
+        Connection conn = null;
+        Statement st = null;
+
+        List<PedidoComida> pedidoComidaes = new ArrayList<PedidoComida>();
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from pedidoComida where PEDIDO_ID=" +pedidoid);
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                int comidaId = rs.getInt("COMIDA_ID");
+
+                Pedido pedido = PedidoDAO.getInstance().getPedidoById(pedidoid);
+                Comida comida = ComidaDAO.getInstance().getComidaById(comidaId);
+
+                PedidoComida pedidoComida = new PedidoComida(id, pedido, comida);
+
                 pedidoComidaes.add(pedidoComida);
 
             }
@@ -90,6 +121,7 @@ public class PedidoComidaDAO {
         return pedidoComidaes;
 
     }
+
 
     public void delete(PedidoComida pedidoComida) throws
             SQLException, ClassNotFoundException {
