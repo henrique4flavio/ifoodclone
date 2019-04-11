@@ -24,7 +24,7 @@ public class ListarPedidosAction implements Action {
 try {
             request.setAttribute("Pedido", PedidoDAO.getInstance().list());
             RequestDispatcher view
-                    = request.getRequestDispatcher("/pedidos.jsp");
+                    = request.getRequestDispatcher("/listarPedidosRestauante.jsp");
             try {
                 view.forward(request, response);
             } catch (ServletException ex) {

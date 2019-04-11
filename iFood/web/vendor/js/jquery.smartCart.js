@@ -375,7 +375,8 @@
             }
 
             // Update cart value to the  cart hidden element 
-            $('#' + this.options.resultName, this.cart_element).val(JSON.stringify(this.cart));
+            var comidas = {comidas: this.cart};
+            $('#' + this.options.resultName, this.cart_element).val(JSON.stringify(comidas));
         },
         /* 
          * Calculates the cart subtotal
