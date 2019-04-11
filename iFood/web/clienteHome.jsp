@@ -47,11 +47,11 @@
                     </div>
                     <div class="login">
                         <ul>
-                            <li><i class="fa fa-percent"></i>
+<!--                            <li><i class="fa fa-percent"></i>
                                 <a href="#">Promoções</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Entrar</a></li>
-                            <li><a href="#">Registrar</a></li>
-                            <li><a href="#">Sacola</a></li>
+                            <li><a href="#">Registrar</a></li>-->
+                            <li><a href="index.jsp">Logout</a></li>
 
                         </ul>
                     </div>

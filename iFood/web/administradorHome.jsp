@@ -47,14 +47,15 @@
                     <a class="nav-link" href="#">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
+
                 </li>
 
                 <hr class="sidebar-divider">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Alterar dados do Administrador</span></a>
+                        <span>Logout</span></a>
                 </li>
                 
 
