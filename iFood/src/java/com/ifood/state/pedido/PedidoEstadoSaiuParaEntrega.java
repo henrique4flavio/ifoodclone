@@ -19,12 +19,12 @@ public class PedidoEstadoSaiuParaEntrega implements PedidoEstado {
 
     @Override
     public String efetuar(Pedido pedido) {
-        return "Pedido ja foi efetuado";
+        return "Pedido ja saiu para enrtrega";
     }
 
     @Override
     public String confirmar(Pedido pedido) {
-        return "Pedido já foi confirmado";
+        return "Pedido já saiu para entrega";
     }
 
     @Override
@@ -34,6 +34,8 @@ public class PedidoEstadoSaiuParaEntrega implements PedidoEstado {
 
     @Override
     public String entregar(Pedido pedido) {
+                pedido.setEstado(new PedidoEstadoEntregue());
+
         return "Pedido Entregue";
     }
 

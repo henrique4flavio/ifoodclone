@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class EnviarEmailCliente {
 
-    public void enviarEmail(Cliente cliente) {
+public static void enviarEmail(Cliente cliente) {
+    
 
         Properties props = new Properties();
         /**
@@ -51,11 +52,11 @@ public class EnviarEmailCliente {
             message.setFrom(new InternetAddress("projetoifoodclone@gmail.com")); //Remetente
 
             Address[] toUser = InternetAddress //Destinatário(s)
-                    .parse(cliente.getEmail());
+                    .parse("laisalvesjf@hotmail.com");
 
             message.setRecipients(Message.RecipientType.TO, toUser);
-            message.setSubject("Boas Noticias!! O status do seu pedido foi alterado.");//Assunto
-            message.setText("Seu pedido mudou de Status!");
+            message.setSubject("Bem Vinda ao Ifood.");//Assunto
+            message.setText("Ola lais chatinha!");
             /**
              * Método para enviar a mensagem criada
              */

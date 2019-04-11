@@ -36,7 +36,7 @@ public class EntregarPedidoAction implements Action {
 
         //pedido.setSituacao(pedido.getEstado().confirmar(pedido));
         try {
-            PedidoDAO.getInstance().edit(pedido);
+            PedidoDAO.getInstance().editEstado(pedido);
         } catch (SQLException ex) {
             Logger.getLogger(EntregarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

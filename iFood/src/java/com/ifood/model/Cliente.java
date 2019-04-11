@@ -102,8 +102,9 @@ public class Cliente extends Usuario implements Observer {
             String mensagem = "Olá, " + getNome() + ", o estado do seu pedido mudou. " + estado + ".";
             System.out.println(mensagem);
             
-            EnviarEmailCliente email = new EnviarEmailCliente();
-            email.enviarEmail(this);
+            String argumento="";
+            
+            EnviarEmailCliente.enviarEmail(this);
             
            
         }

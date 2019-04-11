@@ -37,7 +37,7 @@ public class ConfirmarPedidoAction implements Action {
         //pedido.setSituacao(pedido.getEstado().confirmar(pedido));
        
         try {
-            PedidoDAO.getInstance().edit(pedido);
+            PedidoDAO.getInstance().editEstado(pedido);
         } catch (SQLException ex) {
             Logger.getLogger(ConfirmarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

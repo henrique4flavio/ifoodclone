@@ -24,19 +24,21 @@ public class PedidoEstadoConfirmado implements PedidoEstado {
 
     @Override
     public String confirmar(Pedido pedido) {
-        pedido.setEstado(new PedidoEstadoConfirmado());
-        return "Pedido Confirmado com Sucesso";
+        return "Pedido já está confirmado";
 
     }
 
     @Override
     public String sairParaEntrega(Pedido pedido) {
+                
+        pedido.setEstado(new PedidoEstadoSaiuParaEntrega());
+
         return "Pedido saiu para entrega ";
     }
 
     @Override
     public String entregar(Pedido pedido) {
-        return "Pedido entregue";
+        return "Pedido ainda não saiu para entrega";
     }
 
 }

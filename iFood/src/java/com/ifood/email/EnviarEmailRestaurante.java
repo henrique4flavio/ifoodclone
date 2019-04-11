@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class EnviarEmailRestaurante {
 
-    public void enviarEmail(Restaurante restaurante) {
+    public static void enviarEmail(Restaurante restaurante) {
 
         Properties props = new Properties();
         /**

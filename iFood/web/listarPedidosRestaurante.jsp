@@ -166,6 +166,7 @@
                                                                     <form action ="FrontController?pacote=pedido&action=EntregarPedido&id=${Pedido.id}&restauranteId=${restaurante.id}" method="post">
                                                                         <input type="submit" value="Marcar como Entregue"/>
                                                                     </form>
+                                                                        
                                                                     
 
                                                                 </td>

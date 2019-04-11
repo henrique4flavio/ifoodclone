@@ -42,6 +42,16 @@ public class Pedido extends Observable {
         this.estado = new PedidoEstadoEfetuado();
         this.id = id;
     }
+    
+    public Pedido(int id, String data, Restaurante restaurante, Cliente cliente, double precoTotal, PedidoEstado estado) {
+        this.data = data;
+        this.restaurante = restaurante;
+        this.cliente = cliente;
+        this.precoTotal = precoTotal;
+        this.estado = new PedidoEstadoEfetuado();
+        this.id = id;
+        this.estado=estado;
+    }
 
     public int getId() {
         return id;

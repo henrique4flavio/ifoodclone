@@ -138,7 +138,7 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <a href="listarRestaurantes.jsp" class="h5 mb-0 font-weight-bold text-gray-800">Listar Restaurantes</a>
+                                                <a href="FrontController?pacote=restaurante&action=ListarRestaurantes" class="h5 mb-0 font-weight-bold text-gray-800">Listar Restaurantes</a>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
