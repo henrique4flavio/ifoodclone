@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.ifood.model.Pedido;
 import com.ifood.model.Restaurante;
+import com.ifood.state.pedido.PedidoEstado;
+import com.ifood.state.pedido.PedidoEstadoFactory;
 
 public class PedidoDAO {
 
@@ -85,15 +87,50 @@ public class PedidoDAO {
         return pedidos;
     }
 
-    public Pedido getPedidoById(int id) throws ClassNotFoundException {
-
+    public List<Pedido> listPedidosByRestauranteId(int id) throws ClassNotFoundException {
         com.mysql.jdbc.Connection conn = null;
         Statement st = null;
 
+        List<Pedido> pedidos = new ArrayList<Pedido>();
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from pedido WHERE id=?" + id);
+            ResultSet rs = st.executeQuery("select * from pedido where REST_ID=" + id);
+            while (rs.next()) {
+
+                String estadoString = rs.getString("estado");
+
+                String data = rs.getString("data");
+                int restauranteId = rs.getInt("REST_ID");
+                int clienteId = rs.getInt("CLIENTE_ID");
+                double precoTotal = rs.getDouble("precoTotal");
+                int pedidoId = rs.getInt("id");
+                
+                PedidoEstado estado =PedidoEstadoFactory.create(estadoString);
+
+                Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
+                Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
+
+                Pedido pedido = new Pedido(pedidoId, data, restaurante, cliente, precoTotal, estado);
+                pedidos.add(pedido);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pedidos;
+    }
+
+    public List<Pedido> getPedidos(int id) throws ClassNotFoundException {
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        List<Pedido> pedidos = new ArrayList<Pedido>();
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from pedido");
             while (rs.next()) {
 
                 String data = rs.getString("data");
@@ -105,7 +142,67 @@ public class PedidoDAO {
                 Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
 
                 Pedido pedido = new Pedido(data, restaurante, cliente, precoTotal);
-                
+                pedidos.add(pedido);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pedidos;
+    }
+
+    public Pedido getPedidoById(int id) throws ClassNotFoundException {
+
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from pedido WHERE id=" + id);
+            while (rs.next()) {
+
+                String data = rs.getString("data");
+                int restauranteId = rs.getInt("REST_ID");
+                int clienteId = rs.getInt("CLIENTE_ID");
+                double precoTotal = rs.getDouble("precoTotal");
+
+                Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
+                Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
+
+                Pedido pedido = new Pedido(id, data, restaurante, cliente, precoTotal);
+
+                return pedido;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Pedido getUltimoPedido() throws ClassNotFoundException {
+
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT MAX(ID), data, REST_ID, CLIENTE_ID, precoTotal, estado FROM pedido");
+            while (rs.next()) {
+
+                String data = rs.getString("data");
+                int restauranteId = rs.getInt("REST_ID");
+                int clienteId = rs.getInt("CLIENTE_ID");
+                double precoTotal = rs.getDouble("precoTotal");
+                int id = rs.getInt("MAX(ID)");
+
+                Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
+                Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
+
+                Pedido pedido = new Pedido(id, data, restaurante, cliente, precoTotal);
+
                 return pedido;
             }
         } catch (SQLException e) {
@@ -146,6 +243,44 @@ public class PedidoDAO {
 
     public void edit(Pedido pedido) throws SQLException, ClassNotFoundException {
 
+        Connection conn = null;
+        PreparedStatement comando = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            String sql = "update pedido set precoTotal=? where id =?";
+
+            comando = conn.prepareStatement(sql);
+            comando.setDouble(1, pedido.getPrecoTotal());
+            comando.setInt(2, pedido.getId());
+
+            comando.execute();
+            comando.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public void editEstado(Pedido pedido) throws SQLException, ClassNotFoundException {
+
+        Connection conn = null;
+        PreparedStatement comando = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            String sql = "update pedido set estado=? where id =?";
+
+            comando = conn.prepareStatement(sql);
+            comando.setString(1, pedido.getEstado().getEstado());
+            comando.setInt(2, pedido.getId());
+
+            comando.execute();
+            comando.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
 }

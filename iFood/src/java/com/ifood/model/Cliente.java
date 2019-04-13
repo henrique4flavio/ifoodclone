@@ -1,5 +1,6 @@
 package com.ifood.model;
 
+import com.ifood.email.EnviarEmailCliente;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -22,6 +23,16 @@ public class Cliente extends Usuario implements Observer {
         this.bairro = bairro;
         this.cep = cep;
     }
+    public Cliente(int id, String cpf, String rua, String numero, String bairro, String cep, String nome, String senha, String email) {
+        super(nome, senha, email);
+        this.cpf = cpf;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.id = id;
+    }
+
 
     public Cliente(int id, String nome, String senha, String email) {
         super(id, nome, senha, email);
@@ -83,8 +94,20 @@ public class Cliente extends Usuario implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Observable pedidoSubject, Object arg){
+        
+        if (pedidoSubject instanceof Pedido) {
+            Pedido pedido = (Pedido) pedidoSubject;
+            String estado = pedido.getEstado().getEstado();
+            String mensagem = "Olá, " + getNome() + ", o estado do seu pedido mudou. " + estado + ".";
+            System.out.println(mensagem);
+            
+            String argumento="";
+            
+            EnviarEmailCliente.enviarEmail(this);
+            
+           
+        }
     }
 
 }

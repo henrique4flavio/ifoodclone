@@ -32,20 +32,20 @@
                
                 
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="#">
                     <img src="${restaurante.foto}" alt="logo" width=190 height=160>
                 </li>
 
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                     <div class="sidebar-brand-text mx-3">Bem Vindo ${restaurante.nome} <sup>;)</sup></div>
                 </a>
 
                 <hr class="sidebar-divider my-0">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -53,9 +53,10 @@
                 <hr class="sidebar-divider">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Alterar dados do Restaurante</span></a>
+                        
+                        <span>Logout</span></a>
                 </li>
                 
 
@@ -156,7 +157,7 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <a href="#" class="h5 mb-0 font-weight-bold text-gray-800">Listar Pedidos</a>
+                                                <a href="FrontController?pacote=pedido&action=ListarPedidos&id=${restaurante.id}" class="h5 mb-0 font-weight-bold text-gray-800">Listar Pedidos</a>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-comments fa-2x text-gray-300"></i>

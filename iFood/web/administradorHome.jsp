@@ -32,29 +32,30 @@
                
                 
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="#">
                 </li>
 
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                     <div class="sidebar-brand-text mx-3">Bem Vindo ${administrador.nome} <sup>;)</sup></div>
                 </a>
 
                 <hr class="sidebar-divider my-0">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
+
                 </li>
 
                 <hr class="sidebar-divider">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="index.jsp">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Alterar dados do Administrador</span></a>
+                        <span>Logout</span></a>
                 </li>
                 
 
@@ -137,7 +138,7 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <a href="#" class="h5 mb-0 font-weight-bold text-gray-800">Listar Clientes</a>
+                                                <a href="FrontController?pacote=restaurante&action=ListarRestaurantes" class="h5 mb-0 font-weight-bold text-gray-800">Listar Restaurantes</a>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>

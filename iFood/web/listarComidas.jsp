@@ -45,7 +45,7 @@
                                                     <strong class="price pull-left">R$<c:out value = "${Comida.preco}" /> </strong>
 
                                                     <input name="product_price" value="<c:out value = "${Comida.preco}" />" type="hidden" />
-                                                    <input name="product_id" value="12" type="hidden" />
+                                                    <input name="product_id" value="<c:out value = "${Comida.id}" />" type="hidden" />
                                                     <button class="sc-add-to-cart btn btn-success btn-sm pull-right">Adicionar ao Carrinho</button>
                                                 </div>
                                                 <div class="clearfix"></div>
@@ -64,7 +64,7 @@
                 <aside class="col-md-4">
 
                     <!-- Cart submit form -->
-                    <form action="results.php" method="POST"> 
+                    <form action="FrontController?pacote=pedido&action=EfetuarPedido&id=27" method="POST"> 
                         <!-- SmartCart element -->
                         <div id="smartcart"></div>
                     </form>

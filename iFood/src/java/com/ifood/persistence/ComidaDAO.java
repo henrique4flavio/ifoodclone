@@ -141,6 +141,7 @@ public class ComidaDAO {
                 Double preco = rs.getDouble("preco");
                 String foto = rs.getString("foto");
                 int restauranteId = rs.getInt("REST_ID");
+                
 
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
 

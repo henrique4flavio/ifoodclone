@@ -7,7 +7,9 @@ package com.ifood.action.comida;
 
 import com.ifood.controller.Action;
 import com.ifood.persistence.ComidaDAO;
+import com.ifood.persistence.RestauranteDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -28,6 +30,7 @@ public class ListarComidasAction implements Action {
             HttpSession session = request.getSession(create);
             String usuario = (String) session.getAttribute("tipo");
             if (usuario.equals("restaurante")) {
+                request.setAttribute("restaurante", RestauranteDAO.getInstance().getRestauranteById(restauranteId));
                 request.setAttribute("Comida", ComidaDAO.getInstance().list(restauranteId));
 
                 RequestDispatcher view = request.getRequestDispatcher("/listarComidasRestaurante.jsp");
@@ -44,6 +47,8 @@ public class ListarComidasAction implements Action {
         } catch (ServletException ex) {
             Logger.getLogger(ListarComidasAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ListarComidasAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(ListarComidasAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

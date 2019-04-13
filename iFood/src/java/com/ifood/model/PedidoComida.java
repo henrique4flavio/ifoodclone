@@ -17,6 +17,12 @@ public class PedidoComida {
         this.comida = comida;
         this.quantidade = quantidade;
     }
+    
+    public PedidoComida(Pedido pedido, Comida comida, int quantidade) {
+        this.pedido = pedido;
+        this.comida = comida;
+        this.quantidade = quantidade;
+    }
 
     public PedidoComida(int id, Pedido pedido, Comida comida) {
         this.id = id;

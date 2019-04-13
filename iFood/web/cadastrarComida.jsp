@@ -11,7 +11,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>iFood</title>
+        <title>Cadastrar comida</title>
 
         <!-- Custom fonts for this template-->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -161,6 +161,8 @@
                                     <label class="col-md-4 control-label" for="btnsalvar"></label>
                                     <div class="col-md-8">
                                         <input type="submit" value="Cadastrar"  class="btn btn-primary">
+                                        <button id="Voltar" name="Voltar" class="btn btn-danger" onclick="window.location.href='LoginController?acao=logar#'">Voltar</button>
+
                                     </div>
                                 </div>
 
