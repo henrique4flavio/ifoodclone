@@ -11,16 +11,47 @@
 
 
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
         <!-- Include Bootstrap CSS -->
-        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap3.min.css">
 
         <!-- Include SmartCart CSS -->
         <link href="vendor/css/smart_cart.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/font-awesome.css"/>
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/animate.css">
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/responsive.css"/>
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap3.min.css">
+
     </head>
     <body>
-        <br />
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="menu fixed">
+                        <div class="mobile-nav-container"> </div>
+                        <nav>
+                            <ul>
+                                <li><img src="imagens/ifood-logo.png" width="90" align="left"></li>			
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="login">
+                        <ul>
+                            <li><i class="fa fa-percent"></i>
+                            <li><a href="#">Promoções</a></li>
+                            <li><a href="#">Meus Pedidos</a></li>
+                            <li><a href="LoginController?acao=logout">Sair</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <section class="container">
             <div class="row">
                 <div class="col-md-8">
@@ -46,7 +77,7 @@
 
                                                     <input name="product_price" value="<c:out value = "${Comida.preco}" />" type="hidden" />
                                                     <input name="product_id" value="<c:out value = "${Comida.id}" />" type="hidden" />
-                                                    <button class="sc-add-to-cart btn btn-success btn-sm pull-right">Adicionar ao Carrinho</button>
+                                                    <button class="sc-add-to-cart btn btn-danger btn-sm pull-right">Adicionar ao Carrinho</button>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div>
@@ -64,14 +95,31 @@
                 <aside class="col-md-4">
 
                     <!-- Cart submit form -->
-                    <form action="FrontController?pacote=pedido&action=EfetuarPedido&id=27" method="POST"> 
+                    <form action="FrontController?pacote=pedido&action=EfetuarPedido&id=${restaurante.id}" method="POST"> 
                         <!-- SmartCart element -->
-                        <div id="smartcart"></div>
+                        <div id="smartcart">
+                            <h4>&nbsp;Frete = R$ ${restaurante.valorDoFrete}</h4>
+                        </div>
                     </form>
 
                 </aside>
             </div>
         </section>
+        
+
+                                                                                                                                                                           
+                                                                                                                                                                            <br><br><br><br><br><br><br><br><br><br>
+
+        <footer class="saction9 ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <center><div class="email">&copy;LP5 - Padrões de Projeto 2019  / iFood </div></center>
+                        <center> <p class="freetemplates">Jonathas Flavio Laís</a></p> </center>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
         <!-- Include jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript" ></script>

@@ -12,7 +12,7 @@ public interface PedidoEstado {
 
     public String confirmar(Pedido pedido);
 
-    public String sairParaEntrega(Pedido pedido);
+    public String enviar(Pedido pedido);
 
     public String entregar(Pedido pedido);
 

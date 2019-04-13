@@ -28,7 +28,7 @@ public class PedidoEstadoEntregue implements PedidoEstado {
     }
 
     @Override
-    public String sairParaEntrega(Pedido pedido) {
+    public String enviar(Pedido pedido) {
         return "Pedido ja foi entregue";
     }
 

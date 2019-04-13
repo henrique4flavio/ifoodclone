@@ -15,17 +15,6 @@ public class Pedido extends Observable {
     private double precoTotal;
     private PedidoEstado estado;
 
-    public Pedido(Restaurante restaurante, Cliente cliente) {
-        this.restaurante = restaurante;
-        this.cliente = cliente;
-        this.estado = new PedidoEstadoEfetuado();
-
-    }
-
-    public Pedido(int id) {
-        this.id = id;
-    }
-
     public Pedido(String data, Restaurante restaurante, Cliente cliente, double precoTotal) {
         this.data = data;
         this.restaurante = restaurante;
@@ -34,25 +23,36 @@ public class Pedido extends Observable {
         this.estado = new PedidoEstadoEfetuado();
     }
 
-    public Pedido(int id, String data, Restaurante restaurante, Cliente cliente, double precoTotal) {
-        this.data = data;
-        this.restaurante = restaurante;
-        this.cliente = cliente;
-        this.precoTotal = precoTotal;
-        this.estado = new PedidoEstadoEfetuado();
-        this.id = id;
-    }
-    
     public Pedido(int id, String data, Restaurante restaurante, Cliente cliente, double precoTotal, PedidoEstado estado) {
         this.data = data;
         this.restaurante = restaurante;
         this.cliente = cliente;
         this.precoTotal = precoTotal;
-        this.estado = new PedidoEstadoEfetuado();
         this.id = id;
-        this.estado=estado;
+        this.estado = estado;
     }
 
+    public String efetuarPedido() {
+        return estado.efetuar(this);
+
+    }
+
+    public String confirmarPedido() {
+        return estado.confirmar(this);
+
+    }
+
+    public String enviarPedido() {
+        return estado.enviar(this);
+
+    }
+
+    public String entregarPedido() {
+        return estado.entregar(this);
+
+    }
+
+//Metodos get e set
     public int getId() {
         return id;
     }
