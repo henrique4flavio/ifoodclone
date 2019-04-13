@@ -122,6 +122,8 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Codigo</th>
+                                                            <th>Data e Hora</th>
+
                                                             <th>Cliente</th>
                                                             <th>Endereço de Entrega</th>
                                                             <th>Pedido</th> 
@@ -134,6 +136,8 @@
                                                     <tfoot>
                                                         <tr>
                                                             <th>Codigo</th>
+                                                            <th>Data e Hora</th>
+
                                                             <th>Cliente</th>
                                                             <th>Endereço de Entrega</th>
                                                             <th>Pedido</th> 
@@ -150,11 +154,14 @@
                                                             <tr>
 
                                                                 <td><c:out value = "${Pedido.id}" /></td>
+                                                                <td><c:out value = "${Pedido.data}" /></td>
+
                                                                 <td><c:out value = "${Pedido.cliente.nome}" /></td>
                                                                 <td><c:out value = "${Pedido.cliente.rua} ${Pedido.cliente.numero} ${Pedido.cliente.bairro} CEP: ${Pedido.cliente.cep}" /></td>
                                                                 <td></td>
                                                                 <td><c:out value = "${Pedido.precoTotal}" /></td>
                                                                 <td><c:out value = "${Pedido.estado.estado}" /></td>
+                                                                
 
                                                                 <td>
                                                                     <form action ="FrontController?pacote=pedido&action=ConfirmarPedido&id=${Pedido.id}&restauranteId=${restaurante.id}" method="post">
@@ -185,9 +192,9 @@
 
                                 </div>
                                 <!-- /.container-fluid -->
-                                
-                                
-                                
+
+
+
 
 
                                 <!-- Footer -->

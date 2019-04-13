@@ -54,22 +54,25 @@ public class EfetuarPedidoAction implements Action {
 
             Cliente cliente = (Cliente) session.getAttribute("cliente");
 
-            double precoTotal = 0;
+            double precoTotal = restaurante.getValorDoFrete();
 
             Date data = new Date();
-            SimpleDateFormat formatar = new SimpleDateFormat("H:m dd/MM/yyy");
+            SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyy H:m");
             String dataPedido = formatar.format(data);
             
 
-            Pedido pedido = new Pedido(dataPedido, restaurante, cliente, precoTotal);
+            Pedido pedido = new Pedido(0, dataPedido, restaurante, cliente, precoTotal, new PedidoEstadoEfetuado());
             PedidoDAO.getInstance().save(pedido);
+            pedido = PedidoDAO.getInstance().getUltimoPedido();
+            
+            System.out.println(pedido.getId());
             
             for (int i = 0; i < comidasJSON.length(); i++) {
                 int quantidade = comidasJSON.getJSONObject(i).getInt("product_quantity");
                 int comidaId = Integer.parseInt(comidasJSON.getJSONObject(i).getString("product_id"));
                 double preco = Double.parseDouble(comidasJSON.getJSONObject(i).getString("product_price"));
 
-                precoTotal = precoTotal + preco;
+                precoTotal = precoTotal + (preco*quantidade);
 
                 try {
 
@@ -81,6 +84,9 @@ public class EfetuarPedidoAction implements Action {
                     Logger.getLogger(EfetuarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+           
+           pedido.setPrecoTotal(precoTotal);
+           PedidoDAO.getInstance().edit(pedido);
             
         
         } catch (ClassNotFoundException ex) {

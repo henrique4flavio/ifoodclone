@@ -15,11 +15,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
         <!--CSS-->
-        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/style.css"/>
         <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/font-awesome.css"/>
         <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/animate.css">
         <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/responsive.css"/>
+                        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap3.min.css">
+
         <!--JS-->
 
         <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
@@ -38,7 +39,6 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="menu fixed">
                         <div class="mobile-nav-container"> </div>
-                        <div class="mobile-nav-btn"><img class="nav-open" src=					      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-open.png" alt="Nav Button Open" /> <img class="nav-close" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-close.png" alt="Nav Button Close" /> </div>
                         <nav>
                             <ul>
                                 <li><img src="imagens/ifood-logo.png" width="90" align="left"></li>			
@@ -51,9 +51,6 @@
                                <li><a href="#">Promoções</a></li>
                             <li><a href="#">Meus Pedidos</a></li>
                             <li><a href="LoginController?acao=logout">Sair</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Entrar</a></li>
-                            <li><a href="#">Registrar</a></li>-->
-                            <li><a href="index.jsp">Logout</a></li>
 
                         </ul>
                     </div>
@@ -66,11 +63,11 @@
             <div class="col-md-9">
                 <p>
 
-                    <span class="contactcor border"> <h5>Bem-Vindo ${cliente.nome}</h5></span><br>
+                    <span class="contactcor border"> <h3>Bem-Vindo ${cliente.nome}</h3></span><br>
                     <img src="imagens/icon.png" width="6%"> 
 
                     <span>ENDEREÇO DE ENTREGA: </span>
-                    <span>${cliente.rua} ${cliente.numero} ${cliente.bairro} </span><br> <span>CEP: ${cliente.cep}</span>
+                    <span>${cliente.rua} ${cliente.numero} ${cliente.bairro} </span> <span>CEP: ${cliente.cep}</span>
                 </p>
 
             </div>
@@ -138,7 +135,7 @@
                             <div class="img clearfix"> <img src="<c:out value = "${Restaurante.foto}"/>" alt="imagem" width=100 height=100> </div>
                             <div class="title clearfix">
                                 <h3><c:out value = "${Restaurante.nome}"/></h3>
-                                <p><c:out value = "${Restaurante.descricao}"/> </p>
+                                <p><c:out value = "${Restaurante.categoria}"/> </p>
                                 <a href="FrontController?pacote=comida&action=ListarComidas&id=<c:out value = "${Restaurante.id}"/>">FAZER PEDIDO &#10152;</a> </div>
                         </div>
                     </div>

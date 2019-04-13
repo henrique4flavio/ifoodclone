@@ -44,7 +44,6 @@ public class PedidoDAO {
             comando.setInt(3, pedido.getCliente().getId());
             comando.setDouble(4, pedido.getPrecoTotal());
             comando.setString(5, pedido.getEstado().getEstado());
-            //comando.getGeneratedKeys();
 
             comando.execute();
             comando.close();
@@ -204,7 +203,7 @@ public class PedidoDAO {
                 int restauranteId = rs.getInt("REST_ID");
                 int clienteId = rs.getInt("CLIENTE_ID");
                 double precoTotal = rs.getDouble("precoTotal");
-                int pedidoId = rs.getInt("id");
+                int pedidoId = rs.getInt("MAX(ID)");
                 
                 PedidoEstado estado =PedidoEstadoFactory.create(estadoString);
 
