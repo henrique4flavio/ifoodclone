@@ -21,7 +21,7 @@ public class ApagarPedidoAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 int id = Integer.parseInt(request.getParameter("id"));
-        Pedido pedido = new Pedido(id);
+        Pedido pedido = new Pedido(id, null, null, null, 0, null);
 
         try {
             PedidoDAO.getInstance().delete(pedido);

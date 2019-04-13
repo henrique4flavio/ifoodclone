@@ -44,6 +44,7 @@ public class PedidoDAO {
             comando.setInt(3, pedido.getCliente().getId());
             comando.setDouble(4, pedido.getPrecoTotal());
             comando.setString(5, pedido.getEstado().getEstado());
+            //comando.getGeneratedKeys();
 
             comando.execute();
             comando.close();
@@ -163,15 +164,20 @@ public class PedidoDAO {
             ResultSet rs = st.executeQuery("select * from pedido WHERE id=" + id);
             while (rs.next()) {
 
+                String estadoString = rs.getString("estado");
+
                 String data = rs.getString("data");
                 int restauranteId = rs.getInt("REST_ID");
                 int clienteId = rs.getInt("CLIENTE_ID");
                 double precoTotal = rs.getDouble("precoTotal");
+                int pedidoId = rs.getInt("id");
+                
+                PedidoEstado estado =PedidoEstadoFactory.create(estadoString);
 
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
                 Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
 
-                Pedido pedido = new Pedido(id, data, restaurante, cliente, precoTotal);
+                Pedido pedido = new Pedido(pedidoId, data, restaurante, cliente, precoTotal, estado);
 
                 return pedido;
             }
@@ -192,16 +198,20 @@ public class PedidoDAO {
             ResultSet rs = st.executeQuery("SELECT MAX(ID), data, REST_ID, CLIENTE_ID, precoTotal, estado FROM pedido");
             while (rs.next()) {
 
+                String estadoString = rs.getString("estado");
+
                 String data = rs.getString("data");
                 int restauranteId = rs.getInt("REST_ID");
                 int clienteId = rs.getInt("CLIENTE_ID");
                 double precoTotal = rs.getDouble("precoTotal");
-                int id = rs.getInt("MAX(ID)");
+                int pedidoId = rs.getInt("id");
+                
+                PedidoEstado estado =PedidoEstadoFactory.create(estadoString);
 
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
                 Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
 
-                Pedido pedido = new Pedido(id, data, restaurante, cliente, precoTotal);
+                Pedido pedido = new Pedido(pedidoId, data, restaurante, cliente, precoTotal, estado);
 
                 return pedido;
             }

@@ -161,13 +161,13 @@
                                                                         <input type="submit" value="Confirmar"/>
                                                                     </form>
                                                                     <form action ="FrontController?pacote=pedido&action=EnviarPedido&id=${Pedido.id}&restauranteId=${restaurante.id}" method="post">
-                                                                        <input type="submit" value="Marcar como Enviado"/>
+                                                                        <input type="submit" value="Enviar"/>
                                                                     </form>
                                                                     <form action ="FrontController?pacote=pedido&action=EntregarPedido&id=${Pedido.id}&restauranteId=${restaurante.id}" method="post">
-                                                                        <input type="submit" value="Marcar como Entregue"/>
+                                                                        <input type="submit" value="Entregar"/>
                                                                     </form>
-                                                                        
-                                                                    
+
+
 
                                                                 </td>
 
@@ -185,6 +185,9 @@
 
                                 </div>
                                 <!-- /.container-fluid -->
+                                
+                                
+                                
 
 
                                 <!-- Footer -->
