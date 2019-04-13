@@ -87,6 +87,8 @@ public class EfetuarPedidoAction implements Action {
            
            pedido.setPrecoTotal(precoTotal);
            PedidoDAO.getInstance().edit(pedido);
+        response.sendRedirect("FrontController?pacote=pedido&action=ListarPedidosCliente&id=" +cliente.getId());
+
             
         
         } catch (ClassNotFoundException ex) {
