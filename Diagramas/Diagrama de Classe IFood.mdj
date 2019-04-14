@@ -4181,7 +4181,7 @@
 											"top": 119,
 											"width": 174.07177734375,
 											"height": 13,
-											"text": "ApagarComidaAction"
+											"text": "ApagarRestauranteAction"
 										},
 										{
 											"_type": "LabelView",
@@ -4379,7 +4379,7 @@
 											"top": 207,
 											"width": 189.97900390625,
 											"height": 13,
-											"text": "CadastrarComidaAction"
+											"text": "CadastrarRestauranteAction"
 										},
 										{
 											"_type": "LabelView",
@@ -4577,7 +4577,7 @@
 											"top": 319,
 											"width": 166.12451171875,
 											"height": 13,
-											"text": "EditarComidaAction"
+											"text": "EditarRestauranteAction"
 										},
 										{
 											"_type": "LabelView",
@@ -4775,7 +4775,7 @@
 											"top": 415,
 											"width": 162.525390625,
 											"height": 13,
-											"text": "ListarComidaAction"
+											"text": "ListarRestauranteAction"
 										},
 										{
 											"_type": "LabelView",
@@ -40072,7 +40072,7 @@
 											"top": 295,
 											"width": 239.560546875,
 											"height": 13,
-											"text": "PedidoEstadoSaiuParaEntregue"
+											"text": "PedidoEstadoEnviado"
 										},
 										{
 											"_type": "LabelView",
@@ -40178,7 +40178,7 @@
 											"top": 341,
 											"width": 239.560546875,
 											"height": 13,
-											"text": "+PedidoEstadoSaiuParaEntrega()",
+											"text": "+PedidoEstadoEnviado()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -40229,7 +40229,7 @@
 											"top": 386,
 											"width": 239.560546875,
 											"height": 13,
-											"text": "+sairParaEntregue(Pedido pedido): string",
+											"text": "+enviar(Pedido pedido): string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -42816,7 +42816,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFqBuolvQsIxyU="
 					},
-					"name": "PedidoEstadoSaiuParaEntregue",
+					"name": "PedidoEstadoEnviado",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -42864,7 +42864,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqBvOdhwvpFCo="
 							},
-							"name": "PedidoEstadoSaiuParaEntrega"
+							"name": "PedidoEstadoEnviado"
 						},
 						{
 							"_type": "UMLOperation",
@@ -42928,7 +42928,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFqBvOdhwvpFCo="
 							},
-							"name": "sairParaEntregue",
+							"name": "enviar",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -42936,8 +42936,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFqBvzSAA2SSQE="
 									},
-									"name": "Pedido pedido",
-									"type": ""
+									"name": "Pedido pedido"
 								},
 								{
 									"_type": "UMLParameter",
