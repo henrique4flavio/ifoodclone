@@ -52,7 +52,7 @@ public static void enviarEmail(Cliente cliente) {
             message.setFrom(new InternetAddress("projetoifoodclone@gmail.com")); //Remetente
 
             Address[] toUser = InternetAddress //Destinatário(s)
-                    .parse("laisalvesjf@hotmail.com");
+                    .parse("jonathas.maraujo@gmail.com");
 
             message.setRecipients(Message.RecipientType.TO, toUser);
             message.setSubject("Bem Vinda ao Ifood.");//Assunto

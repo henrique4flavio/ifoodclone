@@ -121,6 +121,42 @@ public class PedidoDAO {
 
         return pedidos;
     }
+    
+        public List<Pedido> listPedidosByClienteId(int id) throws ClassNotFoundException {
+        com.mysql.jdbc.Connection conn = null;
+        Statement st = null;
+
+        List<Pedido> pedidos = new ArrayList<Pedido>();
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from pedido where CLIENTE_ID=" + id +" ORDER BY id DESC");
+            while (rs.next()) {
+
+                String estadoString = rs.getString("estado");
+
+                String data = rs.getString("data");
+                int restauranteId = rs.getInt("REST_ID");
+                int clienteId = rs.getInt("CLIENTE_ID");
+                double precoTotal = rs.getDouble("precoTotal");
+                int pedidoId = rs.getInt("id");
+                
+                PedidoEstado estado =PedidoEstadoFactory.create(estadoString);
+
+                Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
+                Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
+
+                Pedido pedido = new Pedido(pedidoId, data, restaurante, cliente, precoTotal, estado);
+                pedidos.add(pedido);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pedidos;
+    }
+    
 
     public List<Pedido> getPedidos(int id) throws ClassNotFoundException {
         com.mysql.jdbc.Connection conn = null;
@@ -152,6 +188,7 @@ public class PedidoDAO {
         return pedidos;
     }
 
+    
     public Pedido getPedidoById(int id) throws ClassNotFoundException {
 
         com.mysql.jdbc.Connection conn = null;

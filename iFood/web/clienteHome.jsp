@@ -49,7 +49,7 @@
                         <ul>
                             <li><i class="fa fa-percent"></i>
                                <li><a href="#">Promoções</a></li>
-                            <li><a href="#">Meus Pedidos</a></li>
+                            <li><a href="FrontController?pacote=pedido&action=ListarPedidosCliente&id=${cliente.id}">Meus Pedidos</a></li>
                             <li><a href="LoginController?acao=logout">Sair</a></li>
 
                         </ul>

@@ -100,6 +100,7 @@ public class Pedido extends Observable {
     public void setEstado(PedidoEstado estado) {
         this.estado = estado;
         setChanged();
+        notifyObservers();
 
     }
 

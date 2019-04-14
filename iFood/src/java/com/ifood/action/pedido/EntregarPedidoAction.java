@@ -37,7 +37,7 @@ public class EntregarPedidoAction implements Action {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConfirmarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("FrontController?pacote=pedido&action=ListarPedidos&id=" + restauranteId);
+        response.sendRedirect("FrontController?pacote=pedido&action=ListarPedidosRestaurante&id=" + restauranteId);
     }
 
 }

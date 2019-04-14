@@ -72,6 +72,7 @@
 
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <img src="imagens/ifood-logo.png" width="90" align="left">
 
                         <!-- Sidebar Toggle (Topbar) -->
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -157,7 +158,7 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <a href="FrontController?pacote=pedido&action=ListarPedidos&id=${restaurante.id}" class="h5 mb-0 font-weight-bold text-gray-800">Listar Pedidos</a>
+                                                <a href="FrontController?pacote=pedido&action=ListarPedidosRestaurante&id=${restaurante.id}" class="h5 mb-0 font-weight-bold text-gray-800">Listar Pedidos</a>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-comments fa-2x text-gray-300"></i>
