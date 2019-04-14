@@ -95,7 +95,7 @@ public class PedidoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from pedido where REST_ID=" + id);
+            ResultSet rs = st.executeQuery("select * from pedido where REST_ID=" + id +" ORDER BY id DESC");
             while (rs.next()) {
 
                 String estadoString = rs.getString("estado");
