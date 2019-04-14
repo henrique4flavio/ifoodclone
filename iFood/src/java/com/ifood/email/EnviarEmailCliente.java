@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class EnviarEmailCliente {
 
-public static void enviarEmail(Cliente cliente) {
+public static void enviarEmail(Cliente cliente, String mensagem) {
     
 
         Properties props = new Properties();
@@ -32,9 +32,9 @@ public static void enviarEmail(Cliente cliente) {
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
-
-        Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
+        
+        
+        Session session = Session.getInstance(props,new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication("projetoifoodclone@gmail.com", "Ifoodclone01");
                     }
@@ -52,11 +52,13 @@ public static void enviarEmail(Cliente cliente) {
             message.setFrom(new InternetAddress("projetoifoodclone@gmail.com")); //Remetente
 
             Address[] toUser = InternetAddress //Destinatário(s)
-                    .parse("jonathas.maraujo@gmail.com");
+                    .parse(cliente.getEmail());
 
             message.setRecipients(Message.RecipientType.TO, toUser);
-            message.setSubject("Bem Vinda ao Ifood.");//Assunto
-            message.setText("Ola lais chatinha!");
+            message.setSubject("Olá o status de seu pedido mudou!.");//Assunto
+            message.setText(mensagem);
+           
+
             /**
              * Método para enviar a mensagem criada
              */

@@ -93,11 +93,11 @@ public class Cliente extends Usuario implements Observer {
         if (pedidoSubject instanceof Pedido) {
             Pedido pedido = (Pedido) pedidoSubject;
             String estado = pedido.getEstado().getEstado();
-            String mensagem = "Olá, " + getNome() + ", o estado do seu pedido mudou. " + estado + ".";
+            String mensagem = "Olá, " + getNome() + ", o status do seu pedido mudou para " + estado + ".";
             System.out.println(mensagem);
             
       
-            EnviarEmailCliente.enviarEmail(this);
+            EnviarEmailCliente.enviarEmail(this, mensagem);
             
            
         }
