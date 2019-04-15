@@ -6,7 +6,7 @@
 package com.ifood.action.cliente;
 
 import com.ifood.controller.Action;
-import com.ifood.email.EnviarEmailCliente;
+import com.ifood.templateMethod.EnviarEmailCliente;
 import com.ifood.model.Cliente;
 import com.ifood.persistence.ClienteDAO;
 import java.io.IOException;

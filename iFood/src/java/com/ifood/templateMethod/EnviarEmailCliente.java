@@ -1,7 +1,8 @@
-package com.ifood.email;
+package com.ifood.templateMethod;
 
 import com.ifood.controller.Action;
 import com.ifood.model.Cliente;
+import com.ifood.model.Pedido;
 import com.ifood.persistence.ClienteDAO;
 import java.io.IOException;
 import java.util.Properties;
@@ -18,11 +19,17 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class EnviarEmailCliente {
+public class EnviarEmailCliente extends EmailTemplate{
 
-public static void enviarEmail(Cliente cliente, String mensagem) {
     
 
+    public void  enviarEmail(Cliente cliente, Pedido pedido) {
+        
+        setNomeCliente(cliente);
+        setNomeRestaurante(pedido);
+        setPedidoEstado(pedido);
+        
+       
         Properties props = new Properties();
         /**
          * Parâmetros de conexão com servidor Gmail
@@ -32,22 +39,17 @@ public static void enviarEmail(Cliente cliente, String mensagem) {
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
-        
-        
-        Session session = Session.getInstance(props,new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication("projetoifoodclone@gmail.com", "Ifoodclone01");
-                    }
-                });
 
-        /**
-         * Ativa Debug para sessão
-         */
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("projetoifoodclone@gmail.com", "Ifoodclone01");
+            }
+        });
+
         session.setDebug(true);
 
         try {
 
-            
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("projetoifoodclone@gmail.com")); //Remetente
 
@@ -56,8 +58,7 @@ public static void enviarEmail(Cliente cliente, String mensagem) {
 
             message.setRecipients(Message.RecipientType.TO, toUser);
             message.setSubject("Olá o status de seu pedido mudou!.");//Assunto
-            message.setText(mensagem);
-           
+            message.setText(mensagemTemplate());
 
             /**
              * Método para enviar a mensagem criada
@@ -71,4 +72,5 @@ public static void enviarEmail(Cliente cliente, String mensagem) {
         }
 
     }
+
 }

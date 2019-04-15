@@ -1,6 +1,6 @@
 package com.ifood.model;
 
-import com.ifood.email.EnviarEmailCliente;
+import com.ifood.templateMethod.EnviarEmailCliente;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -14,7 +14,6 @@ public class Cliente extends Usuario implements Observer {
     private String cep;
     private int id;
 
- 
     public Cliente(String cpf, String rua, String numero, String bairro, String cep, String nome, String senha, String email) {
         super(nome, senha, email);
         this.cpf = cpf;
@@ -23,6 +22,7 @@ public class Cliente extends Usuario implements Observer {
         this.bairro = bairro;
         this.cep = cep;
     }
+
     public Cliente(int id, String cpf, String rua, String numero, String bairro, String cep, String nome, String senha, String email) {
         super(nome, senha, email);
         this.cpf = cpf;
@@ -32,11 +32,10 @@ public class Cliente extends Usuario implements Observer {
         this.cep = cep;
         this.id = id;
     }
-    
-    public Cliente(int id){
-        this.id= id;
+
+    public Cliente(int id) {
+        this.id = id;
     }
-    
 
     public String getCpf() {
         return cpf;
@@ -88,18 +87,15 @@ public class Cliente extends Usuario implements Observer {
     }
 
     @Override
-    public void update(Observable pedidoSubject, Object arg){
-        
+    public void update(Observable pedidoSubject, Object arg) {
+
         if (pedidoSubject instanceof Pedido) {
             Pedido pedido = (Pedido) pedidoSubject;
-            String estado = pedido.getEstado().getEstado();
-            String mensagem = "Olá, " + getNome() + ", o status do seu pedido mudou para " + estado + ".";
-            System.out.println(mensagem);
-            
-      
-            EnviarEmailCliente.enviarEmail(this, mensagem);
-            
-           
+
+            EnviarEmailCliente email = new EnviarEmailCliente();
+
+            email.enviarEmail(this, pedido);
+
         }
     }
 
