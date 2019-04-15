@@ -7,5 +7,5 @@ package com.ifood.strategy.frete;
  */
 public interface Frete {
     
-    public double calculaFrete();
+    public double calculaFrete(double valorDoFrete);
 }

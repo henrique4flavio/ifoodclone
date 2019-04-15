@@ -20,6 +20,8 @@ import com.ifood.persistence.PedidoDAO;
 import com.ifood.persistence.RestauranteDAO;
 import com.ifood.state.pedido.PedidoEstado;
 import com.ifood.state.pedido.PedidoEstadoEfetuado;
+import com.ifood.strategy.frete.Frete;
+import com.ifood.strategy.frete.TipoFrete;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,25 +56,34 @@ public class EfetuarPedidoAction implements Action {
 
             Cliente cliente = (Cliente) session.getAttribute("cliente");
 
-            double precoTotal = restaurante.getValorDoFrete();
+            int opcaoFrete = Integer.parseInt(request.getParameter("TipoFrete"));
+
+            TipoFrete tipoFrete = TipoFrete.values()[opcaoFrete - 1];
+
+            Frete frete = tipoFrete.obterFrete();
+            double precoTotal = frete.calculaFrete(restaurante.getValorDoFrete());
+            
+            System.out.println(precoTotal);
+
+            System.out.println("O Tipo de frete é:");
+            System.out.println(tipoFrete);
 
             Date data = new Date();
             SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyy H:m");
             String dataPedido = formatar.format(data);
-            
 
             Pedido pedido = new Pedido(0, dataPedido, restaurante, cliente, precoTotal, new PedidoEstadoEfetuado());
             PedidoDAO.getInstance().save(pedido);
             pedido = PedidoDAO.getInstance().getUltimoPedido();
-            
+
             System.out.println(pedido.getId());
-            
+
             for (int i = 0; i < comidasJSON.length(); i++) {
                 int quantidade = comidasJSON.getJSONObject(i).getInt("product_quantity");
                 int comidaId = Integer.parseInt(comidasJSON.getJSONObject(i).getString("product_id"));
                 double preco = Double.parseDouble(comidasJSON.getJSONObject(i).getString("product_price"));
 
-                precoTotal = precoTotal + (preco*quantidade);
+                precoTotal = precoTotal + (preco * quantidade);
 
                 try {
 
@@ -84,13 +95,11 @@ public class EfetuarPedidoAction implements Action {
                     Logger.getLogger(EfetuarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-           
-           pedido.setPrecoTotal(precoTotal);
-           PedidoDAO.getInstance().edit(pedido);
-        response.sendRedirect("FrontController?pacote=pedido&action=ListarPedidosCliente&id=" +cliente.getId());
 
-            
-        
+            pedido.setPrecoTotal(precoTotal);
+            PedidoDAO.getInstance().edit(pedido);
+            response.sendRedirect("FrontController?pacote=pedido&action=ListarPedidosCliente&id=" + cliente.getId());
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EfetuarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

@@ -1,15 +1,17 @@
-
 package com.ifood.strategy.frete;
 
 /**
  *
  * @author jonat
  */
-public class FreteBicicleta implements Frete{
+public class FreteBicicleta implements Frete {
 
     @Override
-    public double calculaFrete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double calculaFrete(double valorDoFrete) {
+        double calculo = valorDoFrete - (valorDoFrete * 0.30);
+
+        return calculo;
+
     }
-    
+
 }
