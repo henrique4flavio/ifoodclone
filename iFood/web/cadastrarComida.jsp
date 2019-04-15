@@ -161,7 +161,7 @@
                                     <label class="col-md-4 control-label" for="btnsalvar"></label>
                                     <div class="col-md-8">
                                         <input type="submit" value="Cadastrar"  class="btn btn-primary">
-                                        <button id="Voltar" name="Voltar" class="btn btn-danger" onclick="window.location.href='LoginController?acao=logar#'">Voltar</button>
+                                        <button id="Voltar" name="Voltar" class="btn btn-danger" onclick="window.location.href=''">Voltar</button>
 
                                     </div>
                                 </div>

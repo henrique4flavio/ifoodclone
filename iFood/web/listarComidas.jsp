@@ -67,6 +67,8 @@
                     <form action="FrontController?pacote=pedido&action=EfetuarPedido&id=27" method="POST"> 
                         <!-- SmartCart element -->
                         <div id="smartcart"></div>
+                                                <a class='msg-sucesso sucesso-pedido'>
+
                     </form>
 
                 </aside>
