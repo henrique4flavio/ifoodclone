@@ -19,17 +19,17 @@ public class PedidoEstadoEntregue implements PedidoEstado {
 
     @Override
     public String efetuar(Pedido pedido) {
-        return "Pedido já foi efetuado";
+        return "Pedido já foi entregue";
     }
 
     @Override
     public String confirmar(Pedido pedido) {
-        return "Pedido já foi confirmado";
+        return "Pedido já foi entregue";
     }
 
     @Override
-    public String sairParaEntrega(Pedido pedido) {
-        return "Pedido ja saiu para entrega";
+    public String enviar(Pedido pedido) {
+        return "Pedido ja foi entregue";
     }
 
     @Override

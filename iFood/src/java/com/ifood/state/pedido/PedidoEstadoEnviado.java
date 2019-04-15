@@ -10,46 +10,44 @@ import java.util.logging.Logger;
  *
  * @author jonat
  */
-public class PedidoEstadoConfirmado implements PedidoEstado {
+public class PedidoEstadoEnviado implements PedidoEstado {
 
-    private String estado = "Confirmado";
+    private String estado = "Enviado";
 
     public String getEstado() {
         return estado;
     }
 
-    public PedidoEstadoConfirmado() {
+    public PedidoEstadoEnviado() {
     }
 
     @Override
     public String efetuar(Pedido pedido) {
-        return "Esse Pedido já foi efetuado";
+        return "Pedido já saiu para enrtrega";
     }
 
     @Override
     public String confirmar(Pedido pedido) {
-        return "Pedido já está confirmado";
-
+        return "Pedido já saiu para entrega";
     }
 
     @Override
     public String enviar(Pedido pedido) {
-
-        try {
-            pedido.setEstado(new PedidoEstadoEnviado());
-            PedidoDAO.getInstance().editEstado(pedido);
-        } catch (SQLException ex) {
-            Logger.getLogger(PedidoEstadoConfirmado.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PedidoEstadoConfirmado.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return "Pedido saiu para entrega ";
+        return "Pedido já saiu para entrega";
     }
 
     @Override
     public String entregar(Pedido pedido) {
-        return "Pedido ainda não saiu para entrega";
+        try {
+            pedido.setEstado(new PedidoEstadoEntregue());
+            PedidoDAO.getInstance().editEstado(pedido);
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoEstadoEnviado.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PedidoEstadoEnviado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return "Pedido Entregue";
     }
 
 }

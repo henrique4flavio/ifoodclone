@@ -19,34 +19,25 @@ import com.ifood.state.pedido.PedidoEstadoConfirmado;
  * @author jonat
  */
 public class ConfirmarPedidoAction implements Action {
-    
-       public ConfirmarPedidoAction() {
+
+    public ConfirmarPedidoAction() {
     }
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-   int id = Integer.parseInt(request.getParameter("id"));
-      int restauranteId = Integer.parseInt(request.getParameter("restauranteId"));
+        int id = Integer.parseInt(request.getParameter("id"));
+        int restauranteId = Integer.parseInt(request.getParameter("restauranteId"));
 
-       // produto.getEstado().encaminhar(produto);
-                
-        Pedido pedido = new Pedido(id);
-        PedidoEstado estado = new PedidoEstadoConfirmado();
-        pedido.setEstado(estado);
-       
-        //pedido.setSituacao(pedido.getEstado().confirmar(pedido));
-       
+        Pedido pedido;
         try {
-            PedidoDAO.getInstance().edit(pedido);
-        } catch (SQLException ex) {
-            Logger.getLogger(ConfirmarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+            pedido = PedidoDAO.getInstance().getPedidoById(id);
+            request.setAttribute("mensagem", pedido.confirmarPedido());
+
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConfirmarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("FrontController?pacote=pedido&action=ListarPedidos&id="+restauranteId);
-         }
-    
+        response.sendRedirect("FrontController?pacote=pedido&action=ListarPedidosRestaurante&id=" + restauranteId);
     }
-   
- 
 
+}

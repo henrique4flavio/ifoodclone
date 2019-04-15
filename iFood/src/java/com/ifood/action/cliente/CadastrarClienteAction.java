@@ -6,6 +6,7 @@
 package com.ifood.action.cliente;
 
 import com.ifood.controller.Action;
+import com.ifood.email.EnviarEmailCliente;
 import com.ifood.model.Cliente;
 import com.ifood.persistence.ClienteDAO;
 import java.io.IOException;
@@ -34,6 +35,8 @@ public class CadastrarClienteAction implements Action{
         String numero = request.getParameter("textNumero");
         String bairro = request.getParameter("textBairro");
         String cep = request.getParameter("textCep");
+        
+       
 
 
 

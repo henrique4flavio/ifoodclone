@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class EnviarEmailCliente {
 
-    public void enviarEmail(Cliente cliente) {
+public static void enviarEmail(Cliente cliente, String mensagem) {
+    
 
         Properties props = new Properties();
         /**
@@ -31,9 +32,9 @@ public class EnviarEmailCliente {
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
-
-        Session session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
+        
+        
+        Session session = Session.getInstance(props,new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication("projetoifoodclone@gmail.com", "Ifoodclone01");
                     }
@@ -54,8 +55,10 @@ public class EnviarEmailCliente {
                     .parse(cliente.getEmail());
 
             message.setRecipients(Message.RecipientType.TO, toUser);
-            message.setSubject("Boas Noticias!! O status do seu pedido foi alterado.");//Assunto
-            message.setText("Seu pedido mudou de Status!");
+            message.setSubject("Olá o status de seu pedido mudou!.");//Assunto
+            message.setText(mensagem);
+           
+
             /**
              * Método para enviar a mensagem criada
              */

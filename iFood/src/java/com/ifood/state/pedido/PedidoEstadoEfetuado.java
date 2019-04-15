@@ -1,6 +1,10 @@
 package com.ifood.state.pedido;
 
 import com.ifood.model.Pedido;
+import com.ifood.persistence.PedidoDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,17 +28,26 @@ public class PedidoEstadoEfetuado implements PedidoEstado {
 
     @Override
     public String confirmar(Pedido pedido) {
+        try {
+            pedido.setEstado(new PedidoEstadoConfirmado());
+            PedidoDAO.getInstance().editEstado(pedido);
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoEstadoEfetuado.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PedidoEstadoEfetuado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return "Pedido confirmado";
     }
 
     @Override
-    public String sairParaEntrega(Pedido pedido) {
-        return "Pedido saiu para entrega";
+    public String enviar(Pedido pedido) {
+        return "Pedido ainda não foi confirmado";
     }
 
     @Override
     public String entregar(Pedido pedido) {
-        return "Pedido entregue";
+        return "Pedido ainda não foi confirmado";
     }
 
 }

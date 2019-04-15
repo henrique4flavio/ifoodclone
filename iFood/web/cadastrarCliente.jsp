@@ -13,14 +13,42 @@
         <title>Cadastro de cliente</title>
         <link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/font-awesome.css"/>
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/animate.css">
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/responsive.css"/>
+                        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap3.min.css">
         
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-                <script src="vendor/js/cadastro.js" type="text/javascript"></script>
+        <script src="vendor/js/cadastro.js" type="text/javascript"></script>
 
     </head>
     <body>
+        
+         <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="menu fixed">
+                        <div class="mobile-nav-container"> </div>
+                        <nav>
+                            <ul>
+                                <li><img src="imagens/ifood-logo.png" width="90" align="left"></li>			
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="login">
+                        <ul>
+                            <li><i class="fa fa-percent"></i>
+                               <li><a href="#">Entrar</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <form class="form-horizontal" action="FrontController?pacote=cliente&action=CadastrarCliente" method="post">
 

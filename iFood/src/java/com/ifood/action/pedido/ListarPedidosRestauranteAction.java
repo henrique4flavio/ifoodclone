@@ -18,7 +18,7 @@ import javax.servlet.ServletException;
  *
  * @author jonat
  */
-public class ListarPedidosAction implements Action {
+public class ListarPedidosRestauranteAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -35,7 +35,7 @@ try {
             try {
                 view.forward(request, response);
             } catch (ServletException ex) {
-                Logger.getLogger(ListarPedidosAction.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ListarPedidosRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (ClassNotFoundException ex) {
         }

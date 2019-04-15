@@ -32,12 +32,6 @@ public class Cliente extends Usuario implements Observer {
         this.cep = cep;
         this.id = id;
     }
-
-
-    public Cliente(int id, String nome, String senha, String email) {
-        super(id, nome, senha, email);
-    }
-    
     
     public Cliente(int id){
         this.id= id;
@@ -99,11 +93,11 @@ public class Cliente extends Usuario implements Observer {
         if (pedidoSubject instanceof Pedido) {
             Pedido pedido = (Pedido) pedidoSubject;
             String estado = pedido.getEstado().getEstado();
-            String mensagem = "Olá, " + getNome() + ", o estado do seu pedido mudou. " + estado + ".";
+            String mensagem = "Olá, " + getNome() + ", o status do seu pedido mudou para " + estado + ".";
             System.out.println(mensagem);
             
-            EnviarEmailCliente email = new EnviarEmailCliente();
-            email.enviarEmail(this);
+      
+            EnviarEmailCliente.enviarEmail(this, mensagem);
             
            
         }

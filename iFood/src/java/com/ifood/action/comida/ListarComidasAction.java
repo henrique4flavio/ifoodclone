@@ -39,6 +39,7 @@ public class ListarComidasAction implements Action {
             }
             if (usuario.equals("cliente")) {
               request.setAttribute("Comida", ComidaDAO.getInstance().list(restauranteId));
+              request.setAttribute("restaurante", RestauranteDAO.getInstance().getRestauranteById(restauranteId));
 
                 RequestDispatcher view = request.getRequestDispatcher("/listarComidas.jsp");
                 view.forward(request, response);
