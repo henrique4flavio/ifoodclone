@@ -5,10 +5,7 @@
  */
 package com.ifood.controller;
 
-/**
- *
- * @author jonat
- */
+
 public class ActionFactory {
 
     public static Action create(String pacote, String action) {
