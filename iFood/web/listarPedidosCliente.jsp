@@ -66,6 +66,7 @@
                                                         <tr>
                                                             <th>Codigo</th>
                                                             <th>Data e Hora</th>
+                                                            <th>Restaurante</th>
 
                                                             <th>Endereço de Entrega</th>
                                                             <th>Total R$</th>
@@ -73,17 +74,7 @@
 
                                                         </tr>
                                                     </thead>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <th>Codigo</th>
-                                                            <th>Data e Hora</th>
-
-                                                            <th>Endereço de Entrega</th>
-                                                            <th>Total R$</th>
-                                                            <th>Status</th>
-
-                                                        </tr>
-                                                    </tfoot>
+                                                    
                                                     <tbody>
                                                         <c:forEach items="${Pedido}" var="Pedido">
 
@@ -92,6 +83,7 @@
 
                                                                 <td><c:out value = "${Pedido.id}" /></td>
                                                                 <td><c:out value = "${Pedido.data}" /></td>
+                                                                <td><c:out value = "${Pedido.restaurante.nome}" /></td>
 
                                                                 <td><c:out value = "${Pedido.cliente.rua} ${Pedido.cliente.numero} ${Pedido.cliente.bairro} CEP: ${Pedido.cliente.cep}" /></td>
                                                                 <td><c:out value = "${Pedido.precoTotal}" /></td>
