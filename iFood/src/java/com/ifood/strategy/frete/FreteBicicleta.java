@@ -8,7 +8,7 @@ public class FreteBicicleta implements Frete {
 
     @Override
     public double calculaFrete(double valorDoFrete) {
-        double calculo = valorDoFrete - (valorDoFrete * 0.30);
+        double calculo = valorDoFrete - (valorDoFrete * 0.50);
 
         return calculo;
 

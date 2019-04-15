@@ -93,7 +93,6 @@ public class Cliente extends Usuario implements Observer {
             Pedido pedido = (Pedido) pedidoSubject;
 
             EnviarEmailCliente email = new EnviarEmailCliente();
-
             email.enviarEmail(this, pedido);
 
         }

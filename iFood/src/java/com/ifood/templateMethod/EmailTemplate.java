@@ -12,6 +12,12 @@ public abstract class EmailTemplate {
     String nomeCliente;
     String nomeRestaurante;
     String pedidoEstado;
+    String CodPedido;
+    
+    public String assuntoTemplate(){
+        return "Olá " +getNomeCliente() + " Notícias sobre seu pedido!";
+        
+    }
 
     public String mensagemTemplate() {
         return "Olá " +getNomeCliente()+ " seu pedido no restaurante: "+getNomeRestaurante()+ " mudou para o estado " +getPedidoEstado();
@@ -28,6 +34,14 @@ public abstract class EmailTemplate {
 
     public String getNomeRestaurante() {
         return nomeRestaurante;
+    }
+
+    public String getCodPedido() {
+        return CodPedido;
+    }
+
+    public void setCodPedido(String CodPedido) {
+        this.CodPedido = CodPedido;
     }
 
     public void setNomeRestaurante(Pedido pedido) {

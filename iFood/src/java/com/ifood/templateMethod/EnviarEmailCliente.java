@@ -57,7 +57,7 @@ public class EnviarEmailCliente extends EmailTemplate{
                     .parse(cliente.getEmail());
 
             message.setRecipients(Message.RecipientType.TO, toUser);
-            message.setSubject("Olá o status de seu pedido mudou!.");//Assunto
+            message.setSubject(assuntoTemplate());//Assunto
             message.setText(mensagemTemplate());
 
             /**

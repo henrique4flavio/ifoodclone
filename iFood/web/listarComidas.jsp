@@ -105,7 +105,7 @@
                     <form action="FrontController?pacote=pedido&action=EfetuarPedido&id=${restaurante.id}" method="POST">
                         <!-- SmartCart element -->
                         <div id="smartcart" 
-                             <h4>&nbsp;Taxa de frete  = R$ ${restaurante.valorDoFrete}</h4> <br>
+                             <h4>&nbsp;Taxa de frete do Restaurante  = R$ ${restaurante.valorDoFrete}</h4> <br>
                             <div id="smartcart">
                                 <div>
                                     <input type="radio" name="TipoFrete" value="1"
@@ -115,7 +115,7 @@
 
                                 <div>
                                     <input type="radio"name="TipoFrete" value="2">
-                                    <label for="dewey">Frete via Bicicleta - 30%OFF</label>
+                                    <label for="dewey">Frete via Bicicleta - 50%OFF</label>
                                 </div>
 
                             </div>
