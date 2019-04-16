@@ -1,9 +1,10 @@
 package com.ifood.model;
 
+import com.ifood.templateMethod.EnviarEmailRestaurante;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Restaurante extends Usuario{
+public class Restaurante extends Usuario implements Observer {
 
     private String descricao;
     private String foto;
@@ -24,6 +25,7 @@ public class Restaurante extends Usuario{
         this.horaDeAbrir = horaDeFechar;
         this.categoria = categoria;
         this.valorDoFrete = valorDoFrete;
+        
     }
 
     public Restaurante(String descricao, String foto, String horaDeAbrir, String horaDeFechar, String categoria, double valorDoFrete, String nome, String senha, String email) {
@@ -86,6 +88,17 @@ public class Restaurante extends Usuario{
 
     public void setValorDoFrete(double valorDoFrete) {
         this.valorDoFrete = valorDoFrete;
+    }
+
+    public void update(Observable pedidoSubject, Object arg) {
+
+        if (pedidoSubject instanceof Pedido) {
+            Pedido pedido = (Pedido) pedidoSubject;
+
+            EnviarEmailRestaurante email = new EnviarEmailRestaurante();
+            email.enviarEmail(this, pedido);
+
+        }
     }
     
      

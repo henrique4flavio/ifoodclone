@@ -3,6 +3,7 @@ package com.ifood.templateMethod;
 import com.ifood.controller.Action;
 import com.ifood.model.Cliente;
 import com.ifood.model.Pedido;
+import com.ifood.model.Restaurante;
 import com.ifood.persistence.ClienteDAO;
 import java.io.IOException;
 import java.util.Properties;
@@ -17,16 +18,16 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class EnviarEmailCliente extends EmailTemplate {
+public class EnviarEmailRestaurante extends EmailTemplate {
 
     @Override
     public String getTipo() {
-        return "Cliente";
+        return "Restaurante";
     }
 
-    public void enviarEmail(Cliente cliente, Pedido pedido) {
+    public void enviarEmail(Restaurante restaurante, Pedido pedido) {
 
-        setNome(cliente.getNome());
+        setNome(restaurante.getNome());
         setPedidoEstado(pedido.getEstado().getEstado());
 
         Properties props = new Properties();
@@ -53,7 +54,7 @@ public class EnviarEmailCliente extends EmailTemplate {
             message.setFrom(new InternetAddress("projetoifoodclone@gmail.com")); //Remetente
 
             Address[] toUser = InternetAddress //Destinatário(s)
-                    .parse(cliente.getEmail());
+                    .parse(restaurante.getEmail());
 
             message.setRecipients(Message.RecipientType.TO, toUser);
             message.setSubject(assuntoTemplate());//Assunto
