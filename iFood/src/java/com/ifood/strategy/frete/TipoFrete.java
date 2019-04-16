@@ -15,6 +15,12 @@ public enum TipoFrete {
                 @Override
                 public Frete obterFrete() {
                     return new FreteBicicleta();
+                }
+            },
+    EXPRESSO {
+                @Override
+                public Frete obterFrete() {
+                    return new FreteExpresso();
 
                 }
             };

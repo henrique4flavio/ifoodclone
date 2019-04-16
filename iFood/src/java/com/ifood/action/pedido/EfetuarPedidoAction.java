@@ -63,10 +63,6 @@ public class EfetuarPedidoAction implements Action {
             Frete frete = tipoFrete.obterFrete();
             double precoTotal = frete.calculaFrete(restaurante.getValorDoFrete());
             
-            System.out.println(precoTotal);
-
-            System.out.println("O Tipo de frete é:");
-            System.out.println(tipoFrete);
 
             Date data = new Date();
             SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyy H:m");
@@ -79,6 +75,7 @@ public class EfetuarPedidoAction implements Action {
             System.out.println(pedido.getId());
 
             for (int i = 0; i < comidasJSON.length(); i++) {
+                
                 int quantidade = comidasJSON.getJSONObject(i).getInt("product_quantity");
                 int comidaId = Integer.parseInt(comidasJSON.getJSONObject(i).getString("product_id"));
                 double preco = Double.parseDouble(comidasJSON.getJSONObject(i).getString("product_price"));

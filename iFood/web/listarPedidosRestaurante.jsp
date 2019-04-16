@@ -54,9 +54,9 @@
                         <hr class="sidebar-divider">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="FrontController?pacote=login&action=Logout">
                                 <i class="fas fa-fw fa-chart-area"></i>
-                                <span>Alterar dados do Restaurante</span></a>
+                                <span>Logout</span></a>
                         </li>
 
 
@@ -109,108 +109,118 @@
                                 <!-- Begin Page Content -->
 
                                 <div class="container-fluid">
+                                    
+                                        <!-- Page Heading -->
 
-                                    <!-- Page Heading -->
-
-                                    <!-- DataTales Example -->
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">Lista de Comidas cadastradas</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Codigo</th>
-                                                            <th>Data e Hora</th>
-
-                                                            <th>Cliente</th>
-                                                            <th>Endereço de Entrega</th>
-                                                            <th>Pedido</th> 
-                                                            <th>Total R$</th>
-                                                            <th>Status</th>
-                                                            <th>Ação</th>
-
-                                                        </tr>
-                                                    </thead>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <th>Codigo</th>
-                                                            <th>Data e Hora</th>
-
-                                                            <th>Cliente</th>
-                                                            <th>Endereço de Entrega</th>
-                                                            <th>Pedido</th> 
-                                                            <th>Total R$</th>
-                                                            <th>Status</th>
-                                                            <th>Ação</th>
-
-                                                        </tr>
-                                                    </tfoot>
-                                                    <tbody>
-                                                        <c:forEach items="${Pedido}" var="Pedido">
-
-
+                                        <!-- DataTales Example -->
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header py-3">
+                                                <h6 class="m-0 font-weight-bold text-primary">Lista de Pedidos </h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <span style="margin-left: 750px; color: #F00"> ${mensagem} </span>
+                                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                        <thead>
                                                             <tr>
+                                                                <th>Codigo</th>
+                                                                <th>Data e Hora</th>
 
-                                                                <td><c:out value = "${Pedido.id}" /></td>
-                                                                <td><c:out value = "${Pedido.data}" /></td>
-
-                                                                <td><c:out value = "${Pedido.cliente.nome}" /></td>
-                                                                <td><c:out value = "${Pedido.cliente.rua} ${Pedido.cliente.numero} ${Pedido.cliente.bairro} CEP: ${Pedido.cliente.cep}" /></td>
-                                                                <td></td>
-                                                                <td><c:out value = "${Pedido.precoTotal}" /></td>
-                                                                <td><c:out value = "${Pedido.estado.estado}" /></td>
-                                                                
-
-                                                                <td>
-                                                                    <form action ="FrontController?pacote=pedido&action=ConfirmarPedido&id=${Pedido.id}&restauranteId=${restaurante.id}" method="post">
-                                                                        <input type="submit" value="Confirmar"/>
-                                                                    </form>
-                                                                    <form action ="FrontController?pacote=pedido&action=EnviarPedido&id=${Pedido.id}&restauranteId=${restaurante.id}" method="post">
-                                                                        <input type="submit" value="Enviar"/>
-                                                                    </form>
-                                                                    <form action ="FrontController?pacote=pedido&action=EntregarPedido&id=${Pedido.id}&restauranteId=${restaurante.id}" method="post">
-                                                                        <input type="submit" value="Entregar"/>
-                                                                    </form>
-
-
-
-                                                                </td>
-
-
+                                                                <th>Cliente</th>
+                                                                <th>Endereço de Entrega</th>
+                                                                <th>Pedido</th> 
+                                                                <th>Total R$</th>
+                                                                <th>Status</th>
+                                                                <th>Ação</th>
 
                                                             </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>Codigo</th>
+                                                                <th>Data e Hora</th>
 
-                                                        </c:forEach>
+                                                                <th>Cliente</th>
+                                                                <th>Endereço de Entrega</th>
+                                                                <th>Pedido</th> 
+                                                                <th>Total R$</th>
+                                                                <th>Status</th>
+                                                                <th>Ação</th>
 
-                                                    </tbody>
-                                                </table>
+                                                            </tr>
+                                                        </tfoot>
+                                                        <tbody>
+                                                            <c:forEach items="${Pedido}" var="Pedido">
+
+
+                                                                <tr>
+
+                                                                    <td><c:out value = "${Pedido.id}" /></td>
+                                                                    <td><c:out value = "${Pedido.data}" /></td>
+
+                                                                    <td><c:out value = "${Pedido.cliente.nome}" /></td>
+                                                                    <td><c:out value = "${Pedido.cliente.rua} ${Pedido.cliente.numero} ${Pedido.cliente.bairro} CEP: ${Pedido.cliente.cep}" /></td>
+                                                                    <td>
+
+                                                                        <c:forEach items="${PedidoComida}" var="PedidoComida">
+                                                                            <c:if  test="${PedidoComida.pedido.id  == Pedido.id}"> 
+                                                                                <c:out value = "${PedidoComida.comida.nome}" /> qtd: <c:out value = "${PedidoComida.quantidade}" />
+
+                                                                            </c:if>
+
+                                                                        </c:forEach>
+                                                                    </td>
+
+                                                                    <td><c:out value = "${Pedido.precoTotal}" /></td>
+                                                                    <td><c:out value = "${Pedido.estado.estado}" /></td>
+
+                                                                    <td>
+                                                                        <form action ="FrontController?pacote=pedido&action=ConfirmarPedido&id=${Pedido.id}&restauranteId=${restaurante.id}" method="post">
+                                                                            <input type="submit" value="Confirmar"/>
+                                                                        </form>
+                                                                        <form action ="FrontController?pacote=pedido&action=EnviarPedido&id=${Pedido.id}&restauranteId=${restaurante.id}" method="post">
+                                                                            <input type="submit" value="Enviar"/>
+                                                                        </form>
+                                                                        <form action ="FrontController?pacote=pedido&action=EntregarPedido&id=${Pedido.id}&restauranteId=${restaurante.id}" method="post">
+                                                                            <input type="submit" value="Entregar"/>
+                                                                        </form>
+
+
+
+                                                                    </td>
+
+
+
+                                                                </tr>
+
+                                                            </c:forEach>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
-
-                                </div>
-                                <!-- /.container-fluid -->
+                                    <!-- /.container-fluid -->
 
 
 
 
 
-                                <!-- Footer -->
-                                <footer class="sticky-footer bg-white">
-                                    <div class="container my-auto">
-                                        <div class="copyright text-center my-auto">
-                                            <span>Copyright &copy; Your Website 2019</span>
+                                    <!-- Footer -->
+                                    <footer class="sticky-footer bg-white">
+                                        <div class="container my-auto">
+                                            <div class="copyright text-center my-auto">
+                                                <span>Copyright &copy; Your Website 2019</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </footer>
+                                    </footer>
+                                </div>
                             </div>
-                        </div>
 
-                        <script src="js/sb-admin-2.js"></script>
+                            <script src="js/sb-admin-2.js"></script>
 
-                        </body>
+                            </body>
 
-                        </html>
+                            </html>

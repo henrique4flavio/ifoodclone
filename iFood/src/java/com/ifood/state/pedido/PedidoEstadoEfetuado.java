@@ -37,17 +37,17 @@ public class PedidoEstadoEfetuado implements PedidoEstado {
             Logger.getLogger(PedidoEstadoEfetuado.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return "Pedido confirmado";
+        return "Estado alterado! Pedido Confirmado";
     }
 
     @Override
     public String enviar(Pedido pedido) {
-        return "Pedido ainda não foi confirmado";
+        return "Não é possivel enviar pois o pedido ainda não foi Confirmado";
     }
 
     @Override
     public String entregar(Pedido pedido) {
-        return "Pedido ainda não foi confirmado";
+        return "Não é possivel entregar pois o pedido ainda não foi Enviado";
     }
 
 }

@@ -40,9 +40,8 @@
                     <div class="login">
                         <ul>
                             <li><i class="fa fa-percent"></i>
-                               <li><a href="#">Promoções</a></li>
                             <li><a href="FrontController?pacote=pedido&action=ListarPedidosCliente&id=${cliente.id}">Meus Pedidos</a></li>
-                            <li><a href="LoginController?acao=logout">Sair</a></li>
+                            <li><a href="FrontController?pacote=login&action=Logout">Sair</a></li>
 
                         </ul>
                     </div>
@@ -69,6 +68,8 @@
                                                             <th>Restaurante</th>
 
                                                             <th>Endereço de Entrega</th>
+                                                            <th>Pedido</th>
+
                                                             <th>Total R$</th>
                                                             <th>Status</th>
 
@@ -86,6 +87,17 @@
                                                                 <td><c:out value = "${Pedido.restaurante.nome}" /></td>
 
                                                                 <td><c:out value = "${Pedido.cliente.rua} ${Pedido.cliente.numero} ${Pedido.cliente.bairro} CEP: ${Pedido.cliente.cep}" /></td>
+                                                                <td>
+
+                                                                    <c:forEach items="${PedidoComida}" var="PedidoComida">
+                                                                        <c:if  test="${PedidoComida.pedido.id  == Pedido.id}"> 
+                                                                            <c:out value = "${PedidoComida.comida.nome}" />
+
+                                                                        </c:if>
+
+                                                                    </c:forEach>
+                                                                </td>
+
                                                                 <td><c:out value = "${Pedido.precoTotal}" /></td>
                                                                 <td><c:out value = "${Pedido.estado.estado}" /></td>
                                                                                                                                

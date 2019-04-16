@@ -28,12 +28,12 @@ public class PedidoEstadoEnviado implements PedidoEstado {
 
     @Override
     public String confirmar(Pedido pedido) {
-        return "Pedido já saiu para entrega";
+        return "Não é possivel alterar o estado pois o pedido já foi Enviado";
     }
 
     @Override
     public String enviar(Pedido pedido) {
-        return "Pedido já saiu para entrega";
+        return "Não é possivel alterar o estado pois o pedido já foi Enviado";
     }
 
     @Override
@@ -47,7 +47,7 @@ public class PedidoEstadoEnviado implements PedidoEstado {
             Logger.getLogger(PedidoEstadoEnviado.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return "Pedido Entregue";
+        return "Estado alterado! Pedido Entregue";
     }
 
 }

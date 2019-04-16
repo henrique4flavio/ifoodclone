@@ -43,9 +43,8 @@
                     <div class="login">
                         <ul>
                             <li><i class="fa fa-percent"></i>
-                            <li><a href="#">Promoções</a></li>
                             <li><a href="#">Meus Pedidos</a></li>
-                            <li><a href="LoginController?acao=logout">Sair</a></li>
+                            <li><a href="FrontController?pacote=login&action=Logout">Sair</a></li>
 
                         </ul>
                     </div>
@@ -91,8 +90,6 @@
                                         </div>
                                     </div>
                                 </c:forEach>
-
-                                <!-- END PRODUCTS -->
                             </div>
                         </div>
                     </div>
@@ -103,19 +100,25 @@
 
                     <!-- Cart submit form -->
                     <form action="FrontController?pacote=pedido&action=EfetuarPedido&id=${restaurante.id}" method="POST">
-                        <!-- SmartCart element -->
                         <div id="smartcart" 
-                             <h4>&nbsp;Taxa de frete do Restaurante  = R$ ${restaurante.valorDoFrete}</h4> <br>
+
+                             <h3>&nbsp;A taxa de frete do Restaurante é de R$ ${restaurante.valorDoFrete}</h3><br><br>
                             <div id="smartcart">
+                                <label>&nbsp;Selecione uma opção:</label>
+
                                 <div>
                                     <input type="radio" name="TipoFrete" value="1"
                                            checked>
-                                    <label for="huey">Frete Normal</label>
+                                    <label>Frete Normal</label>
                                 </div>
 
                                 <div>
                                     <input type="radio"name="TipoFrete" value="2">
-                                    <label for="dewey">Frete via Bicicleta - 50%OFF</label>
+                                    <label>Frete via Bicicleta - 50%OFF</label>
+                                </div>
+                                <div>
+                                    <input type="radio"name="TipoFrete" value="3">
+                                    <label>Frete Expresso -  +50%</label>
                                 </div>
 
                             </div>

@@ -214,6 +214,9 @@ public class PedidoDAO {
                 Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
 
                 Pedido pedido = new Pedido(pedidoId, data, restaurante, cliente, precoTotal, estado);
+                
+                System.out.println("Pedido ID é");
+                System.out.println(pedidoId);
 
                 return pedido;
             }

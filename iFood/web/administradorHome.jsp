@@ -53,7 +53,7 @@
                 <hr class="sidebar-divider">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="index.jsp">
+                    <a class="nav-link" href="FrontController?pacote=login&action=Logout">
                         <i class="fas fa-fw fa-chart-area"></i>
                         <span>Logout</span></a>
                 </li>

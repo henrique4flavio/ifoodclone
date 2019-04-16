@@ -65,7 +65,7 @@ public class UploadImagemAction implements Action {
                     nome = Integer.toString(chave);
 
                     StringBuffer bn = new StringBuffer();
-                    bn.append("C:/Laboratorio de Programação/ifoodclone/iFood/web/imagens/comidas/"); // colocar o caminho do seu computador
+                    bn.append("C:/Users/jonat/Documents/NetBeansProjects/ifoodclone/iFood/web/imagens/restaurantes/"); // colocar o caminho do seu computador
                     bn.append(nome + ".png");
                     File uploadedFile = new File(bn.toString());
                     try {

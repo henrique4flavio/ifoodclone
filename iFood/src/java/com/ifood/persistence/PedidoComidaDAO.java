@@ -68,17 +68,19 @@ public class PedidoComidaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from pedidoComida");
+            ResultSet rs = st.executeQuery("select * from pedido_pedidocomida");
             while (rs.next()) {
 
                 int id = rs.getInt("id");
                 int pedidoId = rs.getInt("PEDIDO_ID");
                 int comidaId = rs.getInt("COMIDA_ID");
+                int quantidade = rs.getInt("quantidade");
+
 
                 Pedido pedido = PedidoDAO.getInstance().getPedidoById(pedidoId);
                 Comida comida = ComidaDAO.getInstance().getComidaById(comidaId);
 
-                PedidoComida pedidoComida = new PedidoComida(id, pedido, comida);
+                PedidoComida pedidoComida = new PedidoComida(id, pedido, comida, quantidade);
 
                 pedidoComidas.add(pedidoComida);
 
@@ -100,16 +102,17 @@ public class PedidoComidaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from pedidoComida where PEDIDO_ID=" +pedidoid);
+            ResultSet rs = st.executeQuery("select * from pedido_pedidocomida where PEDIDO_ID=" +pedidoid);
             while (rs.next()) {
 
                 int id = rs.getInt("id");
                 int comidaId = rs.getInt("COMIDA_ID");
+                int quantidade = rs.getInt("quantidade");
 
                 Pedido pedido = PedidoDAO.getInstance().getPedidoById(pedidoid);
                 Comida comida = ComidaDAO.getInstance().getComidaById(comidaId);
 
-                PedidoComida pedidoComida = new PedidoComida(id, pedido, comida);
+                PedidoComida pedidoComida = new PedidoComida(id, pedido, comida, quantidade);
 
                 pedidoComidaes.add(pedidoComida);
 
@@ -131,7 +134,7 @@ public class PedidoComidaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("delete from pedidoComida where codigo =" + pedidoComida.getId());
+            st.execute("delete from pedido_pedidocomida where codigo =" + pedidoComida.getId());
         } catch (SQLException e) {
 
             throw e;
@@ -159,7 +162,7 @@ public class PedidoComidaDAO {
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
-            String sql = "update pedidoComida set nome=?,=?,descricao=?,preco=?,REST_ID=? where id =?";
+            String sql = "update pedido_pedidocomida set nome=?,=?,descricao=?,preco=?,REST_ID=? where id =?";
 
             comando = conn.prepareStatement(sql);
 

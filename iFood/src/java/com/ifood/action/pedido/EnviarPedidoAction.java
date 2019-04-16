@@ -13,6 +13,7 @@ import com.ifood.model.Pedido;
 import com.ifood.persistence.PedidoDAO;
 import com.ifood.state.pedido.PedidoEstado;
 import com.ifood.state.pedido.PedidoEstadoEnviado;
+import javax.servlet.ServletException;
 
 /**
  *
@@ -31,11 +32,16 @@ public class EnviarPedidoAction implements Action {
          Pedido pedido;
         try {
             pedido = PedidoDAO.getInstance().getPedidoById(id);
-            request.setAttribute("mensagem", pedido.enviarPedido());
-
-
+            String mensagem = pedido.enviarPedido();
+            request.setAttribute("mensagem", mensagem);
+            
+            RequestDispatcher view = request.getRequestDispatcher("FrontController?pacote=pedido&action=ListarPedidosRestaurante&id=" + restauranteId);
+                view.forward(request, response);
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConfirmarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException ex) {
+            Logger.getLogger(EnviarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
         response.sendRedirect("FrontController?pacote=pedido&action=ListarPedidosRestaurante&id=" + restauranteId);
     }

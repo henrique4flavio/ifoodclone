@@ -19,22 +19,22 @@ public class PedidoEstadoEntregue implements PedidoEstado {
 
     @Override
     public String efetuar(Pedido pedido) {
-        return "Pedido já foi entregue";
+        return "Não é possivel alterar o estado. Pedido já foi entregue";
     }
 
     @Override
     public String confirmar(Pedido pedido) {
-        return "Pedido já foi entregue";
+        return "Não é possivel alterar o estado. Pedido já foi entregue";
     }
 
     @Override
     public String enviar(Pedido pedido) {
-        return "Pedido ja foi entregue";
+        return "Não é possivel alterar o estado. Pedido já foi entregue";
     }
 
     @Override
     public String entregar(Pedido pedido) {
-        return "Produto já foi entregue";
+        return "Não é possivel alterar o estado. Pedido já foi entregue";
     }
 
 }

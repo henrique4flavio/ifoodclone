@@ -48,9 +48,8 @@
                     <div class="login">
                         <ul>
                             <li><i class="fa fa-percent"></i>
-                               <li><a href="#">Promoções</a></li>
                             <li><a href="FrontController?pacote=pedido&action=ListarPedidosCliente&id=${cliente.id}">Meus Pedidos</a></li>
-                            <li><a href="LoginController?acao=logout">Sair</a></li>
+                            <li><a href="FrontController?pacote=login&action=Logout">Sair</a></li>
 
                         </ul>
                     </div>
