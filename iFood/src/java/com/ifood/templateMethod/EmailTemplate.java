@@ -32,9 +32,11 @@ public abstract class EmailTemplate {
     public String assuntoTemplate() {
         return "Olá " + getTipo() + ": " + getNome() + " Notícias sobre o pedido!";
     }
+    
+    public abstract String getMensagem();
 
     public String mensagemTemplate() {
-        return "Olá " + getTipo() + " seu pedido mudou para o estado " + getPedidoEstado();
+        return "Olá " + getTipo() + getMensagem()  + getPedidoEstado();
 
     }
 

@@ -25,6 +25,11 @@ public class EnviarEmailRestaurante extends EmailTemplate {
         return "Restaurante";
     }
 
+      @Override
+    public String getMensagem() {
+        return " Vocè alterou o estado do pedido para: ";
+    }
+    
     public void enviarEmail(Restaurante restaurante, Pedido pedido) {
 
         setNome(restaurante.getNome());

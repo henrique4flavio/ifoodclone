@@ -95,8 +95,8 @@ public class Restaurante extends Usuario implements Observer {
         if (pedidoSubject instanceof Pedido) {
             Pedido pedido = (Pedido) pedidoSubject;
 
-            EnviarEmailRestaurante email = new EnviarEmailRestaurante();
-            email.enviarEmail(this, pedido);
+           // EnviarEmailRestaurante email = new EnviarEmailRestaurante();
+           // email.enviarEmail(this, pedido);
 
         }
     }

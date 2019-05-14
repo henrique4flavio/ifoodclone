@@ -1,8 +1,10 @@
 package com.ifood.model;
 
+import com.ifood.memento.pedido.PedidoMemento;
 import com.ifood.state.pedido.PedidoEstado;
 import com.ifood.state.pedido.PedidoEstadoEfetuado;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -14,6 +16,7 @@ public class Pedido extends Observable {
     private Cliente cliente;
     private double precoTotal;
     private PedidoEstado estado;
+    ArrayList<PedidoMemento> estadosSalvos = new ArrayList();
 
     public Pedido(String data, Restaurante restaurante, Cliente cliente, double precoTotal) {
         this.data = data;
@@ -58,6 +61,14 @@ public class Pedido extends Observable {
 
     }
 
+    public PedidoMemento saveToMemento() {
+        return new PedidoMemento(estado);
+    }
+
+    public void restoreFromMemento(PedidoMemento memento) {
+        estado = memento.getEstadoSalvo();
+    }
+
 //Metodos get e set
     public int getId() {
         return id;
@@ -95,6 +106,15 @@ public class Pedido extends Observable {
         return precoTotal;
     }
 
+    public void setEstadosSalvos(ArrayList<PedidoMemento> estadosSalvos) {
+        this.estadosSalvos = estadosSalvos;
+    }
+
+    
+    public ArrayList<PedidoMemento> getEstadosSalvos() {
+        return estadosSalvos;
+    }
+
     public void setPrecoTotal(double precoTotal) {
         this.precoTotal = precoTotal;
     }
@@ -102,9 +122,11 @@ public class Pedido extends Observable {
     public PedidoEstado getEstado() {
         return estado;
     }
+    
 
     public void setEstado(PedidoEstado estado) {
         this.estado = estado;
+        estadosSalvos.add(this.saveToMemento());
         setChanged();
         notifyObservers();
 

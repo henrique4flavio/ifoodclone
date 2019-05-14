@@ -23,6 +23,11 @@ public class EnviarEmailCliente extends EmailTemplate {
     public String getTipo() {
         return "Cliente";
     }
+    
+    @Override
+    public String getMensagem() {
+        return " Seu pedido mudou para o estado: ";
+    }
 
     public void enviarEmail(Cliente cliente, Pedido pedido) {
 
@@ -71,5 +76,7 @@ public class EnviarEmailCliente extends EmailTemplate {
         }
 
     }
+
+    
 
 }

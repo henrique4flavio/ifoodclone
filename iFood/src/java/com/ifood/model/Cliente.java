@@ -92,10 +92,10 @@ public class Cliente extends Usuario implements Observer {
         if (pedidoSubject instanceof Pedido) {
             Pedido pedido = (Pedido) pedidoSubject;
 
-            EnviarEmailCliente email = new EnviarEmailCliente();
-            email.enviarEmail(this, pedido);
-
-        }
+//            EnviarEmailCliente email = new EnviarEmailCliente();
+//            email.enviarEmail(this, pedido);
+//
+       }
     }
 
 }
