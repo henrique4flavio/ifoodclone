@@ -2,7 +2,7 @@
 package com.ifood.model;
 
 
-public class Comida {
+public class Comida extends Produto {
 
     private int id;
     private String nome;
