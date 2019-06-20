@@ -58,14 +58,7 @@ public class AdministradorDAO {
             ResultSet rs = st.executeQuery("select * from administrador");
             while (rs.next()) {
 
-                Administrador administrador = new Administrador();
-                        administrador.setId(rs.getInt("id"))
-                        .setNome(rs.getString("nome"))
-                        .setSenha(rs.getString("senha"))
-                        .setEmail(rs.getString("email"));
-                        
-
-                administradores.add(administrador);
+                administradores.add(resultSet(rs));
 
             }
         } catch (SQLException e) {
@@ -107,12 +100,7 @@ public class AdministradorDAO {
             comando.setString(2, senha);
             ResultSet rs = comando.executeQuery();
             if (rs.first()) {
-                administrador = new Administrador();
-                         administrador.setId(rs.getInt("id"))
-                        .setNome(rs.getString("nome"))
-                        .setSenha(rs.getString("senha"))
-                        .setEmail(rs.getString("email"));
-                        
+                administrador = resultSet(rs);
             }
 
             comando.close();
@@ -159,5 +147,17 @@ public class AdministradorDAO {
         } catch (SQLException e) {
             throw e;
         }
+    }
+
+    //Metodo criado para eliminar duplicação
+    public Administrador resultSet(ResultSet rs) throws SQLException {
+        Administrador administrador = new Administrador();
+        administrador.setId(rs.getInt("id"))
+                .setNome(rs.getString("nome"))
+                .setSenha(rs.getString("senha"))
+                .setEmail(rs.getString("email"));
+
+        return administrador;
+
     }
 }

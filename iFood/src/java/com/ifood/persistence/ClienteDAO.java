@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ifood.persistence;
 
 import com.ifood.model.Cliente;
@@ -58,17 +53,7 @@ public class ClienteDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from cliente");
             while (rs.next()) {
-                Cliente cliente = new Cliente();
-                cliente.setBairro(rs.getString("bairro"))
-                        .setRua(rs.getString("rua"))
-                        .setNumero(rs.getString("numero"))
-                        .setCep(rs.getString("cep"))
-                        .setCpf(rs.getString("cpf"))
-                        .setNome(rs.getString("nome"))
-                        .setEmail(rs.getString("email"))
-                        .setSenha(rs.getString("senha"));
-
-                clientes.add(cliente);
+                clientes.add(resultSet(rs));
 
             }
         } catch (SQLException e) {
@@ -89,18 +74,7 @@ public class ClienteDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from cliente WHERE id=" + id);
             while (rs.next()) {
-
-                Cliente cliente = new Cliente();
-                cliente.setBairro(rs.getString("bairro"))
-                        .setRua(rs.getString("rua"))
-                        .setNumero(rs.getString("numero"))
-                        .setCep(rs.getString("cep"))
-                        .setCpf(rs.getString("cpf"))
-                        .setNome(rs.getString("nome"))
-                        .setEmail(rs.getString("email"))
-                        .setSenha(rs.getString("senha"));
-
-                return cliente;
+                return resultSet(rs);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -139,19 +113,8 @@ public class ClienteDAO {
             comando.setString(2, senha);
             ResultSet rs = comando.executeQuery();
             if (rs.first()) {
-                cliente = new Cliente();
-                cliente.setBairro(rs.getString("bairro"))
-                        .setRua(rs.getString("rua"))
-                        .setNumero(rs.getString("numero"))
-                        .setCep(rs.getString("cep"))
-                        .setCpf(rs.getString("cpf"))
-                        .setNome(rs.getString("nome"))
-                        .setEmail(rs.getString("email"))
-                        .setSenha(rs.getString("senha"))
-                        .setId(rs.getInt("id"));
-
+                cliente = resultSet(rs);
             }
-
             comando.close();
             conn.close();
         } catch (SQLException e) {
@@ -188,7 +151,6 @@ public class ClienteDAO {
             comando.setString(2, cliente.getEmail());
             comando.setString(3, cliente.getSenha());
             comando.setString(4, cliente.getCpf());
-
             comando.setString(5, cliente.getCpf());
             comando.setString(6, cliente.getRua());
             comando.setString(7, cliente.getNumero());
@@ -202,6 +164,22 @@ public class ClienteDAO {
         } catch (SQLException e) {
             throw e;
         }
+    }
+
+    public Cliente resultSet(ResultSet rs) throws SQLException {
+        Cliente cliente = new Cliente();
+        cliente.setBairro(rs.getString("bairro"))
+                .setRua(rs.getString("rua"))
+                .setNumero(rs.getString("numero"))
+                .setCep(rs.getString("cep"))
+                .setCpf(rs.getString("cpf"))
+                .setNome(rs.getString("nome"))
+                .setEmail(rs.getString("email"))
+                .setSenha(rs.getString("senha"))
+                .setId(rs.getInt("id"));
+
+        return cliente;
+
     }
 
 }

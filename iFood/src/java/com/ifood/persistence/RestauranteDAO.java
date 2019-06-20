@@ -109,7 +109,8 @@ public class RestauranteDAO {
                     .setFoto(foto)
                     .setNome(nome)
                     .setEmail(email)
-                    .setSenha(senha);
+                    .setSenha(senha)
+                    .setId(id);
             return restaurante;
         }
         return null;
