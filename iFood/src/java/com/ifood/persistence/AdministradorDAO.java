@@ -5,7 +5,6 @@
  */
 package com.ifood.persistence;
 
-
 import com.ifood.model.Administrador;
 import com.ifood.model.Administrador;
 import com.mysql.jdbc.Connection;
@@ -37,7 +36,7 @@ public class AdministradorDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into administrador (nome, senha, email)" + "values('" + administrador.getNome() + "', '" + administrador.getSenha()+ "', '" + administrador.getEmail()+"')");
+            st.execute("insert into administrador (nome, senha, email)" + "values('" + administrador.getNome() + "', '" + administrador.getSenha() + "', '" + administrador.getEmail() + "')");
 
         } catch (SQLException e) {
 
@@ -59,11 +58,12 @@ public class AdministradorDAO {
             ResultSet rs = st.executeQuery("select * from administrador");
             while (rs.next()) {
 
-                Administrador administrador = new Administrador(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getString("email"));
+                Administrador administrador = new Administrador();
+                        administrador.setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setSenha(rs.getString("senha"))
+                        .setEmail(rs.getString("email"));
+                        
 
                 administradores.add(administrador);
 
@@ -92,7 +92,7 @@ public class AdministradorDAO {
             closeResources(conn, st);
         }
     }
-    
+
     public Administrador logar(String email, String senha) throws ClassNotFoundException {
 
         Connection conn = null;
@@ -107,11 +107,12 @@ public class AdministradorDAO {
             comando.setString(2, senha);
             ResultSet rs = comando.executeQuery();
             if (rs.first()) {
-                administrador = new Administrador(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getString("email"));
+                administrador = new Administrador();
+                         administrador.setId(rs.getInt("id"))
+                        .setNome(rs.getString("nome"))
+                        .setSenha(rs.getString("senha"))
+                        .setEmail(rs.getString("email"));
+                        
             }
 
             comando.close();
@@ -120,10 +121,9 @@ public class AdministradorDAO {
         } finally {
             closeResources(conn, comando);
         }
-    
+
         return administrador;
     }
-    
 
     public void closeResources(Connection conn, Statement st) {
         try {
@@ -137,10 +137,8 @@ public class AdministradorDAO {
 
         }
     }
-    
-    
 
-     public static void edit(Administrador administrador) throws SQLException, ClassNotFoundException {
+    public static void edit(Administrador administrador) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement comando = null;
 

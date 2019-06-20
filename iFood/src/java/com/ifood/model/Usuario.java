@@ -2,62 +2,50 @@ package com.ifood.model;
 
 public abstract class Usuario {
 
-    int id;
+    private int id;
     private String nome;
     private String senha;
     private String email;
 
-    public Usuario(String nome, String senha, String email) {
-        this.nome = nome;
-        this.senha = senha;
-        this.email = email;
-    }
-
     public Usuario() {
     }
-
-    public Usuario(int id, String nome, String senha, String email) {
-        this.id = id;
-        this.nome = nome;
-        this.senha = senha;
-        this.email = email;
-    }
-    
-    
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public Usuario setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public Usuario setNome(String nome) {
         this.nome = nome;
+        return this;
     }
-
-   
 
     public String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public Usuario setSenha(String senha) {
         this.senha = senha;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Usuario setEmail(String email) {
         this.email = email;
+        return this;
     }
-    
 
+    
+    
 }

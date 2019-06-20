@@ -36,11 +36,15 @@ public class CadastrarClienteAction implements Action{
         String bairro = request.getParameter("textBairro");
         String cep = request.getParameter("textCep");
         
-       
-
-
-
-        Cliente cliente = new Cliente(cpf, rua, numero, bairro, cep, nome, senha, email);
+    Cliente cliente = new Cliente();
+            cliente.setBairro(bairro)
+                    .setRua(rua)
+                    .setNumero(numero)
+                    .setCep(cep)
+                    .setCpf(cpf)
+                    .setNome(nome)
+                    .setEmail(email)
+                    .setSenha(senha);
 
         try {
             ClienteDAO.getInstance().save(cliente);

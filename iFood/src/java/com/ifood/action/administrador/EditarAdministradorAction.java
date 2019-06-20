@@ -24,8 +24,8 @@ public class EditarAdministradorAction implements Action{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
     int id = Integer.parseInt(request.getParameter("id"));
-        Administrador administrador = new Administrador(id);
-
+        Administrador administrador = new Administrador();
+            administrador.setId(id);
         try {
             AdministradorDAO.getInstance().edit(administrador);
         } catch (SQLException ex) {

@@ -14,77 +14,61 @@ public class Cliente extends Usuario implements Observer {
     private String cep;
     private int id;
 
-    public Cliente(String cpf, String rua, String numero, String bairro, String cep, String nome, String senha, String email) {
-        super(nome, senha, email);
-        this.cpf = cpf;
-        this.rua = rua;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.cep = cep;
-    }
-
-    public Cliente(int id, String cpf, String rua, String numero, String bairro, String cep, String nome, String senha, String email) {
-        super(nome, senha, email);
-        this.cpf = cpf;
-        this.rua = rua;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.cep = cep;
-        this.id = id;
-    }
-
-    public Cliente(int id) {
-        this.id = id;
+    public Cliente() {
     }
 
     public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public Cliente setCpf(String cpf) {
         this.cpf = cpf;
+        return this;
+
     }
 
     public String getRua() {
         return rua;
     }
 
-    public void setRua(String rua) {
+    public Cliente setRua(String rua) {
         this.rua = rua;
+        return this;
     }
 
     public String getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public Cliente setNumero(String numero) {
         this.numero = numero;
+        return this;
     }
 
     public String getBairro() {
         return bairro;
     }
 
-    public void setBairro(String bairro) {
+    public Cliente setBairro(String bairro) {
         this.bairro = bairro;
+        return this;
     }
 
     public String getCep() {
         return cep;
     }
 
-    public void setCep(String cep) {
+    public Cliente setCep(String cep) {
         this.cep = cep;
+        return this;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-
-    }
+    
+    
+    
+    
+    
+    
+    
 
     @Override
     public void update(Observable pedidoSubject, Object arg) {
@@ -95,7 +79,7 @@ public class Cliente extends Usuario implements Observer {
 //            EnviarEmailCliente email = new EnviarEmailCliente();
 //            email.enviarEmail(this, pedido);
 //
-       }
+        }
     }
 
 }

@@ -19,15 +19,16 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author flavi
  */
-public class ApagarRestauranteAction implements Action{
+public class ApagarRestauranteAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-int id = Integer.parseInt(request.getParameter("id"));
-        Restaurante cliente = new Restaurante(id);
+        int id = Integer.parseInt(request.getParameter("id"));
+        Restaurante restaurante = new Restaurante();
+        restaurante.setId(id);
 
         try {
-            RestauranteDAO.getInstance().delete(cliente);
+            RestauranteDAO.getInstance().delete(restaurante);
         } catch (SQLException ex) {
             Logger.getLogger(ApagarRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -35,6 +36,5 @@ int id = Integer.parseInt(request.getParameter("id"));
         }
         response.sendRedirect("FrontController?action=LerRestaurante");
     }
-    
-    
+
 }

@@ -32,24 +32,23 @@ public class CadastrarRestauranteAction implements Action {
         String descricao = request.getParameter("textDescricao");
         String foto = "";
 
-        Restaurante restaurante = new Restaurante(descricao, foto, horaDeAbrir, horaDeFechar, categoria, frete, nome, senha, email);
+        Restaurante restaurante = new Restaurante();
+            restaurante.setCategoria(categoria)
+                    .setValorDoFrete(frete)
+                    .setHoraDeAbrir(horaDeAbrir)
+                    .setHoraDeFechar(horaDeFechar)
+                    .setDescricao(descricao)
+                    .setFoto(foto)
+                    .setNome(nome)
+                    .setEmail(email)
+                    .setSenha(senha);
+        
+        
         try {
             RestauranteDAO.getInstance().save(restaurante);
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CadastrarRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
-        }     
-        try {
-            request.setAttribute("restaurante", RestauranteDAO.getInstance().getRestauranteByEmail(email));
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CadastrarRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(CadastrarRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            request.getRequestDispatcher("inserirLogoRestaurante.jsp").include(request, response);
-        } catch (ServletException ex) {
             Logger.getLogger(CadastrarRestauranteAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 

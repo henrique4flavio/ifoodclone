@@ -56,17 +56,17 @@ public class RestauranteDAO {
             ResultSet rs = st.executeQuery("select * from restaurante");
             while (rs.next()) {
 
-                Restaurante restaurante = new Restaurante(
-                        rs.getString("descricao"),
-                        rs.getString("foto"),
-                        rs.getString("horaDeAbrir"),
-                        rs.getString("horaDeFechar"),
-                        rs.getString("categoria"),
-                        rs.getDouble("valorDoFrete"),
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getString("email"));
+                Restaurante restaurante = new Restaurante();
+                restaurante.setCategoria(rs.getString("categoria"))
+                        .setValorDoFrete(rs.getDouble("valorDoFrete"))
+                        .setHoraDeAbrir(rs.getString("horaDeAbrir"))
+                        .setHoraDeFechar(rs.getString("horaDeFechar"))
+                        .setDescricao(rs.getString("descricao"))
+                        .setFoto(rs.getString("foto"))
+                        .setNome(rs.getString("nome"))
+                        .setEmail(rs.getString("email"))
+                        .setSenha(rs.getString("senha"))
+                        .setId(rs.getInt("id"));
 
                 restaurantes.add(restaurante);
 
@@ -100,8 +100,16 @@ public class RestauranteDAO {
             String senha = rs.getString("senha");
             String email = rs.getString("email");
 
-            Restaurante restaurante = new Restaurante(descricao, foto, horaDeAbrir, horaDeFechar, categoria, valorDoFrete, id, nome, senha, email);
-
+            Restaurante restaurante = new Restaurante();
+            restaurante.setCategoria(categoria)
+                    .setValorDoFrete(valorDoFrete)
+                    .setHoraDeAbrir(horaDeAbrir)
+                    .setHoraDeFechar(horaDeFechar)
+                    .setDescricao(descricao)
+                    .setFoto(foto)
+                    .setNome(nome)
+                    .setEmail(email)
+                    .setSenha(senha);
             return restaurante;
         }
         return null;
@@ -114,7 +122,7 @@ public class RestauranteDAO {
 
         conn = DatabaseLocator.getInstance().getConnection();
         st = conn.createStatement();
-        ResultSet rs = st.executeQuery("select * from restaurante WHERE email="+ "'" + email + "'");
+        ResultSet rs = st.executeQuery("select * from restaurante WHERE email=" + "'" + email + "'");
 
         while (rs.next()) {
 
@@ -128,8 +136,17 @@ public class RestauranteDAO {
             String senha = rs.getString("senha");
             int id = rs.getInt("id");
 
-            Restaurante restaurante = new Restaurante(descricao, foto, horaDeAbrir, horaDeFechar, categoria, valorDoFrete, id, nome, senha, email);
-
+            Restaurante restaurante = new Restaurante();
+            restaurante.setCategoria(categoria)
+                    .setValorDoFrete(valorDoFrete)
+                    .setHoraDeAbrir(horaDeAbrir)
+                    .setHoraDeFechar(horaDeFechar)
+                    .setDescricao(descricao)
+                    .setFoto(foto)
+                    .setNome(nome)
+                    .setEmail(email)
+                    .setId(id)
+                    .setSenha(senha);
             return restaurante;
         }
         return null;
@@ -166,18 +183,17 @@ public class RestauranteDAO {
             comando.setString(2, senha);
             ResultSet rs = comando.executeQuery();
             if (rs.first()) {
-                restaurante = new Restaurante(
-                        rs.getString("descricao"),
-                        rs.getString("foto"),
-                        rs.getString("horaDeAbrir"),
-                        rs.getString("horaDeFechar"),
-                        rs.getString("categoria"),
-                        rs.getDouble("valorDoFrete"),
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getString("email"));
-
+                restaurante = new Restaurante();
+                restaurante.setCategoria(rs.getString("categoria"))
+                        .setValorDoFrete(rs.getDouble("valorDoFrete"))
+                        .setHoraDeAbrir(rs.getString("horaDeAbrir"))
+                        .setHoraDeFechar(rs.getString("horaDeFechar"))
+                        .setDescricao(rs.getString("descricao"))
+                        .setFoto(rs.getString("foto"))
+                        .setNome(rs.getString("nome"))
+                        .setEmail(rs.getString("email"))
+                        .setSenha(rs.getString("senha"))
+                        .setId(rs.getInt("id"));
             }
 
             comando.close();

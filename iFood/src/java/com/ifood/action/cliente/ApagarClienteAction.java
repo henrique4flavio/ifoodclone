@@ -24,7 +24,8 @@ public class ApagarClienteAction implements Action{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 int id = Integer.parseInt(request.getParameter("id"));
-        Cliente cliente = new Cliente(id);
+        Cliente cliente = new Cliente();        
+            cliente.setId(id);
 
         try {
             ClienteDAO.getInstance().delete(cliente);

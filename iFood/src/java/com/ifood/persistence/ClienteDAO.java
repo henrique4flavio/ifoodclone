@@ -58,15 +58,15 @@ public class ClienteDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from cliente");
             while (rs.next()) {
-                Cliente cliente = new Cliente(
-                        rs.getString("cpf"),
-                        rs.getString("rua"),
-                        rs.getString("numero"),
-                        rs.getString("bairro"),
-                        rs.getString("cep"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getString("email"));
+                Cliente cliente = new Cliente();
+                cliente.setBairro(rs.getString("bairro"))
+                        .setRua(rs.getString("rua"))
+                        .setNumero(rs.getString("numero"))
+                        .setCep(rs.getString("cep"))
+                        .setCpf(rs.getString("cpf"))
+                        .setNome(rs.getString("nome"))
+                        .setEmail(rs.getString("email"))
+                        .setSenha(rs.getString("senha"));
 
                 clientes.add(cliente);
 
@@ -78,7 +78,7 @@ public class ClienteDAO {
         return clientes;
 
     }
-    
+
     public Cliente getClienteById(int id) throws ClassNotFoundException {
 
         com.mysql.jdbc.Connection conn = null;
@@ -90,17 +90,16 @@ public class ClienteDAO {
             ResultSet rs = st.executeQuery("select * from cliente WHERE id=" + id);
             while (rs.next()) {
 
-                Cliente cliente = new Cliente(
-                        rs.getString("cpf"),
-                        rs.getString("rua"),
-                        rs.getString("numero"),
-                        rs.getString("bairro"),
-                        rs.getString("cep"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getString("email"));
+                Cliente cliente = new Cliente();
+                cliente.setBairro(rs.getString("bairro"))
+                        .setRua(rs.getString("rua"))
+                        .setNumero(rs.getString("numero"))
+                        .setCep(rs.getString("cep"))
+                        .setCpf(rs.getString("cpf"))
+                        .setNome(rs.getString("nome"))
+                        .setEmail(rs.getString("email"))
+                        .setSenha(rs.getString("senha"));
 
-                       
                 return cliente;
             }
         } catch (SQLException e) {
@@ -108,7 +107,6 @@ public class ClienteDAO {
         }
         return null;
     }
-
 
     public void delete(Cliente cliente) throws
             SQLException, ClassNotFoundException {
@@ -141,16 +139,16 @@ public class ClienteDAO {
             comando.setString(2, senha);
             ResultSet rs = comando.executeQuery();
             if (rs.first()) {
-                cliente = new Cliente(
-                        rs.getInt("id"),
-                        rs.getString("cpf"),
-                        rs.getString("rua"),
-                        rs.getString("numero"),
-                        rs.getString("bairro"),
-                        rs.getString("cep"),
-                        rs.getString("nome"),
-                        rs.getString("senha"),
-                        rs.getString("email"));
+                cliente = new Cliente();
+                cliente.setBairro(rs.getString("bairro"))
+                        .setRua(rs.getString("rua"))
+                        .setNumero(rs.getString("numero"))
+                        .setCep(rs.getString("cep"))
+                        .setCpf(rs.getString("cpf"))
+                        .setNome(rs.getString("nome"))
+                        .setEmail(rs.getString("email"))
+                        .setSenha(rs.getString("senha"))
+                        .setId(rs.getInt("id"));
 
             }
 

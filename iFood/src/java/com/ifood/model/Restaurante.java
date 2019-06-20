@@ -13,81 +13,66 @@ public class Restaurante extends Usuario implements Observer {
     private String categoria;
     private double valorDoFrete;
 
- 
     public Restaurante() {
-    }
-
-    public Restaurante(String descricao, String foto, String horaDeAbrir, String horaDeFechar, String categoria, double valorDoFrete, int id, String nome, String senha, String email) {
-        super(id, nome, senha, email);
-        this.descricao = descricao;
-        this.foto = foto;
-        this.horaDeAbrir = horaDeAbrir;
-        this.horaDeAbrir = horaDeFechar;
-        this.categoria = categoria;
-        this.valorDoFrete = valorDoFrete;
-        
-    }
-
-    public Restaurante(String descricao, String foto, String horaDeAbrir, String horaDeFechar, String categoria, double valorDoFrete, String nome, String senha, String email) {
-        super(nome, senha, email);
-        this.descricao = descricao;
-        this.foto = foto;
-        this.horaDeAbrir = horaDeAbrir;
-        this.horaDeFechar = horaDeFechar;
-        this.categoria = categoria;
-        this.valorDoFrete = valorDoFrete;
-    }
-    
-    public Restaurante(int id){
-        this.id= id;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public Restaurante setDescricao(String descricao) {
         this.descricao = descricao;
+        return this;
     }
 
     public String getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public Restaurante setFoto(String foto) {
         this.foto = foto;
+        return this;
+
     }
 
     public String getHoraDeAbrir() {
         return horaDeAbrir;
     }
 
-    public void setHoraDeAbrir(String horaDeAbrir) {
+    public Restaurante setHoraDeAbrir(String horaDeAbrir) {
         this.horaDeAbrir = horaDeAbrir;
+        return this;
+
     }
 
     public String getHoraDeFechar() {
         return horaDeFechar;
     }
 
-    public void setHoraDeFechar(String horaDeFechar) {
+    public Restaurante setHoraDeFechar(String horaDeFechar) {
         this.horaDeFechar = horaDeFechar;
+        return this;
+
     }
 
     public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public Restaurante setCategoria(String categoria) {
         this.categoria = categoria;
+        return this;
+
     }
 
     public double getValorDoFrete() {
         return valorDoFrete;
     }
 
-    public void setValorDoFrete(double valorDoFrete) {
+    public Restaurante setValorDoFrete(double valorDoFrete) {
         this.valorDoFrete = valorDoFrete;
+        return this;
+
     }
 
     public void update(Observable pedidoSubject, Object arg) {
@@ -96,11 +81,8 @@ public class Restaurante extends Usuario implements Observer {
             Pedido pedido = (Pedido) pedidoSubject;
 
            // EnviarEmailRestaurante email = new EnviarEmailRestaurante();
-           // email.enviarEmail(this, pedido);
-
+            // email.enviarEmail(this, pedido);
         }
     }
-    
-     
-    
+
 }

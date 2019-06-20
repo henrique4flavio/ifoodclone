@@ -25,7 +25,8 @@ public class EditarRestauranteAction implements Action{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 int id = Integer.parseInt(request.getParameter("id"));
-        Restaurante restaurante = new Restaurante(id);
+         Restaurante restaurante = new Restaurante();
+        restaurante.setId(id);
 
         try {
             RestauranteDAO.getInstance().edit(restaurante);
