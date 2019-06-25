@@ -18,27 +18,7 @@ public class Pedido extends Observable {
     private PedidoEstado estado;
     ArrayList<PedidoMemento> estadosSalvos = new ArrayList();
 
-    public Pedido(String data, Restaurante restaurante, Cliente cliente, double precoTotal) {
-        this.data = data;
-        this.restaurante = restaurante;
-        this.cliente = cliente;
-        this.precoTotal = precoTotal;
-        this.estado = new PedidoEstadoEfetuado();
-        addObserver(cliente);
-        addObserver(restaurante);
-
-    }
-
-    public Pedido(int id, String data, Restaurante restaurante, Cliente cliente, double precoTotal, PedidoEstado estado) {
-        this.data = data;
-        this.restaurante = restaurante;
-        this.cliente = cliente;
-        this.precoTotal = precoTotal;
-        this.id = id;
-        this.estado = estado;
-        addObserver(cliente);
-        addObserver(restaurante);
-
+    public Pedido() {
     }
 
     public String efetuarPedido() {
@@ -69,67 +49,74 @@ public class Pedido extends Observable {
         estado = memento.getEstadoSalvo();
     }
 
-//Metodos get e set
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public Pedido setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public Pedido setData(String data) {
         this.data = data;
+        return this;
     }
 
     public Restaurante getRestaurante() {
         return restaurante;
     }
 
-    public void setRestaurante(Restaurante restaurante) {
+    public Pedido setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
+        return this;
     }
 
     public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public Pedido setCliente(Cliente cliente) {
         this.cliente = cliente;
+        return this;
     }
 
     public double getPrecoTotal() {
         return precoTotal;
     }
 
-    public void setEstadosSalvos(ArrayList<PedidoMemento> estadosSalvos) {
-        this.estadosSalvos = estadosSalvos;
+    public Pedido setPrecoTotal(double precoTotal) {
+        this.precoTotal = precoTotal;
+        return this;
     }
 
-    
     public ArrayList<PedidoMemento> getEstadosSalvos() {
         return estadosSalvos;
     }
 
-    public void setPrecoTotal(double precoTotal) {
-        this.precoTotal = precoTotal;
+    public Pedido setEstadosSalvos(ArrayList<PedidoMemento> estadosSalvos) {
+        this.estadosSalvos = estadosSalvos;
+        return this;
+    }
+
+
+    public Pedido setEstado(PedidoEstado estado) {
+        this.estado = estado;
+        estadosSalvos.add(this.saveToMemento());
+        setChanged();
+        notifyObservers();
+        return this;
+
     }
 
     public PedidoEstado getEstado() {
         return estado;
     }
+
     
-
-    public void setEstado(PedidoEstado estado) {
-        this.estado = estado;
-        estadosSalvos.add(this.saveToMemento());
-        setChanged();
-        notifyObservers();
-
-    }
 
 }

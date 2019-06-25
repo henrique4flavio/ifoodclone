@@ -13,6 +13,7 @@ import com.ifood.model.Pedido;
 import com.ifood.model.Restaurante;
 import com.ifood.state.pedido.PedidoEstado;
 import com.ifood.state.pedido.PedidoEstadoFactory;
+import com.sun.xml.wss.impl.XMLUtil;
 
 public class PedidoDAO {
 
@@ -76,7 +77,12 @@ public class PedidoDAO {
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
                 Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
 
-                Pedido pedido = new Pedido(data, restaurante, cliente, precoTotal);
+                Pedido pedido = new Pedido();
+                pedido.setData(data)
+                        .setRestaurante(restaurante)
+                        .setCliente(cliente)
+                        .setPrecoTotal(precoTotal);
+
                 pedidos.add(pedido);
 
             }
@@ -95,7 +101,7 @@ public class PedidoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from pedido where REST_ID=" + id +" ORDER BY id DESC");
+            ResultSet rs = st.executeQuery("select * from pedido where REST_ID=" + id + " ORDER BY id DESC");
             while (rs.next()) {
 
                 String estadoString = rs.getString("estado");
@@ -105,13 +111,18 @@ public class PedidoDAO {
                 int clienteId = rs.getInt("CLIENTE_ID");
                 double precoTotal = rs.getDouble("precoTotal");
                 int pedidoId = rs.getInt("id");
-                
-                PedidoEstado estado =PedidoEstadoFactory.create(estadoString);
+
+                PedidoEstado estado = PedidoEstadoFactory.create(estadoString);
 
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
                 Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
 
-                Pedido pedido = new Pedido(pedidoId, data, restaurante, cliente, precoTotal, estado);
+                Pedido pedido = new Pedido();
+                pedido.setData(data)
+                        .setRestaurante(restaurante)
+                        .setCliente(cliente)
+                        .setPrecoTotal(precoTotal)
+                        .setId(id);
                 pedidos.add(pedido);
 
             }
@@ -121,8 +132,8 @@ public class PedidoDAO {
 
         return pedidos;
     }
-    
-        public List<Pedido> listPedidosByClienteId(int id) throws ClassNotFoundException {
+
+    public List<Pedido> listPedidosByClienteId(int id) throws ClassNotFoundException {
         com.mysql.jdbc.Connection conn = null;
         Statement st = null;
 
@@ -130,7 +141,7 @@ public class PedidoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from pedido where CLIENTE_ID=" + id +" ORDER BY id DESC");
+            ResultSet rs = st.executeQuery("select * from pedido where CLIENTE_ID=" + id + " ORDER BY id DESC");
             while (rs.next()) {
 
                 String estadoString = rs.getString("estado");
@@ -140,13 +151,18 @@ public class PedidoDAO {
                 int clienteId = rs.getInt("CLIENTE_ID");
                 double precoTotal = rs.getDouble("precoTotal");
                 int pedidoId = rs.getInt("id");
-                
-                PedidoEstado estado =PedidoEstadoFactory.create(estadoString);
+
+                PedidoEstado estado = PedidoEstadoFactory.create(estadoString);
 
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
                 Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
 
-                Pedido pedido = new Pedido(pedidoId, data, restaurante, cliente, precoTotal, estado);
+                Pedido pedido = new Pedido();
+                pedido.setData(data)
+                        .setRestaurante(restaurante)
+                        .setCliente(cliente)
+                        .setPrecoTotal(precoTotal)
+                        .setId(id);
                 pedidos.add(pedido);
 
             }
@@ -156,7 +172,6 @@ public class PedidoDAO {
 
         return pedidos;
     }
-    
 
     public List<Pedido> getPedidos(int id) throws ClassNotFoundException {
         com.mysql.jdbc.Connection conn = null;
@@ -177,7 +192,12 @@ public class PedidoDAO {
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
                 Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
 
-                Pedido pedido = new Pedido(data, restaurante, cliente, precoTotal);
+                Pedido pedido = new Pedido();
+                pedido.setData(data)
+                        .setRestaurante(restaurante)
+                        .setCliente(cliente)
+                        .setPrecoTotal(precoTotal)
+                        .setId(id);
                 pedidos.add(pedido);
 
             }
@@ -188,7 +208,6 @@ public class PedidoDAO {
         return pedidos;
     }
 
-    
     public Pedido getPedidoById(int id) throws ClassNotFoundException {
 
         com.mysql.jdbc.Connection conn = null;
@@ -207,14 +226,19 @@ public class PedidoDAO {
                 int clienteId = rs.getInt("CLIENTE_ID");
                 double precoTotal = rs.getDouble("precoTotal");
                 int pedidoId = rs.getInt("id");
-                
-                PedidoEstado estado =PedidoEstadoFactory.create(estadoString);
+
+                PedidoEstado estado = PedidoEstadoFactory.create(estadoString);
 
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
                 Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
 
-                Pedido pedido = new Pedido(pedidoId, data, restaurante, cliente, precoTotal, estado);
-                
+                Pedido pedido = new Pedido();
+                pedido.setData(data)
+                        .setRestaurante(restaurante)
+                        .setCliente(cliente)
+                        .setPrecoTotal(precoTotal)
+                        .setId(id)
+                        .setEstado(estado);
                 System.out.println("Pedido ID é");
                 System.out.println(pedidoId);
 
@@ -244,13 +268,20 @@ public class PedidoDAO {
                 int clienteId = rs.getInt("CLIENTE_ID");
                 double precoTotal = rs.getDouble("precoTotal");
                 int pedidoId = rs.getInt("MAX(ID)");
-                
-                PedidoEstado estado =PedidoEstadoFactory.create(estadoString);
+
+                PedidoEstado estado = PedidoEstadoFactory.create(estadoString);
 
                 Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
                 Cliente cliente = ClienteDAO.getInstance().getClienteById(clienteId);
+                
+                Pedido pedido = new Pedido();
+                pedido.setData(data)
+                        .setRestaurante(restaurante)
+                        .setCliente(cliente)
+                        .setPrecoTotal(precoTotal)
+                        .setId(pedidoId)
+                        .setEstado(estado);
 
-                Pedido pedido = new Pedido(pedidoId, data, restaurante, cliente, precoTotal, estado);
 
                 return pedido;
             }

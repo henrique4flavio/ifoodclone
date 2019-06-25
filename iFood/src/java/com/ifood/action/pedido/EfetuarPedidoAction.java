@@ -35,6 +35,8 @@ import org.json.JSONObject;
 
 public class EfetuarPedidoAction implements Action {
 
+    private static double precoTotal = 0;
+
     public EfetuarPedidoAction() {
     }
 
@@ -42,56 +44,25 @@ public class EfetuarPedidoAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         try {
-
             int restauranteId = Integer.parseInt(request.getParameter("id"));
             Restaurante restaurante = RestauranteDAO.getInstance().getRestauranteById(restauranteId);
-
-            String pedidoJS = request.getParameter("cart_list");
-            JSONObject pedidoJSON = new JSONObject(pedidoJS);
-            JSONArray comidasJSON = pedidoJSON.getJSONArray("comidas");
-
-            System.out.println(comidasJSON);
             boolean create = true;
             HttpSession session = request.getSession(create);
-
             Cliente cliente = (Cliente) session.getAttribute("cliente");
 
-            int opcaoFrete = Integer.parseInt(request.getParameter("TipoFrete"));
+            String dataPedido = getDataeHora();
 
-            TipoFrete tipoFrete = TipoFrete.values()[opcaoFrete - 1];
-
-            Frete frete = tipoFrete.obterFrete();
-            double precoTotal = frete.calculaFrete(restaurante.getValorDoFrete());
-            
-
-            Date data = new Date();
-            SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyy H:m");
-            String dataPedido = formatar.format(data);
-
-            Pedido pedido = new Pedido(0, dataPedido, restaurante, cliente, precoTotal, new PedidoEstadoEfetuado());
+            Pedido pedido = new Pedido();
+            pedido.setCliente(cliente)
+                    .setData(dataPedido)
+                    .setPrecoTotal(precoTotal)
+                    .setRestaurante(restaurante);
+                        
             PedidoDAO.getInstance().save(pedido);
             pedido = PedidoDAO.getInstance().getUltimoPedido();
 
-            System.out.println(pedido.getId());
-
-            for (int i = 0; i < comidasJSON.length(); i++) {
-                
-                int quantidade = comidasJSON.getJSONObject(i).getInt("product_quantity");
-                int comidaId = Integer.parseInt(comidasJSON.getJSONObject(i).getString("product_id"));
-                double preco = Double.parseDouble(comidasJSON.getJSONObject(i).getString("product_price"));
-
-                precoTotal = precoTotal + (preco * quantidade);
-
-                try {
-
-                    Comida comida = ComidaDAO.getInstance().getComidaById(comidaId);
-                    PedidoComida pedidoComida = new PedidoComida(pedido, comida, quantidade);
-                    PedidoComidaDAO.getInstance().save(pedidoComida);
-
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(EfetuarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            gravarComidasJSON(request, pedido);
+            precoTotal = precoTotal + calculaFrete(request, restaurante);
 
             pedido.setPrecoTotal(precoTotal);
             PedidoDAO.getInstance().edit(pedido);
@@ -102,6 +73,47 @@ public class EfetuarPedidoAction implements Action {
         } catch (SQLException ex) {
             Logger.getLogger(EfetuarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void gravarComidasJSON(HttpServletRequest request, Pedido pedido) throws SQLException {
+        String pedidoJS = request.getParameter("cart_list");
+        JSONObject pedidoJSON = new JSONObject(pedidoJS);
+        JSONArray comidasJSON = pedidoJSON.getJSONArray("comidas");
+
+        for (int i = 0; i < comidasJSON.length(); i++) {
+            int quantidade = comidasJSON.getJSONObject(i).getInt("product_quantity");
+            int comidaId = Integer.parseInt(comidasJSON.getJSONObject(i).getString("product_id"));
+            double preco = Double.parseDouble(comidasJSON.getJSONObject(i).getString("product_price"));
+            precoTotal = precoTotal + (preco * quantidade);
+
+            try {
+                Comida comida = ComidaDAO.getInstance().getComidaById(comidaId);
+                PedidoComida pedidoComida = new PedidoComida(pedido, comida, quantidade);
+                PedidoComidaDAO.getInstance().save(pedidoComida);
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EfetuarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public String getDataeHora() {
+        Date data = new Date();
+        SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyy H:m");
+        String dataPedido = formatar.format(data);
+
+        return dataPedido;
+    }
+
+    public double calculaFrete(HttpServletRequest request, Restaurante restaurante) {
+        int opcaoFrete = Integer.parseInt(request.getParameter("TipoFrete"));
+
+        TipoFrete tipoFrete = TipoFrete.values()[opcaoFrete - 1];
+
+        Frete frete = tipoFrete.obterFrete();
+        double preco = frete.calculaFrete(restaurante.getValorDoFrete());
+
+        return preco;
     }
 
 }
