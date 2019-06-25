@@ -44,7 +44,6 @@ public class UploadImagemAction implements Action {
             int id = Integer.parseInt(request.getParameter("id"));
             Comida comida = ComidaDAO.getInstance().getComidaById(id);
 
-
             DiskFileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
             upload.setSizeMax(50 * 1024 * 1024);
@@ -53,27 +52,7 @@ public class UploadImagemAction implements Action {
 
             // Processa os itens do upload
             Iterator iter = items.iterator();
-            while (iter.hasNext()) {
-                FileItem item = (FileItem) iter.next();
-                if (item.getFieldName().equals("arquivo")) {
-
-                    Random r = new Random();
-                    Random s = new Random();
-                    int chave = r.nextInt() + s.nextInt();
-
-                    nome = Integer.toString(chave);
-
-                    StringBuffer bn = new StringBuffer();
-                    bn.append("C:/Users/jonat/Documents/NetBeansProjects/ifoodclone/iFood/web/imagens/comidas/"); // colocar o caminho do seu computador
-                    bn.append(nome + ".png");
-                    File uploadedFile = new File(bn.toString());
-                    try {
-                        item.write(uploadedFile);
-                    } catch (Exception ex) {
-                        Logger.getLogger(UploadImagemAction.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
+            interator(iter, nome);
             nome = "imagens/comidas/" + nome + ".png";
 
             comida.setFoto(nome);
@@ -81,7 +60,7 @@ public class UploadImagemAction implements Action {
 
             boolean create = true;
             HttpSession session = request.getSession(create);
-            response.sendRedirect(session.getAttribute("tipo")+"Home.jsp");
+            response.sendRedirect(session.getAttribute("tipo") + "Home.jsp");
 
             session.getAttribute("tipo");
 
@@ -95,4 +74,27 @@ public class UploadImagemAction implements Action {
 
     }
 
+    public void interator(Iterator iter, String nome) {
+        while (iter.hasNext()) {
+            FileItem item = (FileItem) iter.next();
+            if (item.getFieldName().equals("arquivo")) {
+
+                Random r = new Random();
+                Random s = new Random();
+                int chave = r.nextInt() + s.nextInt();
+
+                nome = Integer.toString(chave);
+
+                StringBuffer bn = new StringBuffer();
+                bn.append("C:/Users/jonat/Documents/NetBeansProjects/ifoodclone/iFood/web/imagens/comidas/"); // colocar o caminho do seu computador
+                bn.append(nome + ".png");
+                File uploadedFile = new File(bn.toString());
+                try {
+                    item.write(uploadedFile);
+                } catch (Exception ex) {
+                    Logger.getLogger(UploadImagemAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
 }
