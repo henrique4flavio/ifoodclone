@@ -9,11 +9,13 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Address;
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -43,30 +45,14 @@ public class EnviarEmailCliente extends EmailTemplate {
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
-
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("projetoifoodclone@gmail.com", "Ifoodclone01");
-            }
-        });
-
+        
+        Session session = returnSession(props);
+    
         session.setDebug(true);
 
         try {
+            Message message = returnMessage(session,cliente);
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("projetoifoodclone@gmail.com")); //Remetente
-
-            Address[] toUser = InternetAddress //Destinatário(s)
-                    .parse(cliente.getEmail());
-
-            message.setRecipients(Message.RecipientType.TO, toUser);
-            message.setSubject(assuntoTemplate());//Assunto
-            message.setText(mensagemTemplate());
-
-            /**
-             * Método para enviar a mensagem criada
-             */
             Transport.send(message);
 
             System.out.println("Feito!!!");
@@ -76,7 +62,30 @@ public class EnviarEmailCliente extends EmailTemplate {
         }
 
     }
+    
+    public Session returnSession(Properties props ){
+        return Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("projetoifoodclone@gmail.com", "Ifoodclone01");
+            }
+        });
+    }
+     public Message returnMessage (Session session,Cliente cliente) throws AddressException, MessagingException{
+         Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("projetoifoodclone@gmail.com")); //Remetente
 
+            Address[] toUser = InternetAddress //Destinatário(s)
+                    .parse(cliente.getEmail());
+
+            message.setRecipients(Message.RecipientType.TO, toUser);
+            message.setSubject(assuntoTemplate());//Assunto
+            message.setText(mensagemTemplate());
+            
+            return message;
+     }
+    }
+    
+   
     
 
-}
+
